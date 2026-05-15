@@ -13,14 +13,16 @@ ASSETS.mkdir(exist_ok=True)
 
 # (display name, Wikipedia article title, filename stem in assets/)
 LEADERS = [
-    ("Mahatma Gandhi",      "Mahatma Gandhi",       "gandhi"),
-    ("Jawaharlal Nehru",    "Jawaharlal Nehru",     "nehru"),
-    ("Subhas Chandra Bose", "Subhas Chandra Bose",  "bose"),
-    ("B. R. Ambedkar",      "B. R. Ambedkar",       "ambedkar"),
-    ("Lal Bahadur Shastri", "Lal Bahadur Shastri",  "shastri"),
-    ("Bhagat Singh",        "Bhagat Singh",         "bhagat_singh"),
-    ("Bal Gangadhar Tilak", "Bal Gangadhar Tilak",  "tilak"),
-    ("Narendra Modi",       "Narendra Modi",        "modi"),
+    ("Mahatma Gandhi",         "Mahatma Gandhi",            "gandhi"),
+    ("Jawaharlal Nehru",       "Jawaharlal Nehru",          "nehru"),
+    ("Sardar Vallabhbhai Patel","Vallabhbhai Patel",        "patel"),
+    ("Subhas Chandra Bose",    "Subhas Chandra Bose",       "bose"),
+    ("B. R. Ambedkar",         "B. R. Ambedkar",            "ambedkar"),
+    ("Lal Bahadur Shastri",    "Lal Bahadur Shastri",       "shastri"),
+    ("Bhagat Singh",           "Bhagat Singh",              "bhagat_singh"),
+    ("Bal Gangadhar Tilak",    "Bal Gangadhar Tilak",       "tilak"),
+    ("A. P. J. Abdul Kalam",   "A. P. J. Abdul Kalam",      "kalam"),
+    ("Narendra Modi",          "Narendra Modi",             "modi"),
 ]
 
 entries = []
