@@ -21,10 +21,15 @@ ITEMS = [
     ("Blue Star",    "bluestar.png"),
     ("Usha",         "usha.png"),
     ("Atomberg",     "atomberg.png"),
+    ("Bajaj",        "bajaj.png"),
     # Conglomerates / retail / cars
     ("Tata",         "tata.png"),
     ("Croma",        "croma.jpeg"),
+    ("DMart",        "dmart.png"),
+    ("Amazon",       "amazon.png"),
+    ("Flipkart",     "flipkart.png"),
     ("Thar",         "thar.jpeg"),
+    ("Suzuki",       "suzuki.jpeg"),
     # Apps the kid knows
     ("WhatsApp",     "whatsapp.jpeg"),
     ("YouTube",      "youtube.png"),
