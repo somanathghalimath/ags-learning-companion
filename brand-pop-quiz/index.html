@@ -142,23 +142,26 @@
       place-items: center;
     }
 
-    /* image + canvas overlay live inside a relative frame */
+    /* Uniform white card holding the image. Fixed 4:3 ratio so every
+       logo/portrait sits in the same rectangle, regardless of source. */
     .image-frame {
       position: relative;
-      display: inline-block;
-      line-height: 0;
+      display: block;
+      width: min(88%, 520px);
+      aspect-ratio: 4 / 3;
+      background: rgba(255,255,255,0.96);
+      padding: 14px;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.30);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.8);
     }
 
     .brand-image {
-      max-width: min(88%, 520px);
-      max-height: min(56vh, 360px);
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      background: rgba(255,255,255,0.96);
-      padding: 14px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
       display: block;
       pointer-events: none;
     }
@@ -304,19 +307,21 @@
       .footer { flex-wrap: wrap; justify-content: center; }
       .pill { padding: 7px 12px; }
       .brand-card { width: 92%; padding: 18px; }
-      .brand-image { max-height: 46vh; }
+      .image-frame { width: 92%; padding: 10px; }
       .answer { left: 0; right: 0; bottom: 14px; text-align: center; }
       .hint { display: none; }
       button { padding: 11px 14px; }
       button.icon { padding: 0; width: 44px; height: 44px; }
       button.icon svg { width: 20px; height: 20px; }
+      .nav-prev { left: 6px; }
+      .nav-next { right: 6px; }
     }
 
     /* ---------- Landscape phones ---------- */
     @media (orientation: landscape) and (max-height: 500px) {
       .app { height: 96dvh; gap: 8px; padding: 8px; }
       .brand-card { padding: 12px; }
-      .brand-image { max-height: 60vh; padding: 10px; }
+      .image-frame { width: min(60%, 360px); padding: 10px; }
       .answer { bottom: 10px; right: 14px; }
       button { padding: 8px 14px; font-size: 13px; }
     }
@@ -536,7 +541,10 @@
       const existing = frame.querySelector('.scratch-cover');
       if (existing) existing.remove();
 
-      const rect = img.getBoundingClientRect();
+      // Size canvas to the entire frame (including the white padding around
+      // the logo) — gives a uniform scratch-card look regardless of the
+      // logo's aspect ratio.
+      const rect = frame.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) {
         requestAnimationFrame(function () { mountScratchCover(frame, img); });
         return;
