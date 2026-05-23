@@ -1,4 +1,4 @@
-# html-css-js-projects
+# AG's Learning Companion
 
 Small standalone HTML/CSS/JS projects that run directly in a browser.
 
@@ -14,5 +14,5 @@ The root page is **AG's Learning Companion**, a visual launcher for the quiz pro
 
 Hosted on GitHub Pages:
 
-- Companion hub: `https://<user>.github.io/html-css-js-projects/`
-- Individual projects: `https://<user>.github.io/html-css-js-projects/<project>/`
+- Companion hub: `https://somanathghalimath.github.io/ags-learning-companion/`
+- Individual projects: `https://somanathghalimath.github.io/ags-learning-companion/<project>/`
