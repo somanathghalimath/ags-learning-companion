@@ -46,4 +46,4 @@ for name, code, stem in FLAGS:
         print("using cached " + path.name)
     entries.append((name, path))
 
-emit("Name the Flag", HERE, entries)
+emit("Name the Flag", HERE, entries, features={"showName": True})
