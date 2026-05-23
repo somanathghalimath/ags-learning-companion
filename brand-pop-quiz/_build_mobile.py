@@ -35,7 +35,6 @@ ITEMS = [
     ("YouTube",      "youtube.png"),
     ("YouTube Kids", "youtube-kids.png"),
     ("Spotify",      "spotify.png"),
-    ("Talking Tom",  "talking-tom.jpeg"),
 ]
 
 entries = [(name, HERE / "assets" / fname) for name, fname in ITEMS]
