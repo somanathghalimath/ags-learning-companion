@@ -77,6 +77,12 @@
       align-items: center;
       gap: 8px;
     }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
 
     .pill {
       border: 1px solid var(--soft);
@@ -241,6 +247,28 @@
     }
     button.primary:hover { background: rgba(125, 211, 252, 0.22); }
 
+    a.icon {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 140ms ease, transform 80ms ease, border-color 140ms ease;
+    }
+    a.icon:hover { background: rgba(255,255,255,0.11); }
+    a.icon:active { transform: scale(0.97); }
+    a.icon svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
     /* Toggle button "on" state (used for Scratch) */
     button.toggle.on {
       background: rgba(255, 191, 73, 0.20);
@@ -324,7 +352,9 @@
       .hint { display: none; }
       button { padding: 11px 14px; }
       button.icon { padding: 0; width: 44px; height: 44px; }
+      a.icon { width: 44px; height: 44px; }
       button.icon svg { width: 20px; height: 20px; }
+      a.icon svg { width: 20px; height: 20px; }
       .nav-prev { left: 6px; }
       .nav-next { right: 6px; }
     }
@@ -342,7 +372,16 @@
 <body>
   <main class="app">
     <div class="topbar">
-      <div class="pill">Name the Flag</div>
+      <div class="topbar-left">
+        <a href="../" class="icon" aria-label="Back to AG's Learning Companion" title="Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"/>
+            <path d="M5 9.5V21h14V9.5"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+        </a>
+        <div class="pill">Name the Flag</div>
+      </div>
       <div class="topbar-right">
         <div class="pill"><strong id="counter">1</strong>&nbsp;/&nbsp;<span id="total">10</span></div>
         <button id="scratchBtn" type="button" class="icon toggle" aria-label="Toggle scratch mode" title="Scratch mode">

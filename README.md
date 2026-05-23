@@ -2,6 +2,8 @@
 
 Small standalone HTML/CSS/JS projects that run directly in a browser.
 
+The root page is **AG's Learning Companion**, a visual launcher for the quiz projects.
+
 ## Projects
 
 - [`brand-pop-quiz/`](brand-pop-quiz/) — Slideshow quiz of brand logos. Single-file build with embedded images. Includes a scratch-card reveal mode.
@@ -10,5 +12,7 @@ Small standalone HTML/CSS/JS projects that run directly in a browser.
 
 ## Hosting
 
-Hosted on GitHub Pages. Each project is reachable at:
-`https://<user>.github.io/html-css-js-projects/<project>/`
+Hosted on GitHub Pages:
+
+- Companion hub: `https://<user>.github.io/html-css-js-projects/`
+- Individual projects: `https://<user>.github.io/html-css-js-projects/<project>/`

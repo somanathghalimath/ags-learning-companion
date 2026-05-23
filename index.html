@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#12161d" />
+  <title>AG's Learning Companion</title>
+  <style>
+    :root {
+      --bg: #12161d;
+      --panel: #19212b;
+      --panel-2: #202936;
+      --text: #f5f7fb;
+      --muted: #9aa7b7;
+      --line: rgba(255, 255, 255, 0.10);
+      --brand: #7dd3fc;
+      --flag: #5ee0a1;
+      --leader: #f4bd61;
+      --shadow: rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(94, 224, 161, 0.13), transparent 32%),
+        linear-gradient(315deg, rgba(244, 189, 97, 0.12), transparent 30%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      padding:
+        max(18px, env(safe-area-inset-top))
+        max(18px, env(safe-area-inset-right))
+        max(18px, env(safe-area-inset-bottom))
+        max(18px, env(safe-area-inset-left));
+    }
+
+    .shell {
+      width: min(100%, 980px);
+      display: grid;
+      gap: 22px;
+    }
+
+    .masthead {
+      display: grid;
+      gap: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 7vw, 72px);
+      line-height: 0.98;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(15px, 2.1vw, 19px);
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .quiz-link {
+      min-height: 320px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 16px;
+      padding: 18px;
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        var(--panel);
+      box-shadow: 0 22px 55px var(--shadow);
+      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+    }
+
+    .quiz-link:hover,
+    .quiz-link:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        var(--panel-2);
+      outline: none;
+    }
+
+    .visual {
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.94);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .visual img {
+      width: 84%;
+      height: 84%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .visual.leader img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .title strong {
+      font-size: 18px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .go {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .go svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .quiz-link.brand .go { color: var(--brand); }
+    .quiz-link.flag .go { color: var(--flag); }
+    .quiz-link.leader .go { color: var(--leader); }
+
+    @media (max-width: 760px) {
+      body {
+        align-items: start;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-link {
+        min-height: 220px;
+        grid-template-columns: minmax(128px, 42%) 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+      }
+
+      .visual {
+        min-height: 150px;
+      }
+
+      .meta {
+        grid-template-columns: 1fr;
+        align-content: end;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .quiz-link {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <h1>AG's Learning Companion</h1>
+      <p class="subtitle">Pick a quiz and jump straight in. Each card opens a full-screen learning round.</p>
+    </header>
+
+    <nav class="grid" aria-label="Learning games">
+      <a class="quiz-link brand" href="./brand-pop-quiz/" aria-label="Open Brand Pop Quiz">
+        <div class="visual">
+          <img src="./brand-pop-quiz/assets/samsung.png" alt="" />
+        </div>
+        <div class="meta">
+          <div class="title">
+            <strong>Brand Pop Quiz</strong>
+            <span>23 logos</span>
+          </div>
+          <div class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="quiz-link leader" href="./name-the-leader/" aria-label="Open Name the Leader">
+        <div class="visual leader">
+          <img src="./name-the-leader/assets/gandhi.jpg" alt="" />
+        </div>
+        <div class="meta">
+          <div class="title">
+            <strong>Name the Leader</strong>
+            <span>10 portraits</span>
+          </div>
+          <div class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="quiz-link flag" href="./name-the-flag/" aria-label="Open Name the Flag">
+        <div class="visual">
+          <img src="./name-the-flag/assets/india.svg" alt="" />
+        </div>
+        <div class="meta">
+          <div class="title">
+            <strong>Name the Flag</strong>
+            <span>10 flags</span>
+          </div>
+          <div class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </nav>
+  </main>
+</body>
+</html>
