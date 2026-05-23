@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#101418" />
+  <title>Name the Flag</title>
+  <style>
+    :root {
+      --bg: #101418;
+      --card: #171d24;
+      --card-2: #1d252e;
+      --text: #f2f5f8;
+      --muted: #8f9baa;
+      --accent: #7dd3fc;
+      --accent-2: #a855f7;
+      --soft: rgba(255,255,255,0.08);
+      --gold: #ffbf49;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.10), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.10), transparent 34%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+    }
+
+    .app {
+      width: min(94vw, 820px);
+      height: min(94dvh, 640px);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .topbar,
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: clamp(12px, 1.8vw, 15px);
+      letter-spacing: 0.02em;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill {
+      border: 1px solid var(--soft);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      padding: 8px 14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      white-space: nowrap;
+    }
+    .pill strong { color: var(--text); font-weight: 600; }
+
+    /* ---------- Stage ---------- */
+    .stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        var(--card);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow: hidden;
+      isolation: isolate;
+      min-height: 0;
+      touch-action: pan-y;
+    }
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.045);
+      pointer-events: none;
+    }
+
+    .brand-card {
+      width: min(86%, 560px);
+      max-height: 86%;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 40px);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.10), transparent 42%),
+        var(--card-2);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.32);
+      transition: transform 280ms ease, opacity 230ms ease, filter 280ms ease;
+    }
+    .brand-card.switching {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+      filter: blur(7px);
+    }
+
+    .brand {
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Uniform white card holding the image. Fixed 4:3 ratio so every
+       logo/portrait sits in the same rectangle, regardless of source. */
+    .image-frame {
+      position: relative;
+      display: block;
+      width: min(88%, 520px);
+      aspect-ratio: 4 / 3;
+      background: rgba(255,255,255,0.96);
+      padding: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .brand-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    .scratch-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      touch-action: none;
+      cursor: grab;
+      transition: opacity 380ms ease;
+    }
+    .image-frame.scratch-on .scratch-cover { display: block; }
+    .image-frame.scratch-on { cursor: grab; }
+
+    .answer {
+      position: absolute;
+      right: 22px;
+      bottom: 18px;
+      color: rgba(255,255,255,0.40);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 220ms ease;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+    .show-answer .answer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- Footer / buttons ---------- */
+    .hint {
+      opacity: 0.85;
+      flex: 1;
+      min-width: 0;
+    }
+    .footer-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    button {
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 140ms ease, transform 80ms ease, border-color 140ms ease, color 140ms ease;
+    }
+    button:hover { background: rgba(255,255,255,0.11); }
+    button:active { transform: scale(0.97); }
+    button.primary {
+      background: rgba(125, 211, 252, 0.15);
+      border-color: rgba(125, 211, 252, 0.30);
+      color: #cdeefe;
+    }
+    button.primary:hover { background: rgba(125, 211, 252, 0.22); }
+
+    /* Toggle button "on" state (used for Scratch) */
+    button.toggle.on {
+      background: rgba(255, 191, 73, 0.20);
+      border-color: rgba(255, 191, 73, 0.55);
+      color: #ffe0a0;
+    }
+    button.toggle.on:hover { background: rgba(255, 191, 73, 0.28); }
+
+    /* Icon-only buttons (Shuffle, Scratch toggle) */
+    button.icon {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button.icon svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    /* Carousel nav buttons (Prev / Next) flank the card inside the stage */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      background: rgba(20, 25, 35, 0.65);
+      border-color: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .nav-btn:hover {
+      background: rgba(30, 36, 48, 0.85);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+    .nav-btn:active { transform: translateY(-50%) scale(0.94); }
+    .nav-prev { left: 14px; }
+    .nav-next { right: 14px; }
+
+    /* ---------- Done state ---------- */
+    .done {
+      text-align: center;
+      color: var(--text);
+    }
+    .done .tick {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+    .done h1 {
+      margin: 0 0 6px;
+      font-size: clamp(22px, 4.4vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .done p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---------- Small screens ---------- */
+    @media (max-width: 520px) {
+      .app { padding: 10px; gap: 12px; height: 96dvh; }
+      .footer { flex-wrap: wrap; justify-content: center; }
+      .pill { padding: 7px 12px; }
+      .brand-card { width: 92%; padding: 18px; }
+      .image-frame { width: 92%; padding: 10px; }
+      .answer { left: 0; right: 0; bottom: 14px; text-align: center; }
+      .hint { display: none; }
+      button { padding: 11px 14px; }
+      button.icon { padding: 0; width: 44px; height: 44px; }
+      button.icon svg { width: 20px; height: 20px; }
+      .nav-prev { left: 6px; }
+      .nav-next { right: 6px; }
+    }
+
+    /* ---------- Landscape phones ---------- */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .app { height: 96dvh; gap: 8px; padding: 8px; }
+      .brand-card { padding: 12px; }
+      .image-frame { width: min(60%, 360px); padding: 10px; }
+      .answer { bottom: 10px; right: 14px; }
+      button { padding: 8px 14px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <div class="pill">Name the Flag</div>
+      <div class="topbar-right">
+        <div class="pill"><strong id="counter">1</strong>&nbsp;/&nbsp;<span id="total">10</span></div>
+        <button id="scratchBtn" type="button" class="icon toggle" aria-label="Toggle scratch mode" title="Scratch mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+            <path d="M20 3v4"/>
+            <path d="M22 5h-4"/>
+            <path d="M4 17v2"/>
+            <path d="M5 18H3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <section id="stage" class="stage" tabindex="0" aria-label="Quiz card">
+      <button id="prevBtn" type="button" class="icon nav-btn nav-prev" aria-label="Previous" title="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6"/>
+        </svg>
+      </button>
+      <div id="card" class="brand-card">
+        <div id="brand" class="brand"></div>
+      </div>
+      <button id="nextBtn" type="button" class="icon nav-btn nav-next" aria-label="Next" title="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
+      <div id="answer" class="answer"></div>
+    </section>
+
+    <div class="footer">
+      <div class="hint">Use the arrows or press <strong>&larr;</strong> / <strong>&rarr;</strong></div>
+      <div class="footer-actions">
+        <button id="shuffleBtn" type="button" class="icon" aria-label="Shuffle" title="Shuffle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 3h5v5"/>
+            <path d="M4 20L21 3"/>
+            <path d="M21 16v5h-5"/>
+            <path d="M15 15l6 6"/>
+            <path d="M4 4l5 5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const items = [{"name": "India", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzA3MDM4RCIgdmlld0JveD0iLTQ1IC0zMCA5MCA2MCI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTS00NS0zMGg5MHY2MGgtOTB6Ii8+PHBhdGggZmlsbD0iI0ZGNjgyMCIgZD0iTS00NS0zMGg5MHYyMGgtOTB6Ii8+PHBhdGggZmlsbD0iIzA0NkEzOCIgZD0iTS00NSAxMGg5MHYyMGgtOTB6Ii8+PGNpcmNsZSByPSI5LjI1Ii8+PGNpcmNsZSByPSI4IiBmaWxsPSIjRkZGIi8+PGNpcmNsZSByPSIxLjYiLz48ZyBpZD0iZCI+PGcgaWQ9ImMiPjxnIGlkPSJiIj48ZyBpZD0iYSI+PHBhdGggZD0ibTAtOCAuMyA0LjgxNEwwLS44MDJsLS4zLTIuMzg0eiIvPjxjaXJjbGUgY3k9Ii04IiByPSIuMzUiIHRyYW5zZm9ybT0icm90YXRlKDcuNSkiLz48L2c+PHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJzY2FsZSgtMSkiLz48L2c+PHVzZSB4bGluazpocmVmPSIjYiIgdHJhbnNmb3JtPSJyb3RhdGUoMTUpIi8+PC9nPjx1c2UgeGxpbms6aHJlZj0iI2MiIHRyYW5zZm9ybT0icm90YXRlKDMwKSIvPjwvZz48dXNlIHhsaW5rOmhyZWY9IiNkIiB0cmFuc2Zvcm09InJvdGF0ZSg2MCkiLz48dXNlIHhsaW5rOmhyZWY9IiNkIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+PC9zdmc+"}, {"name": "Japan", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDkwMHY2MDBIMHoiLz48Y2lyY2xlIGZpbGw9IiNiYzAwMmQiIGN4PSI0NTAiIGN5PSIzMDAiIHI9IjE4MCIvPjwvc3ZnPg=="}, {"name": "United States", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIzNSIgaGVpZ2h0PSI2NTAiIHZpZXdCb3g9IjAgMCA3NDEwIDM5MDAiPjxwYXRoIGZpbGw9IiNiMzE5NDIiIGQ9Ik0wIDBoNzQxMHYzOTAwSDAiLz48cGF0aCBzdHJva2U9IiNGRkYiIHN0cm9rZS13aWR0aD0iMzAwIiBkPSJNMCA0NTBoNzQxMG0wIDYwMEgwbTAgNjAwaDc0MTBtMCA2MDBIMG0wIDYwMGg3NDEwbTAgNjAwSDAiLz48cGF0aCBmaWxsPSIjMGEzMTYxIiBkPSJNMCAwaDI5NjR2MjEwMEgwIi8+PGcgZmlsbD0iI0ZGRiI+PGcgaWQ9ImQiPjxnIGlkPSJjIj48ZyBpZD0iZSI+PGcgaWQ9ImIiPjxwYXRoIGlkPSJhIiBkPSJtMjQ3IDkwIDcwLjUzNCAyMTcuMDgyLTE4NC42Ni0xMzQuMTY0aDIyOC4yNTNMMTc2LjQ2NiAzMDcuMDgyeiIvPjx1c2UgeGxpbms6aHJlZj0iI2EiIHk9IjQyMCIvPjx1c2UgeGxpbms6aHJlZj0iI2EiIHk9Ijg0MCIvPjx1c2UgeGxpbms6aHJlZj0iI2EiIHk9IjEyNjAiLz48L2c+PHVzZSB4bGluazpocmVmPSIjYSIgeT0iMTY4MCIvPjwvZz48dXNlIHhsaW5rOmhyZWY9IiNiIiB4PSIyNDciIHk9IjIxMCIvPjwvZz48dXNlIHhsaW5rOmhyZWY9IiNjIiB4PSI0OTQiLz48L2c+PHVzZSB4bGluazpocmVmPSIjZCIgeD0iOTg4Ii8+PHVzZSB4bGluazpocmVmPSIjYyIgeD0iMTk3NiIvPjx1c2UgeGxpbms6aHJlZj0iI2UiIHg9IjI0NzAiLz48L2c+PC9zdmc+"}, {"name": "Canada", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDk2MDAgNDgwMCI+PHBhdGggZmlsbD0icmVkIiBkPSJNMCAwaDI0MDBsOTkgOTloNDYwMmw5OS05OWgyNDAwdjQ4MDBINzIwMGwtOTktOTlIMjQ5OWwtOTkgOTlIMHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjQwMCAwaDQ4MDB2NDgwMEgyNDAwem0yNDkwIDQ0MzAtNDUtODYzYTk1IDk1IDAgMCAxIDExMS05OGw4NTkgMTUxLTExNi0zMjBhNjUgNjUgMCAwIDEgMjAtNzNsOTQxLTc2Mi0yMTItOTlhNjUgNjUgMCAwIDEtMzQtNzlsMTg2LTU3Mi01NDIgMTE1YTY1IDY1IDAgMCAxLTczLTM4bC0xMDUtMjQ3LTQyMyA0NTRhNjUgNjUgMCAwIDEtMTExLTU3bDIwNC0xMDUyLTMyNyAxODlhNjUgNjUgMCAwIDEtOTEtMjdsLTMzMi02NTItMzMyIDY1MmE2NSA2NSAwIDAgMS05MSAyN2wtMzI3LTE4OSAyMDQgMTA1MmE2NSA2NSAwIDAgMS0xMTEgNTdsLTQyMy00NTQtMTA1IDI0N2E2NSA2NSAwIDAgMS03MyAzOGwtNTQyLTExNSAxODYgNTcyYTY1IDY1IDAgMCAxLTM0IDc5bC0yMTIgOTkgOTQxIDc2MmE2NSA2NSAwIDAgMSAyMCA3M2wtMTE2IDMyMCA4NTktMTUxYTk1IDk1IDAgMCAxIDExMSA5OGwtNDUgODYzeiIvPjwvc3ZnPg=="}, {"name": "United Kingdom", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCIgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIj48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGQ9Ik0wIDB2MzBoNjBWMHoiLz48L2NsaXBQYXRoPjxjbGlwUGF0aCBpZD0iYiI+PHBhdGggZD0iTTMwIDE1aDMwdjE1enYxNUgwekgwVjB6VjBoMzB6Ii8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGQ9Ik0wIDB2MzBoNjBWMHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJtMCAwIDYwIDMwbTAtMzBMMCAzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJtMCAwIDYwIDMwbTAtMzBMMCAzMCIgY2xpcC1wYXRoPSJ1cmwoI2IpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCAwdjMwTTAgMTVoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCAwdjMwTTAgMTVoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8+PC9nPjwvc3ZnPg=="}, {"name": "France", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIj48cGF0aCBmaWxsPSIjQ0UxMTI2IiBkPSJNMCAwaDkwMHY2MDBIMCIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNjAwdjYwMEgwIi8+PHBhdGggZmlsbD0iIzAwMjY1NCIgZD0iTTAgMGgzMDB2NjAwSDAiLz48L3N2Zz4="}, {"name": "China", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjYwMCI+PHBhdGggZmlsbD0iI0VFMUMyNSIgZD0iTTAgMGg5MDB2NjAwSDAiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgzIDAgMCAzIDE1MCAxNTApIj48cGF0aCBpZD0iYSIgZmlsbD0iI0ZGMCIgZD0ibTAtMzAgMTcuNjM0IDU0LjI3LTQ2LjE2Ni0zMy41NGg1Ny4wNjRsLTQ2LjE2NiAzMy41NFoiLz48L2c+PHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJyb3RhdGUoMjMuMDM2IDIuNzg0IDc2Ni4wODIpIi8+PHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJyb3RhdGUoNDUuODcgMzguMjAxIDQ4NS4zOTYpIi8+PHVzZSB4bGluazpocmVmPSIjYSIgdHJhbnNmb3JtPSJyb3RhdGUoNjkuOTQ1IDI5Ljg5MiAzNjIuMzI4KSIvPjx1c2UgeGxpbms6aHJlZj0iI2EiIHRyYW5zZm9ybT0icm90YXRlKDIwLjY2IC01OTAuNjYgOTU3Ljk1NSkiLz48L3N2Zz4="}, {"name": "Brazil", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI3MDAiIHZpZXdCb3g9Ii0yMTAwIC0xNDcwIDQyMDAgMjk0MCI+PGRlZnM+PHBhdGggaWQ9ImoiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTS0zMS41IDBoMzNhMzAgMzAgMCAwIDAgMzAtMzB2LTEwYTMwIDMwIDAgMCAwLTMwLTMwaC0zM3ptMTMtMTNoMTlhMTkgMTkgMCAwIDAgMTktMTl2LTZhMTkgMTkgMCAwIDAtMTktMTloLTE5eiIvPjxwYXRoIGlkPSJrIiBkPSJNMCAwaDYzdi0xM0gxMnYtMThoNDB2LTEySDEydi0xNGg0OHYtMTNIMHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMS41KSIvPjxwYXRoIGlkPSJtIiBkPSJNLTI2LjI1IDBoNTIuNXYtMTJoLTQwLjV2LTE2aDMzdi0xMmgtMzN2LTExSDI1di0xMmgtNTEuMjV6Ii8+PHBhdGggaWQ9ImwiIGQ9Ik0tMzEuNSAwaDEydi00OGwxNCA0OGgxMWwxNC00OFYwaDEydi03MEgxNEwwLTIybC0xNC00OGgtMTcuNXoiLz48cGF0aCBpZD0iYiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMCAwYTMxLjUgMzUgMCAwIDAgMC03MEEzMS41IDM1IDAgMCAwIDAgMG0wLTEzYTE4LjUgMjIgMCAwIDAgMC00NCAxOC41IDIyIDAgMCAwIDAgNDQiLz48cGF0aCBpZD0iYyIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNLTMxLjUgMGgxM3YtMjZoMjhhMjIgMjIgMCAwIDAgMC00NGgtNDB6bTEzLTM5aDI3YTkgOSAwIDAgMCAwLTE4aC0yN3oiLz48cGF0aCBpZD0ibyIgZD0iTS0xNS43NS0yMkMtMTUuNzUtMTUtOS0xMS41IDEtMTEuNXMxNC43NC0zLjI1IDE0Ljc1LTcuNzVjMC0xNC4yNS00Ni43NS01LjI1LTQ2LjUtMzAuMjVDLTMwLjUtNzEtNi03MCAzLTcwczI2IDQgMjUuNzUgMjEuMjVIMTMuNWMwLTcuNS03LTEwLjI1LTE1LTEwLjI1LTcuNzUgMC0xMy4yNSAxLjI1LTEzLjI1IDguNS0uMjUgMTEuNzUgNDYuMjUgNCA0Ni4yNSAyOC43NUMzMS41LTMuNSAxMy41IDAgMCAwYy0xMS41IDAtMzEuNTUtNC41LTMxLjUtMjJ6Ii8+PHVzZSB4bGluazpocmVmPSIjZiIgaWQ9InAiIHRyYW5zZm9ybT0ic2NhbGUoMzEuNSkiLz48dXNlIHhsaW5rOmhyZWY9IiNmIiBpZD0icSIgdHJhbnNmb3JtPSJzY2FsZSgyNi4yNSkiLz48dXNlIHhsaW5rOmhyZWY9IiNmIiBpZD0idSIgdHJhbnNmb3JtPSJzY2FsZSgyMSkiLz48dXNlIHhsaW5rOmhyZWY9IiNmIiBpZD0iciIgdHJhbnNmb3JtPSJzY2FsZSgxNSkiLz48dXNlIHhsaW5rOmhyZWY9IiNmIiBpZD0idiIgdHJhbnNmb3JtPSJzY2FsZSgxMC41KSIvPjxnIGlkPSJuIj48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGQ9Ik0tMzEuNSAwdi03MGg2M1Ywek0wLTQ3djEyaDMxLjV2LTEyeiIvPjwvY2xpcFBhdGg+PHVzZSB4bGluazpocmVmPSIjYiIgY2xpcC1wYXRoPSJ1cmwoI2EpIi8+PHBhdGggZD0iTTUtMzVoMjYuNXYxMEg1eiIvPjxwYXRoIGQ9Ik0yMS41LTM1aDEwVjBoLTEweiIvPjwvZz48ZyBpZD0iaSI+PHVzZSB4bGluazpocmVmPSIjYyIvPjxwYXRoIGQ9Ik0yOCAwYzAtMTAgMC0zMi0xNS0zMkgtNmMyMiAwIDIyIDIyIDIyIDMyIi8+PC9nPjxnIGlkPSJmIiBmaWxsPSIjZmZmIj48ZyBpZD0iZSI+PHBhdGggaWQ9ImQiIGQ9Ik0wLTF2MWguNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTggMCAtMSkiLz48dXNlIHhsaW5rOmhyZWY9IiNkIiB0cmFuc2Zvcm09InNjYWxlKC0xIDEpIi8+PC9nPjx1c2UgeGxpbms6aHJlZj0iI2UiIHRyYW5zZm9ybT0icm90YXRlKDcyKSIvPjx1c2UgeGxpbms6aHJlZj0iI2UiIHRyYW5zZm9ybT0icm90YXRlKC03MikiLz48dXNlIHhsaW5rOmhyZWY9IiNlIiB0cmFuc2Zvcm09InJvdGF0ZSgxNDQpIi8+PHVzZSB4bGluazpocmVmPSIjZSIgdHJhbnNmb3JtPSJyb3RhdGUoMjE2KSIvPjwvZz48L2RlZnM+PGNsaXBQYXRoIGlkPSJoIj48Y2lyY2xlIHI9IjczNSIvPjwvY2xpcFBhdGg+PHBhdGggZmlsbD0iIzAwOTQ0MCIgZD0iTS0yMTAwLTE0NzBoNDIwMHYyOTQwaC00MjAweiIvPjxwYXRoIGZpbGw9IiNmZmNiMDAiIGQ9Ik0tMTc0MyAwIDAgMTExMyAxNzQzIDAgMC0xMTEzWiIvPjxjaXJjbGUgcj0iNzM1IiBmaWxsPSIjMzAyNjgxIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTS0yMjA1IDE0NzBhMTc4NSAxNzg1IDAgMCAxIDM1NzAgMGgtMTA1YTE2ODAgMTY4MCAwIDEgMC0zMzYwIDB6IiBjbGlwLXBhdGg9InVybCgjaCkiLz48ZyBmaWxsPSIjMDA5NDQwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIwIDE0NzApIj48dXNlIHhsaW5rOmhyZWY9IiNiIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgtNykiLz48dXNlIHhsaW5rOmhyZWY9IiNpIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgtNCkiLz48dXNlIHhsaW5rOmhyZWY9IiNqIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgtMSkiLz48dXNlIHhsaW5rOmhyZWY9IiNrIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgyKSIvPjx1c2UgeGxpbms6aHJlZj0iI2wiIHk9Ii0xNjk3LjUiIHRyYW5zZm9ybT0icm90YXRlKDUpIi8+PHVzZSB4bGluazpocmVmPSIjbSIgeT0iLTE2OTcuNSIgdHJhbnNmb3JtPSJyb3RhdGUoOS43NSkiLz48dXNlIHhsaW5rOmhyZWY9IiNjIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgxNC41KSIvPjx1c2UgeGxpbms6aHJlZj0iI2kiIHk9Ii0xNjk3LjUiIHRyYW5zZm9ybT0icm90YXRlKDE3LjUpIi8+PHVzZSB4bGluazpocmVmPSIjYiIgeT0iLTE2OTcuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMjAuNSkiLz48dXNlIHhsaW5rOmhyZWY9IiNuIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgyMy41KSIvPjx1c2UgeGxpbms6aHJlZj0iI2kiIHk9Ii0xNjk3LjUiIHRyYW5zZm9ybT0icm90YXRlKDI2LjUpIi8+PHVzZSB4bGluazpocmVmPSIjayIgeT0iLTE2OTcuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMjkuNSkiLz48dXNlIHhsaW5rOmhyZWY9IiNvIiB5PSItMTY5Ny41IiB0cmFuc2Zvcm09InJvdGF0ZSgzMi41KSIvPjx1c2UgeGxpbms6aHJlZj0iI28iIHk9Ii0xNjk3LjUiIHRyYW5zZm9ybT0icm90YXRlKDM1LjUpIi8+PHVzZSB4bGluazpocmVmPSIjYiIgeT0iLTE2OTcuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMzguNSkiLz48L2c+PHVzZSB4bGluazpocmVmPSIjcCIgeD0iLTYwMCIgeT0iLTEzMiIvPjx1c2UgeGxpbms6aHJlZj0iI3AiIHg9Ii01MzUiIHk9IjE3NyIvPjx1c2UgeGxpbms6aHJlZj0iI3EiIHg9Ii02MjUiIHk9IjI0MyIvPjx1c2UgeGxpbms6aHJlZj0iI3IiIHg9Ii00NjMiIHk9IjEzMiIvPjx1c2UgeGxpbms6aHJlZj0iI3EiIHg9Ii0zODIiIHk9IjI1MCIvPjx1c2UgeGxpbms6aHJlZj0iI3UiIHg9Ii00MDQiIHk9IjMyMyIvPjx1c2UgeGxpbms6aHJlZj0iI3AiIHg9IjIyOCIgeT0iLTIyOCIvPjx1c2UgeGxpbms6aHJlZj0iI3AiIHg9IjUxNSIgeT0iMjU4Ii8+PHVzZSB4bGluazpocmVmPSIjdSIgeD0iNjE3IiB5PSIyNjUiLz48dXNlIHhsaW5rOmhyZWY9IiNxIiB4PSI1NDUiIHk9IjMyMyIvPjx1c2UgeGxpbms6aHJlZj0iI3EiIHg9IjM2OCIgeT0iNDc3Ii8+PHVzZSB4bGluazpocmVmPSIjdSIgeD0iMzY3IiB5PSI1NTEiLz48dXNlIHhsaW5rOmhyZWY9IiN1IiB4PSI0NDEiIHk9IjQxOSIvPjx1c2UgeGxpbms6aHJlZj0iI3EiIHg9IjUwMCIgeT0iMzgyIi8+PHVzZSB4bGluazpocmVmPSIjdSIgeD0iMzY1IiB5PSI0MDUiLz48dXNlIHhsaW5rOmhyZWY9IiNxIiB4PSItMjgwIiB5PSIzMCIvPjx1c2UgeGxpbms6aHJlZj0iI3UiIHg9IjIwMCIgeT0iLTM3Ii8+PHVzZSB4bGluazpocmVmPSIjcCIgeT0iMzMwIi8+PHVzZSB4bGluazpocmVmPSIjcSIgeD0iODUiIHk9IjE4NCIvPjx1c2UgeGxpbms6aHJlZj0iI3EiIHk9IjExOCIvPjx1c2UgeGxpbms6aHJlZj0iI3UiIHg9Ii03NCIgeT0iMTg0Ii8+PHVzZSB4bGluazpocmVmPSIjciIgeD0iLTM3IiB5PSIyMzUiLz48dXNlIHhsaW5rOmhyZWY9IiNxIiB4PSIyMjAiIHk9IjQ5NSIvPjx1c2UgeGxpbms6aHJlZj0iI3UiIHg9IjI4MyIgeT0iNDMwIi8+PHVzZSB4bGluazpocmVmPSIjdSIgeD0iMTYyIiB5PSI0MTIiLz48dXNlIHhsaW5rOmhyZWY9IiNwIiB4PSItMjk1IiB5PSIzOTAiLz48dXNlIHhsaW5rOmhyZWY9IiN2IiB5PSI1NzUiLz48L3N2Zz4="}, {"name": "Switzerland", "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDBoMzJ2MzJIMHoiIGZpbGw9InJlZCIvPjxwYXRoIGQ9Ik0xMyA2aDZ2N2g3djZoLTd2N2gtNnYtN0g2di02aDd6IiBmaWxsPSIjZmZmIi8+PC9zdmc+"}, {"name": "South Africa", "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgOTAgNjAiPjxkZWZzPjxjbGlwUGF0aCBpZD0iYiI+PHBhdGggZD0ibTAgMCA0NSAzMEwwIDYweiIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBkPSJNMCAwaDkwdjYwSDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0iI0UwM0MzMSIgZD0iTTAgMGg5MHYzMEg0NXoiLz48cGF0aCBmaWxsPSIjMDAxNDg5IiBkPSJNMCA2MGg5MFYzMEg0NXoiLz48ZyBmaWxsPSJub25lIiBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIHN0cm9rZT0iI0ZGRiIgc3Ryb2tlLXdpZHRoPSIyMCIgZD0iTTkwIDMwSDQ1TDAgMHY2MGw0NS0zMCIvPjxwYXRoIGZpbGw9IiMwMDAiIHN0cm9rZT0iI2ZmYjgxYyIgc3Ryb2tlLXdpZHRoPSIyMCIgZD0ibTAgMCA0NSAzMEwwIDYwIiBjbGlwLXBhdGg9InVybCgjYikiLz48cGF0aCBzdHJva2U9IiMwMDc3NDkiIHN0cm9rZS13aWR0aD0iMTIiIGQ9Im0wIDAgNDUgMzBoNDVNMCA2MGw0NS0zMCIvPjwvZz48L3N2Zz4="}];
+    const features = {};
+
+    let order = items.slice();
+    let index = 0;
+    let answerVisible = false;
+    let finished = false;
+    let scratchMode = false;
+
+    const stage      = document.getElementById('stage');
+    const card       = document.getElementById('card');
+    const brandEl    = document.getElementById('brand');
+    const answerEl   = document.getElementById('answer');
+    const counterEl  = document.getElementById('counter');
+    const totalEl    = document.getElementById('total');
+    const scratchBtn = document.getElementById('scratchBtn');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const prevBtn    = document.getElementById('prevBtn');
+    const nextBtn    = document.getElementById('nextBtn');
+
+    // Hide opt-in features that aren't enabled for this project.
+    if (!features.scratch) scratchBtn.remove();
+
+    function shuffleInPlace(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+    }
+
+    /* ---------- Scratch-card overlay ---------- */
+
+    function paintScratchCover(canvas) {
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Metallic silver gradient
+      const g = ctx.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0,    '#c4cad3');
+      g.addColorStop(0.5,  '#9ea3ad');
+      g.addColorStop(1,    '#cfd4dc');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      // Speckled noise (light + dark)
+      ctx.globalAlpha = 1;
+      for (let i = 0; i < 900; i++) {
+        ctx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.10) + ')';
+        ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
+      }
+      for (let i = 0; i < 700; i++) {
+        ctx.fillStyle = 'rgba(0,0,0,' + (Math.random() * 0.06) + ')';
+        ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
+      }
+
+      // "SCRATCH" hint
+      ctx.fillStyle = 'rgba(40,40,40,0.55)';
+      const fs = Math.max(20, Math.min(w / 11, 56));
+      ctx.font = '700 ' + fs + 'px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('SCRATCH', w / 2, h / 2 - fs * 0.35);
+      ctx.font = '500 ' + (fs * 0.4) + 'px Inter, sans-serif';
+      ctx.fillStyle = 'rgba(40,40,40,0.45)';
+      ctx.fillText('to reveal', w / 2, h / 2 + fs * 0.45);
+    }
+
+    function attachScratch(frame, canvas) {
+      const ctx = canvas.getContext('2d');
+      let drawing = false;
+      let lastX = 0, lastY = 0;
+      let revealed = false;
+
+      function pos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const pt = (e.touches && e.touches[0])
+                 || (e.changedTouches && e.changedTouches[0])
+                 || e;
+        const sx = canvas.width / rect.width;
+        const sy = canvas.height / rect.height;
+        return {
+          x: (pt.clientX - rect.left) * sx,
+          y: (pt.clientY - rect.top)  * sy,
+        };
+      }
+
+      function erase(x, y, fromLast) {
+        ctx.globalCompositeOperation = 'destination-out';
+        const r = Math.max(28, canvas.width / 14);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        if (fromLast) {
+          ctx.lineWidth = r * 2;
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        lastX = x; lastY = y;
+      }
+
+      function maybeRevealAll() {
+        if (revealed) return;
+        const w = canvas.width, h = canvas.height;
+        const img = ctx.getImageData(0, 0, w, h).data;
+        let cleared = 0, total = 0;
+        const step = 16;
+        for (let y = 0; y < h; y += step) {
+          for (let x = 0; x < w; x += step) {
+            total++;
+            if (img[(y * w + x) * 4 + 3] === 0) cleared++;
+          }
+        }
+        if (cleared / total > 0.40) {
+          revealed = true;
+          canvas.style.opacity = '0';
+          setTimeout(function () {
+            frame.classList.remove('scratch-on');
+          }, 380);
+        }
+      }
+
+      function start(e) {
+        if (e.cancelable) e.preventDefault();
+        e.stopPropagation();
+        drawing = true;
+        const p = pos(e);
+        lastX = p.x; lastY = p.y;
+        erase(p.x, p.y, false);
+      }
+      function move(e) {
+        if (!drawing) return;
+        if (e.cancelable) e.preventDefault();
+        e.stopPropagation();
+        const p = pos(e);
+        erase(p.x, p.y, true);
+      }
+      function end(e) {
+        if (!drawing) return;
+        if (e && e.cancelable) e.preventDefault();
+        if (e) e.stopPropagation();
+        drawing = false;
+        maybeRevealAll();
+      }
+
+      canvas.addEventListener('mousedown', start);
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
+      canvas.addEventListener('touchstart', start, { passive: false });
+      canvas.addEventListener('touchmove',  move,  { passive: false });
+      canvas.addEventListener('touchend',   end);
+      canvas.addEventListener('touchcancel', end);
+    }
+
+    function mountScratchCover(frame, img) {
+      const existing = frame.querySelector('.scratch-cover');
+      if (existing) existing.remove();
+
+      // Size canvas to the entire frame (including the white padding around
+      // the logo) — gives a uniform scratch-card look regardless of the
+      // logo's aspect ratio.
+      const rect = frame.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) {
+        requestAnimationFrame(function () { mountScratchCover(frame, img); });
+        return;
+      }
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const canvas = document.createElement('canvas');
+      canvas.className = 'scratch-cover';
+      canvas.width  = Math.round(rect.width  * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+
+      paintScratchCover(canvas);
+
+      frame.appendChild(canvas);
+      frame.classList.add('scratch-on');
+      attachScratch(frame, canvas);
+    }
+
+    /* ---------- Render ---------- */
+
+    function render() {
+      const item = order[index];
+      card.className = 'brand-card switching';
+      stage.classList.remove('show-answer');
+      answerVisible = false;
+
+      setTimeout(function () {
+        brandEl.innerHTML = '';
+
+        const frame = document.createElement('div');
+        frame.className = 'image-frame';
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.name;
+        img.draggable = false;
+        img.className = 'brand-image';
+
+        frame.appendChild(img);
+        brandEl.appendChild(frame);
+
+        if (scratchMode) {
+          const mount = function () {
+            requestAnimationFrame(function () { mountScratchCover(frame, img); });
+          };
+          if (img.complete && img.naturalWidth > 0) mount();
+          else img.addEventListener('load', mount, { once: true });
+        }
+
+        answerEl.textContent = item.name;
+        counterEl.textContent = index + 1;
+        card.className = 'brand-card';
+      }, 180);
+    }
+
+    function showFinished() {
+      finished = true;
+      card.className = 'brand-card switching';
+      stage.classList.remove('show-answer');
+      setTimeout(function () {
+        brandEl.innerHTML =
+          '<div class="done">' +
+            '<div class="tick">&#10003;</div>' +
+            '<h1>All ' + order.length + ', named.</h1>' +
+            '<p>Tap Shuffle to play again.</p>' +
+          '</div>';
+        answerEl.textContent = '';
+        counterEl.textContent = order.length;
+        card.className = 'brand-card';
+      }, 180);
+    }
+
+    function nextItem() {
+      if (finished) { restart(); return; }
+      if (index < order.length - 1) {
+        index++;
+        render();
+      } else {
+        showFinished();
+      }
+    }
+
+    function prevItem() {
+      if (finished) {
+        finished = false;
+        index = order.length - 1;
+        render();
+        return;
+      }
+      if (index > 0) {
+        index--;
+        render();
+      }
+    }
+
+    function toggleAnswer() {
+      if (finished) return;
+      answerVisible = !answerVisible;
+      stage.classList.toggle('show-answer', answerVisible);
+    }
+
+    function restart() {
+      finished = false;
+      shuffleInPlace(order);
+      index = 0;
+      totalEl.textContent = order.length;
+      render();
+    }
+
+    function toggleScratch() {
+      scratchMode = !scratchMode;
+      scratchBtn.classList.toggle('on', scratchMode);
+      if (!finished) render();
+    }
+
+    /* ---------- Input ---------- */
+
+    document.addEventListener('keydown', function (e) {
+      if (e.code === 'Space' || e.key === 'ArrowRight') { e.preventDefault(); nextItem(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevItem(); }
+      else if (e.key === 'a' || e.key === 'A') { toggleAnswer(); }
+      else if (e.key === 's' || e.key === 'S') { restart(); }
+      else if (e.key === 'r' || e.key === 'R') { restart(); }
+    });
+
+    prevBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      prevItem();
+    });
+    nextBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      nextItem();
+    });
+    scratchBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleScratch();
+    });
+    shuffleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      restart();
+    });
+
+    /* ---------- First paint ---------- */
+    shuffleInPlace(order);
+    render();
+  </script>
+</body>
+</html>

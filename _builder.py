@@ -24,6 +24,7 @@ MIME_BY_EXT = {
     ".png":  "image/png",
     ".webp": "image/webp",
     ".gif":  "image/gif",
+    ".svg":  "image/svg+xml",
 }
 
 # Anything wider/taller than this gets downscaled. 1000 looks crisp on
