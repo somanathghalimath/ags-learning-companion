@@ -21,6 +21,7 @@ ITEMS = [
     ("Blue Star",    "bluestar.png"),
     ("Usha",         "usha.png"),
     ("Atomberg",     "atomberg.png"),
+    ("Racold",       "racold.jpeg"),
     ("Bajaj",        "bajaj.png"),
     # Conglomerates / retail / cars
     ("Tata",         "tata.png"),
