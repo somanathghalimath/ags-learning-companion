@@ -16,6 +16,7 @@
       --brand: #7dd3fc;
       --flag: #5ee0a1;
       --leader: #f4bd61;
+      --car: #f87171;
       --shadow: rgba(0, 0, 0, 0.38);
     }
 
@@ -172,6 +173,7 @@
     .quiz-link.brand .go { color: var(--brand); }
     .quiz-link.flag .go { color: var(--flag); }
     .quiz-link.leader .go { color: var(--leader); }
+    .quiz-link.car .go { color: var(--car); }
 
     @media (max-width: 760px) {
       body {
@@ -259,6 +261,24 @@
           <div class="title">
             <strong>Name the Flag</strong>
             <span>10 flags</span>
+          </div>
+          <div class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="quiz-link car" href="./cars-logo-quiz/" aria-label="Open Cars Logo Quiz">
+        <div class="visual">
+          <img src="./cars-logo-quiz/assets/toyota.svg" alt="" />
+        </div>
+        <div class="meta">
+          <div class="title">
+            <strong>Cars Logo Quiz</strong>
+            <span>13 car logos</span>
           </div>
           <div class="go" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">

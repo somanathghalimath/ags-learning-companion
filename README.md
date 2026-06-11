@@ -7,6 +7,7 @@ The root page is **AG's Learning Companion**, a visual launcher for the quiz pro
 ## Projects
 
 - [`brand-pop-quiz/`](brand-pop-quiz/) — Slideshow quiz of brand logos. Single-file build with embedded images. Includes a scratch-card reveal mode.
+- [`cars-logo-quiz/`](cars-logo-quiz/) — Identify 13 car logos. Logos fetched from Wikimedia Commons or reused from local quiz assets and embedded, with source links in `assets/SOURCES.md`.
 - [`name-the-leader/`](name-the-leader/) — Same format, but for Indian national figures. Portraits fetched from Wikipedia and embedded.
 - [`name-the-flag/`](name-the-flag/) — Identify the country from its flag. Ten kid-friendly flags fetched from flagcdn.com as SVGs.
 
