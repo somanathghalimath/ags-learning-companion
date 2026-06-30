@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7fbff" />
+    <meta
+      name="description"
+      content="A visual guide that teaches children the stroke order for uppercase letters."
+    />
+    <title>Write With Me</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="letters.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <h1>Write With Me</h1>
+      </header>
+
+      <section class="lesson-card" aria-labelledby="letter-heading">
+        <div class="lesson-heading">
+          <button class="icon-button" id="previousButton" type="button" aria-label="Previous letter">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="letter-title">
+            <span class="letter-count" id="letterCount">Letter 1 of 3</span>
+            <h2 id="letter-heading">Uppercase A</h2>
+          </div>
+
+          <button class="icon-button" id="nextButton" type="button" aria-label="Next letter">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="canvas-wrap">
+          <svg
+            id="letterCanvas"
+            class="letter-canvas"
+            viewBox="0 0 400 400"
+            role="img"
+            aria-labelledby="svgTitle svgDescription"
+          >
+            <title id="svgTitle">How to write uppercase A</title>
+            <desc id="svgDescription">The strokes appear one at a time in writing order.</desc>
+            <g id="guideLayer" class="guide-layer" aria-hidden="true"></g>
+            <g id="strokeLayer" class="stroke-layer" aria-hidden="true"></g>
+            <circle id="startDot" class="start-dot" r="8" aria-hidden="true"></circle>
+            <g id="pencilTip" class="pencil-tip" aria-hidden="true">
+              <path class="pencil-wood" d="M 0 0 L -12 -6 L -12 6 Z"></path>
+              <path class="pencil-lead" d="M 0 0 L -4 -2 L -4 2 Z"></path>
+              <rect class="pencil-body" x="-34" y="-6" width="22" height="12" rx="2"></rect>
+              <rect class="pencil-band" x="-39" y="-6" width="6" height="12"></rect>
+              <path class="pencil-eraser" d="M -44 -6 H -39 V 6 H -44 Q -47 6 -47 3 V -3 Q -47 -6 -44 -6 Z"></path>
+            </g>
+          </svg>
+        </div>
+
+        <div class="playback-controls" aria-label="Playback controls">
+          <button class="control-button primary" id="playButton" type="button">
+            <span aria-hidden="true">▶</span> Play
+          </button>
+          <button class="control-button" id="pauseButton" type="button" disabled>
+            <span aria-hidden="true">Ⅱ</span> Pause
+          </button>
+          <button class="control-button" id="replayButton" type="button">
+            <span aria-hidden="true">↻</span> Replay
+          </button>
+        </div>
+      </section>
+
+      <section class="practice-options" aria-label="Practice options">
+        <label class="option-group" for="speedSelect">
+          <span>Practice speed</span>
+          <select id="speedSelect">
+            <option value="slow">Slow</option>
+            <option value="normal" selected>Normal</option>
+            <option value="fast">Fast</option>
+          </select>
+        </label>
+      </section>
+    </main>
+  </body>
+</html>
