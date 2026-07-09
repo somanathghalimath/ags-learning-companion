@@ -163,13 +163,13 @@ h1 {
 
 .guide-layer path {
   stroke: var(--guide);
-  stroke-width: 17;
+  stroke-width: 7;
   opacity: 0.72;
 }
 
 .stroke-layer path {
   stroke: var(--blue);
-  stroke-width: 18;
+  stroke-width: 8;
 }
 
 .start-dot {
@@ -240,7 +240,9 @@ h1 {
 
 .practice-options {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 16px;
   margin-top: 18px;
   padding: 20px 24px;
   border-radius: 22px;
@@ -251,7 +253,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(100%, 340px);
+  width: min(100%, 300px);
   gap: 16px;
   color: var(--ink);
   font-weight: 800;

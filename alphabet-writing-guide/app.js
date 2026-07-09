@@ -1,9 +1,7 @@
 "use strict";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
-const ACTIVE_SET_KEY = "uppercase";
-const ACTIVE_SET = window.LETTER_LIBRARY[ACTIVE_SET_KEY];
-const LETTERS = ACTIVE_SET.characters;
+const DEFAULT_SET_KEY = "uppercase";
 const NEXT_STROKE_DELAY = 500;
 
 const SPEEDS = {
@@ -25,10 +23,12 @@ const elements = {
   replayButton: document.querySelector("#replayButton"),
   previousButton: document.querySelector("#previousButton"),
   nextButton: document.querySelector("#nextButton"),
+  setSelect: document.querySelector("#setSelect"),
   speedSelect: document.querySelector("#speedSelect")
 };
 
 const state = {
+  activeSetKey: DEFAULT_SET_KEY,
   letterIndex: 0,
   strokeIndex: 0,
   phase: "ready", // ready | drawing | preparing | paused | complete
@@ -40,6 +40,38 @@ const state = {
   strokeLengths: []
 };
 
+function getAvailableSetEntries() {
+  return Object.entries(window.LETTER_LIBRARY).filter(([, set]) => (
+    Array.isArray(set.characters) && set.characters.length > 0
+  ));
+}
+
+function getActiveSet() {
+  return window.LETTER_LIBRARY[state.activeSetKey];
+}
+
+function getCharacters() {
+  return getActiveSet().characters;
+}
+
+function populateSetSelect() {
+  const setEntries = getAvailableSetEntries();
+  elements.setSelect.replaceChildren();
+
+  setEntries.forEach(([key, set]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = set.label;
+    elements.setSelect.append(option);
+  });
+
+  if (!window.LETTER_LIBRARY[state.activeSetKey]?.characters.length && setEntries.length > 0) {
+    state.activeSetKey = setEntries[0][0];
+  }
+
+  elements.setSelect.value = state.activeSetKey;
+}
+
 function createPath(pathData, className) {
   const path = document.createElementNS(SVG_NS, "path");
   path.setAttribute("d", pathData);
@@ -50,7 +82,9 @@ function createPath(pathData, className) {
 function renderLetter() {
   stopAnimation();
 
-  const letter = LETTERS[state.letterIndex];
+  const characters = getCharacters();
+  state.letterIndex = Math.min(state.letterIndex, characters.length - 1);
+  const letter = characters[state.letterIndex];
   elements.guideLayer.replaceChildren();
   elements.strokeLayer.replaceChildren();
   state.strokeElements = [];
@@ -80,18 +114,22 @@ function renderLetter() {
 }
 
 function updateLetterLabels() {
-  const letter = LETTERS[state.letterIndex];
-  elements.letterHeading.textContent = `${ACTIVE_SET.label} ${letter.name}`;
-  elements.letterCount.textContent = `${ACTIVE_SET.itemLabel} ${state.letterIndex + 1} of ${LETTERS.length}`;
-  elements.svgTitle.textContent = `How to write ${ACTIVE_SET.label.toLowerCase()} ${letter.name}`;
+  const activeSet = getActiveSet();
+  const characters = getCharacters();
+  const letter = characters[state.letterIndex];
+  const headingLabel = activeSet.headingLabel || activeSet.label;
+  elements.letterHeading.textContent = `${headingLabel} ${letter.name}`;
+  elements.letterCount.textContent = `${activeSet.itemLabel} ${state.letterIndex + 1} of ${characters.length}`;
+  elements.svgTitle.textContent = `How to write ${headingLabel.toLowerCase()} ${letter.name}`;
 }
 
 function updateControls() {
+  const characters = getCharacters();
   const isPlaying = state.phase === "drawing" || state.phase === "preparing";
   elements.playButton.disabled = isPlaying || state.phase === "complete";
   elements.pauseButton.disabled = !isPlaying;
   elements.previousButton.disabled = state.letterIndex === 0;
-  elements.nextButton.disabled = state.letterIndex === LETTERS.length - 1;
+  elements.nextButton.disabled = state.letterIndex === characters.length - 1;
 }
 
 function showStartDot(path) {
@@ -167,7 +205,7 @@ function updateDrawing(now) {
     completedPath.style.strokeDasharray = "none";
     hideStartDot();
     hidePencil();
-    const isLastStroke = state.strokeIndex === LETTERS[state.letterIndex].strokes.length - 1;
+    const isLastStroke = state.strokeIndex === getCharacters()[state.letterIndex].strokes.length - 1;
     if (isLastStroke) {
       state.phase = "complete";
       updateControls();
@@ -258,8 +296,16 @@ function replay() {
 
 function changeLetter(direction) {
   const nextIndex = state.letterIndex + direction;
-  if (nextIndex < 0 || nextIndex >= LETTERS.length) return;
+  if (nextIndex < 0 || nextIndex >= getCharacters().length) return;
   state.letterIndex = nextIndex;
+  renderLetter();
+  startCurrentStroke();
+}
+
+function changeSet(setKey) {
+  if (!window.LETTER_LIBRARY[setKey]?.characters.length) return;
+  state.activeSetKey = setKey;
+  state.letterIndex = 0;
   renderLetter();
   startCurrentStroke();
 }
@@ -269,6 +315,7 @@ elements.pauseButton.addEventListener("click", pause);
 elements.replayButton.addEventListener("click", replay);
 elements.previousButton.addEventListener("click", () => changeLetter(-1));
 elements.nextButton.addEventListener("click", () => changeLetter(1));
+elements.setSelect.addEventListener("change", () => changeSet(elements.setSelect.value));
 
 elements.speedSelect.addEventListener("change", () => {
   // Restart the current phase's clock so a speed change is applied predictably.
@@ -278,5 +325,6 @@ elements.speedSelect.addEventListener("change", () => {
   }
 });
 
+populateSetSelect();
 renderLetter();
 startCurrentStroke();
