@@ -172,6 +172,21 @@ h1 {
   stroke-width: 8;
 }
 
+.glyph-guide-text,
+.glyph-reveal-text {
+  font-family: "Noto Sans Kannada", "Nirmala UI", "Tunga", "Kannada Sangam MN", "Kedage", sans-serif;
+  font-weight: 700;
+}
+
+.glyph-guide-text {
+  fill: var(--guide);
+  opacity: 0.76;
+}
+
+.glyph-reveal-text {
+  fill: var(--blue);
+}
+
 .start-dot {
   fill: var(--mint);
   opacity: 0;

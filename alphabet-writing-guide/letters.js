@@ -394,6 +394,10 @@ window.LETTER_LIBRARY = {
     label: "ಕನ್ನಡ ಸ್ವರಗಳು",
     headingLabel: "Kannada swara",
     itemLabel: "Swara",
+    renderMode: "glyphReveal",
+    glyphFontSize: 238,
+    glyphY: 205,
+    revealStrokeWidth: 86,
     characters: KANNADA_SWARAS
   }
 };

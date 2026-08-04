@@ -11,6 +11,7 @@ const SPEEDS = {
 };
 
 const elements = {
+  svgDefs: document.querySelector("#svgDefs"),
   guideLayer: document.querySelector("#guideLayer"),
   strokeLayer: document.querySelector("#strokeLayer"),
   startDot: document.querySelector("#startDot"),
@@ -37,7 +38,9 @@ const state = {
   phaseElapsed: 0,
   animationFrame: null,
   strokeElements: [],
-  strokeLengths: []
+  strokeLengths: [],
+  revealElement: null,
+  revealMaskId: null
 };
 
 function getAvailableSetEntries() {
@@ -79,30 +82,85 @@ function createPath(pathData, className) {
   return path;
 }
 
+function createGlyphText(letter, activeSet, className) {
+  const text = document.createElementNS(SVG_NS, "text");
+  text.textContent = letter.glyph || letter.name;
+  text.setAttribute("x", letter.glyphX || activeSet.glyphX || 200);
+  text.setAttribute("y", letter.glyphY || activeSet.glyphY || 205);
+  text.setAttribute("font-size", letter.glyphFontSize || activeSet.glyphFontSize || 238);
+  text.setAttribute("text-anchor", "middle");
+  text.setAttribute("dominant-baseline", "central");
+  text.setAttribute("class", className);
+  return text;
+}
+
+function createRevealMask(maskId, letter, activeSet) {
+  const mask = document.createElementNS(SVG_NS, "mask");
+  mask.setAttribute("id", maskId);
+  mask.setAttribute("maskUnits", "userSpaceOnUse");
+
+  letter.strokes.forEach((stroke) => {
+    const maskPath = createPath(stroke.d, "reveal-mask-stroke");
+    maskPath.style.fill = "none";
+    maskPath.style.stroke = "#fff";
+    maskPath.style.strokeLinecap = "butt";
+    maskPath.style.strokeLinejoin = "round";
+    maskPath.style.strokeWidth = `${letter.revealStrokeWidth || activeSet.revealStrokeWidth || 72}`;
+    mask.append(maskPath);
+
+    const length = maskPath.getTotalLength();
+    maskPath.style.strokeDasharray = `${length} ${length}`;
+    maskPath.style.strokeDashoffset = `${length}`;
+    maskPath.style.opacity = "0";
+
+    state.strokeElements.push(maskPath);
+    state.strokeLengths.push(length);
+  });
+
+  return mask;
+}
+
 function renderLetter() {
   stopAnimation();
 
+  const activeSet = getActiveSet();
   const characters = getCharacters();
   state.letterIndex = Math.min(state.letterIndex, characters.length - 1);
   const letter = characters[state.letterIndex];
+  elements.svgDefs.replaceChildren();
   elements.guideLayer.replaceChildren();
   elements.strokeLayer.replaceChildren();
   state.strokeElements = [];
   state.strokeLengths = [];
+  state.revealElement = null;
+  state.revealMaskId = null;
 
-  letter.strokes.forEach((stroke) => {
-    elements.guideLayer.append(createPath(stroke.d));
+  if (activeSet.renderMode === "glyphReveal") {
+    const maskId = `letterRevealMask-${state.activeSetKey}-${state.letterIndex}`;
+    const mask = createRevealMask(maskId, letter, activeSet);
+    const revealText = createGlyphText(letter, activeSet, "glyph-reveal-text");
+    revealText.setAttribute("mask", `url(#${maskId})`);
 
-    const animatedPath = createPath(stroke.d);
-    elements.strokeLayer.append(animatedPath);
-    const length = animatedPath.getTotalLength();
-    animatedPath.style.strokeDasharray = `${length} ${length}`;
-    animatedPath.style.strokeDashoffset = `${length}`;
-    animatedPath.style.opacity = "0";
+    elements.svgDefs.append(mask);
+    elements.guideLayer.append(createGlyphText(letter, activeSet, "glyph-guide-text"));
+    elements.strokeLayer.append(revealText);
+    state.revealElement = revealText;
+    state.revealMaskId = maskId;
+  } else {
+    letter.strokes.forEach((stroke) => {
+      elements.guideLayer.append(createPath(stroke.d));
 
-    state.strokeElements.push(animatedPath);
-    state.strokeLengths.push(length);
-  });
+      const animatedPath = createPath(stroke.d);
+      elements.strokeLayer.append(animatedPath);
+      const length = animatedPath.getTotalLength();
+      animatedPath.style.strokeDasharray = `${length} ${length}`;
+      animatedPath.style.strokeDashoffset = `${length}`;
+      animatedPath.style.opacity = "0";
+
+      state.strokeElements.push(animatedPath);
+      state.strokeLengths.push(length);
+    });
+  }
 
   state.strokeIndex = 0;
   state.phase = "ready";
@@ -207,6 +265,9 @@ function updateDrawing(now) {
     hidePencil();
     const isLastStroke = state.strokeIndex === getCharacters()[state.letterIndex].strokes.length - 1;
     if (isLastStroke) {
+      if (state.revealElement) {
+        state.revealElement.removeAttribute("mask");
+      }
       state.phase = "complete";
       updateControls();
     } else {
@@ -278,6 +339,9 @@ function resetStrokes() {
   state.strokeIndex = 0;
   state.phaseElapsed = 0;
   state.phaseBeforePause = null;
+  if (state.revealElement && state.revealMaskId) {
+    state.revealElement.setAttribute("mask", `url(#${state.revealMaskId})`);
+  }
   state.strokeElements.forEach((path, index) => {
     path.style.strokeDasharray = `${state.strokeLengths[index]} ${state.strokeLengths[index]}`;
     path.style.strokeDashoffset = `${state.strokeLengths[index]}`;
