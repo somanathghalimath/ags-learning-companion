@@ -3,7 +3,8 @@
 /*
  * ADDING CHARACTERS
  * -----------------
- * 1. Choose a set: `uppercase`, `lowercase`, or `numbers`.
+ * 1. Choose a set: `uppercase`, `lowercase`, `numbers`, or
+ *    `kannadaSwaras`.
  * 2. Add a character object to that set's `characters` array.
  * 3. Add each pen stroke in writing order. Every stroke needs an SVG path `d`
  *    value and a short child-friendly `prompt`.
@@ -285,6 +286,91 @@ const NUMBERS = [
   ])
 ];
 
+const KANNADA_A_BASE = [
+  stroke("M 155 125 C 115 140 100 190 120 230 C 145 280 215 300 270 260 C 288 247 300 230 304 210", "Start with the big left curve."),
+  stroke("M 160 125 C 210 95 265 120 260 165 C 255 205 190 220 132 205", "Make the top loop."),
+  stroke("M 138 218 L 258 218", "Draw the middle line.")
+];
+
+const KANNADA_SWARAS = [
+  character("ಅ", [
+    ...KANNADA_A_BASE
+  ]),
+  character("ಆ", [
+    ...KANNADA_A_BASE,
+    stroke("M 286 128 C 330 132 332 198 290 202 C 268 204 258 188 270 172", "Add the right sound mark.")
+  ]),
+  character("ಇ", [
+    stroke("M 128 150 C 124 108 174 105 198 142 C 220 108 276 116 274 166 C 272 214 210 218 158 204", "Make the two top humps."),
+    stroke("M 160 205 C 116 228 132 284 190 290 C 238 295 268 265 250 232", "Curve around the bottom."),
+    stroke("M 250 232 L 272 305", "Add the small tail.")
+  ]),
+  character("ಈ", [
+    stroke("M 105 150 L 250 150", "Draw the top line."),
+    stroke("M 128 150 C 125 112 174 105 198 142 C 220 108 276 116 274 166 C 272 214 210 218 158 204", "Make the two top humps."),
+    stroke("M 160 205 C 116 228 132 284 190 290 C 238 295 268 265 250 232", "Curve around the bottom."),
+    stroke("M 250 98 C 292 116 288 172 252 178", "Add the upper curl."),
+    stroke("M 258 188 C 312 184 330 242 292 262", "Add the right curl.")
+  ]),
+  character("ಉ", [
+    stroke("M 135 135 C 95 150 95 225 145 235 C 185 242 202 206 172 184 C 145 165 120 188 132 215", "Make the left loop."),
+    stroke("M 190 145 C 250 108 310 148 300 220 C 292 275 250 310 195 295", "Make the main right curve."),
+    stroke("M 300 220 C 340 250 320 310 270 318", "Finish the lower curl.")
+  ]),
+  character("ಊ", [
+    stroke("M 95 140 C 58 165 66 228 116 236 C 154 242 170 204 145 184 C 120 166 96 190 108 216", "Make the first loop."),
+    stroke("M 162 145 C 215 110 262 148 250 218 C 242 268 205 300 160 288", "Make the middle curve."),
+    stroke("M 270 150 C 335 122 372 190 338 258 C 312 310 255 320 208 294", "Make the long right curve.")
+  ]),
+  character("ಋ", [
+    stroke("M 115 160 C 112 118 165 110 190 145 C 215 110 270 122 270 170 C 270 210 228 222 180 210", "Make the top body."),
+    stroke("M 95 198 L 285 198", "Draw the middle line."),
+    stroke("M 188 198 C 145 220 152 285 208 290 C 255 294 280 260 258 225", "Curve around the bottom."),
+    stroke("M 260 225 C 302 222 318 260 295 285", "Add the right hook.")
+  ]),
+  character("ಎ", [
+    stroke("M 145 188 C 185 155 252 165 270 220 C 288 278 230 315 172 288", "Make the main curve."),
+    stroke("M 145 188 C 105 215 112 265 152 280 C 182 292 215 275 205 240 C 198 212 165 210 145 228", "Make the lower loop.")
+  ]),
+  character("ಏ", [
+    stroke("M 150 120 C 178 145 210 142 222 112", "Make the small top curve."),
+    stroke("M 145 188 C 185 155 252 165 270 220 C 288 278 230 315 172 288", "Make the main curve."),
+    stroke("M 145 188 C 105 215 112 265 152 280 C 182 292 215 275 205 240 C 198 212 165 210 145 228", "Make the lower loop.")
+  ]),
+  character("ಐ", [
+    stroke("M 125 142 C 148 110 192 108 208 145 C 226 110 282 118 282 165 C 282 210 228 215 180 205", "Make the top humps."),
+    stroke("M 138 205 C 105 232 118 282 160 288 C 198 294 220 265 204 238", "Make the lower loop."),
+    stroke("M 232 205 C 270 205 292 228 288 260 C 284 296 238 308 208 282", "Make the right loop.")
+  ]),
+  character("ಒ", [
+    stroke("M 150 145 C 115 162 105 218 138 250 C 178 288 245 282 278 238", "Make the left round body."),
+    stroke("M 150 145 C 196 110 250 130 252 172 C 254 214 198 225 138 210", "Make the top loop."),
+    stroke("M 275 128 C 312 132 330 168 314 205", "Add the right curve.")
+  ]),
+  character("ಓ", [
+    stroke("M 175 96 C 205 118 240 110 250 82", "Make the top mark."),
+    stroke("M 150 145 C 115 162 105 218 138 250 C 178 288 245 282 278 238", "Make the left round body."),
+    stroke("M 150 145 C 196 110 250 130 252 172 C 254 214 198 225 138 210", "Make the top loop."),
+    stroke("M 275 128 C 312 132 330 168 314 205", "Add the right curve.")
+  ]),
+  character("ಔ", [
+    stroke("M 120 125 C 160 92 220 100 230 145 C 238 185 190 205 135 192", "Make the upper body."),
+    stroke("M 130 198 C 92 225 105 282 152 292 C 200 302 238 270 220 232", "Make the lower loop."),
+    stroke("M 238 154 L 300 154", "Draw the top line."),
+    stroke("M 252 154 C 305 180 300 250 248 268", "Add the right curve."),
+    stroke("M 250 268 C 300 270 320 315 285 338", "Finish the lower curl.")
+  ]),
+  character("ಅಂ", [
+    ...KANNADA_A_BASE,
+    stroke("M 323 145 C 305 145 294 156 294 172 C 294 190 306 202 323 202 C 340 202 352 190 352 172 C 352 156 340 145 323 145", "Add the dot.")
+  ]),
+  character("ಅಃ", [
+    ...KANNADA_A_BASE,
+    stroke("M 323 130 C 307 130 298 140 298 155 C 298 170 308 180 323 180 C 338 180 348 170 348 155 C 348 140 338 130 323 130", "Add the top dot."),
+    stroke("M 323 220 C 307 220 298 230 298 245 C 298 260 308 270 323 270 C 338 270 348 260 348 245 C 348 230 338 220 323 220", "Add the bottom dot.")
+  ])
+];
+
 window.LETTER_LIBRARY = {
   uppercase: {
     label: "Uppercase",
@@ -303,5 +389,11 @@ window.LETTER_LIBRARY = {
     headingLabel: "Number",
     itemLabel: "Number",
     characters: NUMBERS
+  },
+  kannadaSwaras: {
+    label: "ಕನ್ನಡ ಸ್ವರಗಳು",
+    headingLabel: "Kannada swara",
+    itemLabel: "Swara",
+    characters: KANNADA_SWARAS
   }
 };

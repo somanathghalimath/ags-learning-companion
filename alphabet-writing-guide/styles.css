@@ -25,7 +25,7 @@ body {
   background:
     radial-gradient(circle at 10% 5%, rgba(98, 194, 255, 0.18), transparent 28rem),
     var(--background);
-  font-family: ui-rounded, "Nunito", "Avenir Next", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: ui-rounded, "Nunito", "Avenir Next", "Noto Sans Kannada", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 button,
@@ -274,7 +274,6 @@ h1 {
   .app-shell {
     padding-top: 22px;
   }
-
 }
 
 @media (max-width: 450px) {
