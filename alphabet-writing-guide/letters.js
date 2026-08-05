@@ -289,115 +289,74 @@ const NUMBERS = [
 /*
  * Kannada swaras
  * ---------------
- * Kannada mode renders the final letter with a real Kannada font glyph, then
- * reveals that glyph through these invisible centerline paths.
+ * These are centerline handwriting paths: the faint guide and animated stroke
+ * use exactly the same geometry. Most Kannada swaras are a continuous motion,
+ * so do not split a path merely because the printed glyph has several shapes.
  *
- * Keep the direction of these paths intentional. Kannada handwriting practice
- * uses many right-to-left and bottom-to-top movements; reversing the paths to
- * Latin-style left-to-right/top-down makes the pencil teach the wrong motion.
+ * Stroke order and letter construction are based on the CC BY-SA 4.0 Kannada
+ * handwriting animations by Gopala Krishna A on Wikimedia Commons:
+ * https://commons.wikimedia.org/wiki/Category:Animations_of_Kannada_letters
  *
- * To add a Kannada character later:
- * 1. Add the real Unicode glyph as the character name.
- * 2. Add centerline strokes in the actual handwriting order.
- * 3. Keep each stroke inside the real glyph body; the glyph text remains the
- *    source of truth for the visible letter shape.
+ * To add another Kannada character, add one `character()` entry and one
+ * `stroke()` per genuine pen-down motion, in the demonstrated writing order.
  */
-
-const KANNADA_A_BASE = [
-  stroke("M 304 210 C 300 230 288 247 270 260 C 215 300 145 280 120 230 C 100 190 115 140 155 125", "Draw the lower curve from right to left."),
-  stroke("M 132 205 C 190 220 255 205 260 165 C 265 120 210 95 160 125", "Curve up through the top loop."),
-  stroke("M 258 218 L 138 218", "Draw the middle line from right to left.")
-];
-
-const KANNADA_A_WITH_MARK_BASE = [
-  stroke("M 235 210 C 231 230 219 247 201 260 C 146 300 76 280 51 230 C 31 190 46 140 86 125", "Draw the lower curve from right to left."),
-  stroke("M 63 205 C 121 220 186 205 191 165 C 196 120 141 95 91 125", "Curve up through the top loop."),
-  stroke("M 189 218 L 69 218", "Draw the middle line from right to left.")
-];
 
 const KANNADA_SWARAS = [
   character("ಅ", [
-    ...KANNADA_A_BASE
+    stroke("M 115 160 C 140 168 165 158 165 135 C 165 112 145 100 123 104 C 96 110 80 136 76 174 C 70 225 90 270 130 292 C 175 317 250 315 295 280 C 330 252 337 205 321 160 C 310 130 285 115 269 126 C 252 138 257 166 265 178 C 270 188 260 190 244 188 C 225 186 202 188 180 185", "Write the full letter in one continuous motion.")
   ]),
   character("ಆ", [
-    ...KANNADA_A_BASE,
-    stroke("M 314 207 C 350 198 345 132 304 128 C 278 126 266 147 275 171", "Add the right sound mark.")
+    stroke("M 105 165 C 130 175 155 158 155 135 C 155 110 132 100 110 108 C 82 119 70 150 72 185 C 75 250 120 295 190 305 C 260 315 320 292 325 245 C 328 210 310 185 287 165 C 270 150 270 127 287 112 C 305 98 328 108 330 130 C 332 155 315 173 292 175 C 265 177 235 185 204 184", "Write the full letter in one continuous motion.")
   ]),
   character("ಇ", [
-    stroke("M 158 204 C 210 218 272 214 274 166 C 276 116 220 108 198 142 C 174 105 124 108 128 150", "Make the two top humps."),
-    stroke("M 250 232 C 268 265 238 295 190 290 C 132 284 116 228 160 205", "Curve around the bottom."),
-    stroke("M 272 305 L 250 232", "Add the small tail.")
+    stroke("M 77 189 C 76 184 60 172 70 157 C 80 142 119 102 136 96 C 153 90 163 110 173 120 C 183 130 188 155 195 155 C 202 155 206 127 217 120 C 228 113 250 111 264 113 C 278 115 294 124 303 133 C 312 142 315 151 315 165 C 315 179 308 205 301 218 C 294 231 287 239 274 243 C 261 247 233 247 225 241 C 217 235 223 214 227 206 C 231 198 238 197 247 196 C 256 195 275 198 283 201 C 291 204 292 201 293 211 C 294 221 289 246 288 260 C 287 274 285 288 288 297 C 291 306 298 316 305 314 C 312 312 326 287 330 282", "Write the full letter in one continuous motion.")
   ]),
   character("ಈ", [
-    stroke("M 250 150 L 105 150", "Draw the top line from right to left."),
-    stroke("M 158 204 C 210 218 272 214 274 166 C 276 116 220 108 198 142 C 174 105 124 108 128 150", "Make the two top humps."),
-    stroke("M 250 232 C 268 265 238 295 190 290 C 132 284 116 228 160 205", "Curve around the bottom."),
-    stroke("M 252 178 C 288 172 292 116 250 98", "Add the upper curl."),
-    stroke("M 292 262 C 330 242 312 184 258 188", "Add the right curl.")
+    stroke("M 92 184 C 90 188 84 196 81 205 C 78 214 73 228 76 237 C 79 246 92 250 100 257 C 108 264 112 276 126 280 C 140 284 170 285 182 282 C 194 279 195 270 201 261 C 207 252 218 238 220 229 C 222 220 221 217 216 205 C 211 193 200 167 188 158 C 176 149 155 152 145 151 C 135 150 133 154 126 151 C 119 148 99 135 102 132 C 105 129 130 130 145 132 C 160 134 180 146 190 143 C 200 140 205 116 208 111", "Make the round body and upper turn."),
+    stroke("M 70 212 C 80 212 111 210 132 211 C 153 212 177 219 195 218 C 213 217 227 206 242 205 C 257 204 274 210 285 211 C 296 212 302 216 309 211 C 316 206 332 195 330 183 C 328 171 303 141 294 141 C 285 141 275 169 274 181 C 273 193 282 204 289 214 C 296 224 310 233 315 242 C 320 251 319 260 317 270 C 315 280 304 294 302 299", "Add the middle sweep and right loop.")
   ]),
   character("ಉ", [
-    stroke("M 132 215 C 120 188 145 165 172 184 C 202 206 185 242 145 235 C 95 225 95 150 135 135", "Make the left loop."),
-    stroke("M 195 295 C 250 310 292 275 300 220 C 310 148 250 108 190 145", "Make the main curve upward."),
-    stroke("M 270 318 C 320 310 340 250 300 220", "Finish the lower curl.")
+    stroke("M 88 184 C 91 184 99 189 105 186 C 111 183 128 176 126 168 C 124 160 102 144 94 141 C 86 138 85 144 81 150 C 77 156 72 168 70 178 C 68 188 69 201 70 211 C 71 221 66 230 75 240 C 84 250 106 271 121 272 C 136 273 157 258 165 247 C 173 236 170 223 171 208 C 172 193 165 166 170 155 C 175 144 193 144 202 144 C 211 144 220 150 226 157 C 232 164 230 174 235 189 C 240 204 243 235 253 247 C 263 259 283 263 296 260 C 309 257 325 244 330 231 C 335 218 329 196 324 183 C 319 170 306 156 298 150 C 290 144 284 148 279 146 C 274 144 268 139 266 138", "Write the full letter in one continuous motion.")
   ]),
   character("ಊ", [
-    stroke("M 108 216 C 96 190 120 166 145 184 C 170 204 154 242 116 236 C 66 228 58 165 95 140", "Make the first loop."),
-    stroke("M 160 288 C 205 300 242 268 250 218 C 262 148 215 110 162 145", "Make the middle curve."),
-    stroke("M 208 294 C 255 320 312 310 338 258 C 372 190 335 122 270 150", "Make the long right curve.")
+    stroke("M 100 191 C 101 188 109 178 107 173 C 105 168 92 162 86 163 C 80 164 72 170 70 177 C 68 184 74 198 77 207 C 80 216 84 223 89 229 C 94 235 101 244 110 245 C 119 246 137 244 142 234 C 147 224 137 198 140 186 C 143 174 152 165 160 161 C 168 157 184 158 189 163 C 194 168 190 183 192 194 C 194 205 197 220 202 229 C 207 238 213 247 222 249 C 231 251 252 249 257 239 C 262 229 250 199 252 187 C 254 175 262 170 271 167 C 280 164 297 161 307 167 C 317 173 327 192 330 201 C 333 210 326 214 323 222 C 320 230 316 250 310 249 C 304 248 288 220 285 216 C 282 212 292 225 294 227", "Write the full letter in one continuous motion.")
   ]),
   character("ಋ", [
-    stroke("M 180 210 C 228 222 270 210 270 170 C 270 122 215 110 190 145 C 165 110 112 118 115 160", "Make the top body."),
-    stroke("M 285 198 L 95 198", "Draw the middle line from right to left."),
-    stroke("M 258 225 C 280 260 255 294 208 290 C 152 285 145 220 188 198", "Curve around the bottom."),
-    stroke("M 295 285 C 318 260 302 222 260 225", "Add the right hook.")
+    stroke("M 96 161 C 97 163 105 166 103 171 C 101 176 92 192 86 194 C 80 196 72 190 70 184 C 68 178 75 167 76 161 C 77 155 71 151 76 148 C 81 145 99 142 108 144 C 117 146 126 155 131 161 C 136 167 136 174 139 181 C 142 188 150 189 151 200 C 152 211 149 234 145 246 C 141 258 132 264 125 269 C 118 274 109 278 102 276 C 95 274 87 265 83 259 C 79 253 80 242 79 239 C 78 236 74 241 77 239 C 80 237 92 228 97 229 C 102 230 110 239 110 243 C 110 247 106 254 100 253 C 94 252 81 242 77 240", "Make the left loop and lower curl."),
+    stroke("M 175 235 C 178 239 184 254 191 258 C 198 262 208 262 216 261 C 224 260 231 261 236 255 C 241 249 244 234 245 224 C 246 214 247 205 243 197 C 239 189 230 181 223 175 C 216 169 210 164 204 161 C 198 158 184 156 186 154 C 188 152 210 152 217 152 C 224 152 226 154 227 151 C 228 148 223 137 222 134", "Make the middle curve from bottom to top."),
+    stroke("M 268 256 C 272 256 285 254 294 253 C 303 252 314 254 320 248 C 326 242 331 226 330 214 C 329 202 323 183 316 175 C 309 167 296 170 288 167 C 280 164 269 161 265 160", "Finish the right curve from bottom to top.")
   ]),
   character("ಎ", [
-    stroke("M 172 288 C 230 315 288 278 270 220 C 252 165 185 155 145 188", "Make the main curve."),
-    stroke("M 145 228 C 165 210 198 212 205 240 C 215 275 182 292 152 280 C 112 265 105 215 145 188", "Make the lower loop.")
+    stroke("M 148 233 C 143 229 129 211 116 211 C 103 211 80 224 72 233 C 64 242 66 256 70 267 C 74 278 88 292 97 299 C 106 306 110 313 123 311 C 136 309 162 295 174 289 C 186 283 186 278 194 277 C 202 276 214 280 221 282 C 228 284 226 290 233 291 C 240 292 248 292 262 289 C 276 286 307 280 318 274 C 329 268 326 264 328 250 C 330 236 336 209 330 192 C 324 175 306 160 291 148 C 276 136 256 129 238 121 C 220 113 199 103 184 99 C 169 95 158 98 150 99 C 142 100 140 102 138 102", "Write the full letter in one continuous motion.")
   ]),
   character("ಏ", [
-    stroke("M 222 112 C 210 142 178 145 150 120", "Make the small top curve."),
-    stroke("M 172 288 C 230 315 288 278 270 220 C 252 165 185 155 145 188", "Make the main curve."),
-    stroke("M 145 228 C 165 210 198 212 205 240 C 215 275 182 292 152 280 C 112 265 105 215 145 188", "Make the lower loop.")
+    stroke("M 141 227 C 136 224 120 208 109 210 C 98 212 80 228 75 237 C 70 246 76 257 80 266 C 84 275 87 287 99 293 C 111 299 136 302 153 301 C 170 300 190 294 200 286 C 210 278 206 252 210 254 C 214 256 214 288 222 298 C 230 308 245 316 261 313 C 277 310 308 296 320 283 C 332 270 329 249 330 232 C 331 215 331 199 325 183 C 319 167 308 146 293 136 C 278 126 254 127 234 122 C 214 117 182 105 173 107 C 164 109 190 128 183 134 C 176 140 146 141 134 141 C 122 141 119 139 112 136 C 105 133 97 128 90 122 C 83 116 73 101 70 97", "Write the full letter in one continuous motion.")
   ]),
   character("ಐ", [
-    stroke("M 180 205 C 228 215 282 210 282 165 C 282 118 226 110 208 145 C 192 108 148 110 125 142", "Make the top humps."),
-    stroke("M 204 238 C 220 265 198 294 160 288 C 118 282 105 232 138 205", "Make the lower loop."),
-    stroke("M 208 282 C 238 308 284 296 288 260 C 292 228 270 205 232 205", "Make the right loop.")
+    stroke("M 103 207 C 98 214 66 236 70 252 C 74 268 106 297 124 303 C 142 309 165 299 178 289 C 191 279 195 248 201 245 C 207 242 207 265 215 273 C 223 281 236 290 248 292 C 260 294 276 302 290 287 C 304 272 330 230 330 205 C 330 180 304 151 288 135 C 272 119 250 109 234 107 C 218 105 202 120 192 125 C 182 130 181 137 175 137 C 169 137 163 129 154 125 C 145 121 131 115 119 114 C 107 113 89 120 82 121 C 75 122 78 111 77 118 C 76 125 79 157 79 165", "Write the full letter in one continuous motion.")
   ]),
   character("ಒ", [
-    stroke("M 278 238 C 245 282 178 288 138 250 C 105 218 115 162 150 145", "Make the left round body."),
-    stroke("M 138 210 C 198 225 254 214 252 172 C 250 130 196 110 150 145", "Make the top loop."),
-    stroke("M 314 205 C 330 168 312 132 275 128", "Add the right curve.")
+    stroke("M 70 130 C 73 127 76 117 89 114 C 102 111 138 106 145 114 C 152 122 141 150 133 164 C 125 178 106 187 99 198 C 92 209 92 218 89 229 C 86 240 77 255 82 265 C 87 275 107 286 121 289 C 135 292 155 291 166 284 C 177 277 179 253 186 246 C 193 239 202 237 210 241 C 218 245 224 263 236 272 C 248 281 268 298 282 296 C 296 294 315 272 323 260 C 331 248 336 236 330 224 C 324 212 296 194 289 188", "Write the full letter in one continuous motion.")
   ]),
   character("ಓ", [
-    stroke("M 250 82 C 240 110 205 118 175 96", "Make the top mark."),
-    stroke("M 278 238 C 245 282 178 288 138 250 C 105 218 115 162 150 145", "Make the left round body."),
-    stroke("M 138 210 C 198 225 254 214 252 172 C 250 130 196 110 150 145", "Make the top loop."),
-    stroke("M 314 205 C 330 168 312 132 275 128", "Add the right curve.")
+    stroke("M 100 179 C 104 175 114 157 124 155 C 134 153 158 158 163 167 C 168 176 160 197 153 209 C 146 221 130 228 124 237 C 118 246 118 254 116 264 C 114 274 106 286 110 294 C 114 302 130 311 142 314 C 154 317 172 316 181 310 C 190 304 191 284 197 278 C 203 272 210 270 217 274 C 224 278 229 292 239 300 C 249 308 266 322 278 320 C 290 318 305 300 312 290 C 319 280 323 269 318 259 C 313 249 290 234 284 229", "Make the main body in one continuous motion."),
+    stroke("M 120 122 C 114 121 90 119 84 114 C 78 109 77 96 82 92 C 87 88 107 90 112 90", "Add the top mark.")
   ]),
   character("ಔ", [
-    stroke("M 135 192 C 190 205 238 185 230 145 C 220 100 160 92 120 125", "Make the upper body."),
-    stroke("M 220 232 C 238 270 200 302 152 292 C 105 282 92 225 130 198", "Make the lower loop."),
-    stroke("M 300 154 L 238 154", "Draw the top line from right to left."),
-    stroke("M 248 268 C 300 250 305 180 252 154", "Add the right curve."),
-    stroke("M 285 338 C 320 315 300 270 250 268", "Finish the lower curl.")
+    stroke("M 93 185 C 96 180 97 160 108 156 C 119 152 154 154 160 163 C 166 172 151 198 145 210 C 139 222 127 228 122 237 C 117 246 117 254 116 264 C 115 274 111 288 114 297 C 117 306 125 320 135 320 C 145 320 164 302 174 295 C 184 288 187 281 193 279 C 199 277 202 275 209 281 C 216 287 223 309 232 314 C 241 319 254 313 265 310 C 276 307 293 305 300 297 C 307 289 311 274 307 264 C 303 254 280 243 274 239", "Make the main body in one continuous motion."),
+    stroke("M 110 131 C 116 130 138 130 143 127 C 148 124 145 117 143 115 C 141 113 135 115 133 115", "Add the small top turn."),
+    stroke("M 158 94 C 164 93 184 91 197 90 C 210 89 226 86 238 90 C 250 94 261 105 271 113 C 281 121 291 130 296 140 C 301 150 302 166 303 171", "Draw the upper sweep."),
+    stroke("M 303 171 C 297 174 278 190 265 191 C 252 192 231 187 224 179 C 217 171 220 150 222 142 C 224 134 230 128 234 129 C 238 130 246 146 249 150 C 252 154 254 155 255 156", "Finish the upper loop.")
   ]),
-  {
-    ...character("ಅಂ", [
-      ...KANNADA_A_WITH_MARK_BASE,
-      stroke("M 325 252 C 285 252 265 226 268 198 C 272 160 306 144 340 156 C 370 167 384 205 366 232 C 357 246 342 252 325 252", "Add the circle mark.")
-    ]),
-    revealStrokeWidth: 56
-  },
-  {
-    ...character("ಅಃ", [
-      ...KANNADA_A_WITH_MARK_BASE,
-      stroke("M 330 175 C 305 175 292 157 297 137 C 302 116 331 111 345 128 C 359 146 350 175 330 175", "Add the top dot."),
-      stroke("M 330 278 C 305 278 292 260 297 240 C 302 219 331 214 345 231 C 359 249 350 278 330 278", "Add the bottom dot.")
-    ]),
-    revealStrokeWidth: 56
-  }
+  character("ಅಂ", [
+    stroke("M 89 181 C 90 182 89 190 92 190 C 95 190 104 186 107 180 C 110 174 112 159 110 154 C 108 149 100 150 95 151 C 90 152 84 150 80 157 C 76 164 71 180 70 190 C 69 200 69 208 73 218 C 77 228 84 241 92 248 C 100 255 111 260 123 262 C 135 264 150 260 163 259 C 176 258 190 259 199 253 C 208 247 212 233 217 223 C 222 213 226 202 226 193 C 226 184 220 174 214 167 C 208 160 199 152 192 151 C 185 150 172 159 170 164 C 168 169 175 175 177 179 C 179 183 185 184 183 187 C 181 190 171 193 164 195 C 157 197 149 200 142 201 C 135 202 126 199 123 199", "Write ಅ in one continuous motion."),
+    stroke("M 243 236 C 248 240 258 260 270 261 C 282 262 302 248 312 245 C 322 242 328 247 330 242 C 332 237 328 225 326 214 C 324 203 324 187 317 176 C 310 165 294 151 282 148 C 270 145 253 152 246 158 C 239 164 241 174 239 181 C 237 188 236 195 236 198", "Add the circle mark from bottom to top.")
+  ]),
+  character("ಅಃ", [
+    stroke("M 91 177 C 92 178 91 186 94 186 C 97 186 108 182 111 175 C 114 168 116 152 114 146 C 112 140 104 142 98 142 C 92 142 86 142 81 149 C 76 156 71 175 70 186 C 69 197 69 206 73 217 C 77 228 85 242 94 250 C 103 258 115 264 128 266 C 141 268 158 265 172 263 C 186 261 203 263 213 256 C 223 249 227 233 232 222 C 237 211 242 200 242 190 C 242 180 235 168 229 160 C 223 152 213 142 205 142 C 197 142 183 152 180 157 C 177 162 186 169 189 173 C 192 177 198 180 195 183 C 192 186 182 188 174 191 C 166 194 158 197 150 198 C 142 199 132 196 128 196", "Write ಅ in one continuous motion."),
+    stroke("M 286 157 C 288 154 295 143 301 141 C 307 139 317 142 322 146 C 327 150 330 158 330 165 C 330 172 327 182 322 186 C 317 190 307 192 301 190 C 295 188 286 180 284 175 C 282 170 286 160 286 157", "Add the top circle."),
+    stroke("M 286 237 C 288 234 295 222 301 220 C 307 218 317 221 322 225 C 327 229 330 238 330 245 C 330 252 327 262 322 266 C 317 270 307 271 301 269 C 295 267 286 260 284 255 C 282 250 286 240 286 237", "Add the bottom circle.")
+  ])
 ];
 
 window.LETTER_LIBRARY = {
@@ -423,10 +382,8 @@ window.LETTER_LIBRARY = {
     label: "ಕನ್ನಡ ಸ್ವರಗಳು",
     headingLabel: "Kannada swara",
     itemLabel: "Swara",
-    renderMode: "glyphReveal",
-    glyphFontSize: 238,
-    glyphY: 205,
-    revealStrokeWidth: 78,
+    strokeWidth: 18,
+    durationByLength: true,
     characters: KANNADA_SWARAS
   }
 };

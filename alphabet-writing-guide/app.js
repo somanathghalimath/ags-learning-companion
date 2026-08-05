@@ -147,10 +147,15 @@ function renderLetter() {
     state.revealElement = revealText;
     state.revealMaskId = maskId;
   } else {
+    const strokeWidth = letter.strokeWidth || activeSet.strokeWidth;
+
     letter.strokes.forEach((stroke) => {
-      elements.guideLayer.append(createPath(stroke.d));
+      const guidePath = createPath(stroke.d);
+      if (strokeWidth) guidePath.style.strokeWidth = `${strokeWidth}`;
+      elements.guideLayer.append(guidePath);
 
       const animatedPath = createPath(stroke.d);
+      if (strokeWidth) animatedPath.style.strokeWidth = `${strokeWidth}`;
       elements.strokeLayer.append(animatedPath);
       const length = animatedPath.getTotalLength();
       animatedPath.style.strokeDasharray = `${length} ${length}`;
@@ -248,9 +253,12 @@ function tick(now) {
 function updateDrawing(now) {
   const settings = SPEEDS[elements.speedSelect.value];
   const elapsed = state.phaseElapsed + (now - state.phaseStartedAt);
-  const progress = Math.min(elapsed / settings.drawDuration, 1);
-  const easedProgress = 1 - Math.pow(1 - progress, 2);
   const length = state.strokeLengths[state.strokeIndex];
+  const durationScale = getActiveSet().durationByLength
+    ? Math.max(0.7, Math.min(length / 220, 3.5))
+    : 1;
+  const progress = Math.min(elapsed / (settings.drawDuration * durationScale), 1);
+  const easedProgress = 1 - Math.pow(1 - progress, 2);
   const path = state.strokeElements[state.strokeIndex];
   state.strokeElements[state.strokeIndex].style.strokeDashoffset = `${length * (1 - easedProgress)}`;
   positionPencil(path, length * easedProgress);
