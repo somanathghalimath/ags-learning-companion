@@ -157,6 +157,7 @@ h1 {
 .guide-layer path,
 .stroke-layer path {
   fill: none;
+  shape-rendering: geometricPrecision;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
