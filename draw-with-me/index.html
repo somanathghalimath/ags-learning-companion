@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6fbf9" />
+    <meta
+      name="description"
+      content="A calm visual guide that helps young children draw simple pictures in a notebook, one stroke at a time."
+    />
+    <title>Draw With Me</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="drawings.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <a class="home-link" href="../" aria-label="Back to all activities">← Activities</a>
+        <h1>Draw With Me</h1>
+        <p>Watch one line, draw it in your notebook, then watch the next.</p>
+      </header>
+
+      <section class="lesson-card" aria-labelledby="drawing-heading">
+        <div class="lesson-heading">
+          <button class="icon-button" id="previousButton" type="button" aria-label="Previous drawing">
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div class="drawing-title">
+            <span class="drawing-count" id="drawingCount">Drawing 1 of 8</span>
+            <h2 id="drawing-heading">House</h2>
+          </div>
+
+          <button class="icon-button" id="nextButton" type="button" aria-label="Next drawing">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="canvas-wrap">
+          <svg
+            id="drawingCanvas"
+            class="drawing-canvas"
+            viewBox="0 0 480 400"
+            role="img"
+            aria-labelledby="svgTitle svgDescription"
+          >
+            <title id="svgTitle">How to draw a house</title>
+            <desc id="svgDescription">The drawing appears one line at a time for the child to copy in a notebook.</desc>
+            <g id="guideLayer" class="guide-layer" aria-hidden="true"></g>
+            <g id="strokeLayer" class="stroke-layer" aria-hidden="true"></g>
+            <circle id="startDot" class="start-dot" r="7" aria-hidden="true"></circle>
+            <g id="pencilTip" class="pencil-tip" aria-hidden="true">
+              <path class="pencil-wood" d="M 0 0 L -12 -6 L -12 6 Z"></path>
+              <path class="pencil-lead" d="M 0 0 L -4 -2 L -4 2 Z"></path>
+              <rect class="pencil-body" x="-34" y="-6" width="22" height="12" rx="2"></rect>
+              <rect class="pencil-band" x="-39" y="-6" width="6" height="12"></rect>
+              <path class="pencil-eraser" d="M -44 -6 H -39 V 6 H -44 Q -47 6 -47 3 V -3 Q -47 -6 -44 -6 Z"></path>
+            </g>
+          </svg>
+        </div>
+
+        <div class="lesson-status" aria-live="polite">
+          <span class="status-badge ready" id="statusBadge">Get ready</span>
+          <span class="step-count" id="stepCount">Line 1 of 9</span>
+        </div>
+        <div class="step-dots" id="stepDots" aria-hidden="true"></div>
+
+        <div class="playback-controls" aria-label="Playback controls">
+          <button class="control-button primary" id="playButton" type="button">
+            <span aria-hidden="true">▶</span> Play
+          </button>
+          <button class="control-button" id="pauseButton" type="button" disabled>
+            <span aria-hidden="true">Ⅱ</span> Pause
+          </button>
+          <button class="control-button" id="replayButton" type="button">
+            <span aria-hidden="true">↻</span> Replay
+          </button>
+        </div>
+      </section>
+
+      <section class="practice-options" aria-label="Drawing speed">
+        <label class="option-group" for="speedSelect">
+          <span>Drawing speed</span>
+          <select id="speedSelect">
+            <option value="verySlow" selected>Very slow</option>
+            <option value="slow">Slow</option>
+            <option value="steady">Steady</option>
+          </select>
+        </label>
+        <p class="notebook-note">Paper and pencil stay on the table. The screen only shows what comes next.</p>
+      </section>
+    </main>
+  </body>
+</html>

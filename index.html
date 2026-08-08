@@ -18,6 +18,7 @@
       --leader: #f4bd61;
       --car: #f87171;
       --write: #60a5fa;
+      --draw: #a78bfa;
       --shadow: rgba(0, 0, 0, 0.38);
     }
 
@@ -182,6 +183,7 @@
     .quiz-link.leader .go { color: var(--leader); }
     .quiz-link.car .go { color: var(--car); }
     .quiz-link.write .go { color: var(--write); }
+    .quiz-link.draw .go { color: var(--draw); }
 
     @media (max-width: 760px) {
       body {
@@ -238,7 +240,33 @@
         <div class="meta">
           <div class="title">
             <strong>Write With Me</strong>
-            <span>26 uppercase letters</span>
+            <span>Letters, numbers &amp; Kannada</span>
+          </div>
+          <div class="go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="quiz-link draw" href="./draw-with-me/" aria-label="Open Draw With Me">
+        <div class="visual">
+          <svg viewBox="0 0 480 400" aria-hidden="true">
+            <g fill="none" stroke="#7357d8" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M70 190 240 62 410 190" />
+              <path d="M105 164v166h270V164" />
+              <path d="M205 330v-86q0-16 16-16h38q16 0 16 16v86" />
+              <path d="M132 207q0-9 9-9h46q9 0 9 9v56q0 9-9 9h-46q-9 0-9-9Z" />
+              <path d="M164 199v72M133 235h62" />
+            </g>
+          </svg>
+        </div>
+        <div class="meta">
+          <div class="title">
+            <strong>Draw With Me</strong>
+            <span>8 notebook drawings</span>
           </div>
           <div class="go" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
