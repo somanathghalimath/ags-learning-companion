@@ -84,9 +84,10 @@ function renderDrawing() {
 
 function updateDrawingLabels() {
   const drawing = getDrawing();
+  const article = /^[aeiou]/i.test(drawing.name) ? "an" : "a";
   elements.drawingHeading.textContent = drawing.name;
   elements.drawingCount.textContent = `Drawing ${state.drawingIndex + 1} of ${window.DRAWINGS.length}`;
-  elements.svgTitle.textContent = `How to draw a ${drawing.name.toLowerCase()}`;
+  elements.svgTitle.textContent = `How to draw ${article} ${drawing.name.toLowerCase()}`;
   updateStepCount();
 }
 

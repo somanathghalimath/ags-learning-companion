@@ -47,6 +47,20 @@ const DRAWINGS = [
     stroke("M 55 340 L 425 340")
   ]),
 
+  drawing("Indian Flag", [
+    stroke("M 75 350 L 258 350 L 258 375 L 75 375 Z"),
+    stroke("M 104 325 L 228 325 L 228 350 L 104 350 Z"),
+    stroke("M 128 300 L 202 300 L 202 325 L 128 325 Z"),
+    stroke("M 154 300 L 154 96 L 173 96 L 173 300"),
+    circle(164, 80, 14),
+    stroke("M 173 98 L 382 98 L 382 220 L 173 220"),
+    stroke("M 173 139 L 382 139"),
+    stroke("M 173 179 L 382 179"),
+    circle(278, 159, 16),
+    stroke("M 278 143 L 278 175 L 278 159 L 294 159 L 262 159"),
+    stroke("M 267 148 L 289 170 L 278 159 L 289 148 L 267 170")
+  ]),
+
   drawing("Robot", [
     stroke("M 155 58 L 325 58 L 325 165 L 155 165 Z"),
     stroke("M 240 58 L 240 28 L 258 28"),
