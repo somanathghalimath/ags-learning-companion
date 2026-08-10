@@ -39,7 +39,8 @@ select {
 }
 
 button:focus-visible,
-select:focus-visible {
+select:focus-visible,
+.home-button:focus-visible {
   outline: 4px solid rgba(38, 120, 233, 0.25);
   outline-offset: 3px;
 }
@@ -51,7 +52,41 @@ select:focus-visible {
 }
 
 .app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+.home-button {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--blue-dark);
+  background: rgba(38, 120, 233, 0.08);
+  border: 1px solid rgba(38, 120, 233, 0.13);
+  border-radius: 999px;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 140ms ease, transform 80ms ease, border-color 140ms ease;
+}
+
+.home-button:hover {
+  background: rgba(38, 120, 233, 0.14);
+  border-color: rgba(38, 120, 233, 0.22);
+}
+
+.home-button:active {
+  transform: scale(0.97);
+}
+
+.home-button svg {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 h1,
@@ -289,6 +324,16 @@ h1 {
 @media (max-width: 650px) {
   .app-shell {
     padding-top: 22px;
+  }
+
+  .home-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .home-button svg {
+    width: 20px;
+    height: 20px;
   }
 }
 

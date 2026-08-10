@@ -3,9 +3,9 @@
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 const SPEEDS = {
-  verySlow: { pixelsPerSecond: 68, minimumDuration: 1800, maximumDuration: 7600, copyPause: 4200 },
-  slow: { pixelsPerSecond: 88, minimumDuration: 1500, maximumDuration: 6200, copyPause: 3200 },
-  steady: { pixelsPerSecond: 115, minimumDuration: 1200, maximumDuration: 5000, copyPause: 2400 }
+  verySlow: { pixelsPerSecond: 68, minimumDuration: 1800, maximumDuration: 7600 },
+  slow: { pixelsPerSecond: 88, minimumDuration: 1500, maximumDuration: 6200 },
+  steady: { pixelsPerSecond: 115, minimumDuration: 1200, maximumDuration: 5000 }
 };
 
 const elements = {
@@ -30,7 +30,7 @@ const elements = {
 const state = {
   drawingIndex: 0,
   strokeIndex: 0,
-  phase: "ready", // ready | drawing | copying | paused | complete
+  phase: "ready", // ready | drawing | paused | complete
   phaseBeforePause: null,
   phaseStartedAt: 0,
   phaseElapsed: 0,
@@ -120,7 +120,7 @@ function setStatus(label, modifier) {
 }
 
 function updateControls() {
-  const isActive = state.phase === "drawing" || state.phase === "copying";
+  const isActive = state.phase === "drawing";
   elements.playButton.disabled = isActive || state.phase === "complete";
   elements.pauseButton.disabled = !isActive;
   elements.previousButton.disabled = state.drawingIndex === 0;
@@ -186,8 +186,7 @@ function requestTick() {
 function tick(now) {
   state.animationFrame = null;
   if (state.phase === "drawing") updateDrawing(now);
-  if (state.phase === "copying") updateCopyPause(now);
-  if (state.phase === "drawing" || state.phase === "copying") requestTick();
+  if (state.phase === "drawing") requestTick();
 }
 
 function updateDrawing(now) {
@@ -213,20 +212,9 @@ function updateDrawing(now) {
       updateStepDots();
       updateControls();
     } else {
-      state.phase = "copying";
-      state.phaseStartedAt = performance.now();
-      state.phaseElapsed = 0;
-      setStatus("Draw it", "copy");
-      updateControls();
+      state.strokeIndex += 1;
+      startCurrentStroke();
     }
-  }
-}
-
-function updateCopyPause(now) {
-  const elapsed = state.phaseElapsed + now - state.phaseStartedAt;
-  if (elapsed >= SPEEDS[elements.speedSelect.value].copyPause) {
-    state.strokeIndex += 1;
-    startCurrentStroke();
   }
 }
 
@@ -238,7 +226,7 @@ function stopAnimation() {
 }
 
 function pause() {
-  if (state.phase !== "drawing" && state.phase !== "copying") return;
+  if (state.phase !== "drawing") return;
   state.phaseElapsed += performance.now() - state.phaseStartedAt;
   state.phaseBeforePause = state.phase;
   state.phase = "paused";
@@ -253,16 +241,12 @@ function play() {
   if (state.phase === "paused") {
     state.phase = state.phaseBeforePause;
     state.phaseStartedAt = performance.now();
-    if (state.phase === "drawing") {
-      const path = state.strokeElements[state.strokeIndex];
-      const length = state.strokeLengths[state.strokeIndex];
-      const offset = Number.parseFloat(path.style.strokeDashoffset);
-      showStartDot(path);
-      positionPencil(path, length - offset);
-      setStatus("Watch", "watch");
-    } else {
-      setStatus("Draw it", "copy");
-    }
+    const path = state.strokeElements[state.strokeIndex];
+    const length = state.strokeLengths[state.strokeIndex];
+    const offset = Number.parseFloat(path.style.strokeDashoffset);
+    showStartDot(path);
+    positionPencil(path, length - offset);
+    setStatus("Watch", "watch");
     updateControls();
     requestTick();
     return;
@@ -311,7 +295,7 @@ elements.previousButton.addEventListener("click", () => changeDrawing(-1));
 elements.nextButton.addEventListener("click", () => changeDrawing(1));
 
 elements.speedSelect.addEventListener("change", () => {
-  if (state.phase === "drawing" || state.phase === "copying") {
+  if (state.phase === "drawing") {
     state.phaseElapsed += performance.now() - state.phaseStartedAt;
     state.phaseStartedAt = performance.now();
   }

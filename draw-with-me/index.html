@@ -9,16 +9,24 @@
       content="A calm visual guide that helps young children draw simple pictures in a notebook, one stroke at a time."
     />
     <title>Draw With Me</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="drawings.js" defer></script>
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="styles.css?v=line-drawings-2" />
+    <script src="drawings.js?v=line-drawings-2" defer></script>
+    <script src="app.js?v=line-drawings-2" defer></script>
   </head>
   <body>
     <main class="app-shell">
       <header class="app-header">
-        <a class="home-link" href="../" aria-label="Back to all activities">← Activities</a>
-        <h1>Draw With Me</h1>
-        <p>Watch one line, draw it in your notebook, then watch the next.</p>
+        <a class="home-button" href="../" aria-label="Back to AG's Learning Companion" title="Home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5" />
+            <path d="M5 9.5V21h14V9.5" />
+            <path d="M9 21v-6h6v6" />
+          </svg>
+        </a>
+        <div class="header-copy">
+          <h1>Draw With Me</h1>
+          <p>Watch the picture appear slowly, and draw along in your notebook.</p>
+        </div>
       </header>
 
       <section class="lesson-card" aria-labelledby="drawing-heading">
@@ -88,7 +96,7 @@
             <option value="steady">Steady</option>
           </select>
         </label>
-        <p class="notebook-note">Paper and pencil stay on the table. The screen only shows what comes next.</p>
+        <p class="notebook-note">The drawing keeps flowing. Tap Pause whenever little hands need more time.</p>
       </section>
     </main>
   </body>
