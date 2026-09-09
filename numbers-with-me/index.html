@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f8fc" />
+  <title>Numbers With Me</title>
+  <link rel="stylesheet" href="styles.css?v=1" />
+  <script src="lessons.js?v=1" defer></script>
+  <script src="app.js?v=1" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <a class="home-button" href="../" aria-label="Back to home" title="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+      </a>
+      <div><h1>Numbers With Me</h1><p>Little stories. Big pencil thinking.</p></div>
+    </header>
+    <section class="settings" aria-label="Choose your practice">
+      <label>Let’s try <select id="operation"><option value="add">+ Adding</option><option value="subtract">− Taking away</option></select></label>
+      <label>Numbers <select id="range"><option value="5">Up to 5</option><option value="10">Up to 10</option></select></label>
+    </section>
+    <section class="lesson-card" aria-labelledby="storyTitle">
+      <div class="lesson-heading"><span id="position" class="eyebrow"></span><span id="concept" class="concept"></span></div>
+      <h2 id="storyTitle"></h2>
+      <p id="storyText" class="story-text" aria-live="polite"></p>
+      <svg id="scene" viewBox="0 0 600 290" role="img" aria-labelledby="sceneTitle sceneDescription"><title id="sceneTitle"></title><desc id="sceneDescription"></desc><g id="sceneArt" aria-hidden="true"></g></svg>
+      <div id="equation" class="equation" aria-label="Number sentence"></div>
+      <div class="notebook"><span class="pencil" aria-hidden="true">✎</span><div><h3>In your notebook</h3><p id="notebookText"></p></div></div>
+      <div class="actions"><button id="replay" class="secondary" type="button">↻ Again</button><button id="advance" class="primary" type="button">Watch what happens →</button></div>
+      <nav class="navigation" aria-label="Stories"><button id="previous" type="button">← Previous</button><button id="next" type="button">Next story →</button></nav>
+    </section>
+    <details class="grownup"><summary>A note for your grown-up</summary><p>Read the short story together. One dot or box stands for one thing; there’s no need to copy the whole picture. Let your child count, draw and write before revealing the answer. If the answers differ, count the marks together. There’s no timer or score.</p><p>Adding means joining more to a group. Taking away means crossing some out and counting what remains. Start with “Up to 5”; “Up to 10” also includes a story with nothing left.</p></details>
+    <noscript>Please enable JavaScript to play the number stories.</noscript>
+  </main>
+</body>
+</html>
