@@ -13,9 +13,12 @@ Add a `[themeKey, start, change]` entry to the relevant list to add a story.
 Addition totals must fit the range; subtraction must never go below zero.
 All screen counts and answers are derived from these quantities.
 
-`app.js` holds the SVG illustrations and four lesson stages: start, movement,
-notebook time and reveal. Add new illustration types in `object()` and
-`renderScene()` when adding a theme. Keep one object equal to one notebook mark.
+`app.js` holds the SVG layout and four lesson stages: start, movement,
+notebook time and reveal. Six familiar themes (cats, dogs, toy cars, balls,
+balloons and ducks) use emoji pictures in a plain counting space. Add a theme's
+emoji in its `icon` field; the layout is shared. The `place`, `leaveOne` and
+`leaveMany` fields supply the short story wording.
+Keep one picture equal to one notebook dot. Emoji appearance follows the device.
 Reduced-motion preferences skip object travel. Resetting, switching operation,
 or navigating cancels pending movement callbacks.
 
