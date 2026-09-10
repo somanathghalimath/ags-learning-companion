@@ -25,15 +25,15 @@ select { width:100%; min-width:0; height:44px; border:1px solid var(--border); b
 .concept { font-size:12px; font-weight:800; color:var(--blue-dark); background:var(--blue-soft); padding:4px 8px; border-radius:999px; }
 h2 { font-size:clamp(19px,4.6vw,24px); line-height:32px; }
 .story-text { font-size:16px; line-height:20px; }
-.guide-area { min-height:0; display:grid; container-type:size; }
-#scene,.answer-panel { grid-area:1/1; width:100%; height:100%; min-height:0; }
-#scene { display:block; overflow:hidden; }
-.answer-panel { display:grid; place-items:center; text-align:center; background:var(--blue-soft); border:2px solid #c4ddfb; border-radius:18px; padding:4px; }
-.answer-result { display:grid; justify-items:center; align-content:center; }
+.guide-area { min-height:0; display:grid; grid-template-rows:minmax(0,1fr) clamp(60px,25%,110px); container-type:size; }
+#scene,.answer-panel { width:100%; height:100%; min-height:0; }
+#scene { grid-row:1; display:block; overflow:hidden; }
+.answer-panel { grid-row:2; display:grid; place-items:center; text-align:left; padding:4px; }
+.answer-result { display:grid; grid-template-columns:auto auto; column-gap:16px; align-items:center; align-content:center; }
 .answer-result:focus { outline:none; }
-.answer-number { color:var(--blue-dark); font-size:clamp(36px,42cqh,112px); font-weight:900; line-height:1.05; }
-.answer-label { font-size:clamp(15px,8cqh,24px); line-height:1.2; font-weight:800; }
-.equation { margin-top:4px; padding:3px 14px; border-radius:10px; background:white; font-size:clamp(15px,7cqh,22px); line-height:1.2; font-weight:750; }
+.answer-number { grid-row:1/3; color:var(--blue-dark); font-size:clamp(36px,16cqh,72px); font-weight:900; line-height:1; }
+.answer-label { font-size:clamp(15px,5cqh,22px); line-height:1.2; font-weight:800; }
+.equation { margin-top:4px; color:var(--muted); font-size:clamp(15px,4cqh,19px); line-height:1.2; font-weight:750; }
 .notebook { display:flex; gap:10px; align-items:flex-start; padding:10px; background:#f5f8fc; border:1px solid var(--border); border-radius:14px; }
 .pencil { font-size:24px; color:var(--blue-dark); line-height:1; }
 .notebook h3 { font-size:13px; line-height:16px; margin-bottom:3px; }

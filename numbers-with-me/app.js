@@ -64,7 +64,6 @@ function render() {
   $("storyText").textContent = stories[state.stage];
   const revealed = state.stage === 3;
   $("answerPanel").hidden = !revealed;
-  $("scene").hidden = revealed;
   $("answerPanel").classList.toggle("revealed", revealed);
   $("answerResult").hidden = !revealed;
   $("answerNumber").textContent = revealed ? end : "";
