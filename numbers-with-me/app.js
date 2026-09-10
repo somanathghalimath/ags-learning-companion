@@ -63,18 +63,18 @@ function render() {
   ];
   $("storyText").textContent = stories[state.stage];
   const revealed = state.stage === 3;
-  $("answerPlaceholder").hidden = revealed;
+  $("answerPanel").hidden = !revealed;
+  $("scene").hidden = revealed;
   $("answerPanel").classList.toggle("revealed", revealed);
-  $("answerPrompt").textContent = revealed ? "Let’s count together" : `How many ${theme.noun}?`;
   $("answerResult").hidden = !revealed;
   $("answerNumber").textContent = revealed ? end : "";
   $("answerLabel").textContent = revealed ? `${noun(end)} ${adding() ? "altogether" : "left"}${end === 0 ? " — none!" : ""}` : "";
   $("equation").textContent = revealed ? `${start} ${sign} ${change} = ${end}` : "";
   const notebook = [
-    `Draw ${start} ${start === 1 ? "dot" : theme.mark}. Each dot stands for one ${noun(1)}.`,
+    `Draw ${start} ${start === 1 ? "dot" : theme.mark}. One dot = one ${noun(1)}.`,
     adding() ? `Add ${change} more ${theme.mark} beside your first group.` : `Cross out ${change} of your ${theme.mark}.`,
-    `Count ${adding() ? "all your marks" : "only the marks without a cross"}. Write ${start} ${sign} ${change} = __ and fill in your answer.`,
-    `Look at your marks together: ${start} ${adding() ? "plus" : "minus"} ${change} equals ${end}. ${end === 0 ? "All the marks are crossed out." : "Point to each one as you count."}`
+    `Count ${adding() ? "all your dots" : "the dots without a cross"}. Write ${start} ${sign} ${change} = __.`,
+    `${start} ${adding() ? "plus" : "minus"} ${change} equals ${end}. ${end === 0 ? "All dots are crossed out." : "Count your dots together."}`
   ];
   $("notebookText").textContent = notebook[state.stage];
   $("advance").textContent = ["Watch what happens →", "Watching…", "Show me the answer", state.index === list().length - 1 ? "Start these stories again ↻" : "Next story →"][state.stage];
@@ -111,4 +111,5 @@ $("replay").addEventListener("click", () => reset());
 $("previous").addEventListener("click", () => { if (state.index > 0) reset(state.index - 1); });
 $("next").addEventListener("click", () => { if (state.index < list().length - 1) reset(state.index + 1); });
 for (const id of ["operation", "range"]) $(id).addEventListener("change", () => reset(0));
+$("helpButton").addEventListener("click", () => $("helpDialog").showModal());
 reset(0);
