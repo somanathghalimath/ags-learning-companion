@@ -22,8 +22,21 @@ select { border: 1px solid var(--border); border-radius: 12px; background: white
 h2 { font-size: clamp(1.5rem,4vw,2rem); }
 .story-text { margin-top: 8px; min-height: 3em; font-size: clamp(1.1rem,3vw,1.35rem); line-height: 1.5; }
 #scene { display: block; width: 100%; max-height: 300px; margin: 6px auto; overflow: hidden; }
-.equation { text-align: center; min-height: 64px; padding: 6px; font-size: clamp(2rem,6vw,2.8rem); font-weight: 850; letter-spacing: .08em; }
-.equation .unknown { color: var(--muted); }
+[hidden] { display: none !important; }
+.answer-panel { text-align: center; border: 2px solid #c4ddfb; border-radius: 24px; background: var(--blue-soft); padding: 24px 18px; margin: 12px 0 20px; scroll-margin: 20px; }
+.answer-prompt { font-size: clamp(1.25rem,4vw,1.6rem); font-weight: 800; }
+.reveal-button { width: min(100%, 360px); min-height: 72px; margin-top: 18px; font-size: 1.2rem; box-shadow: 0 8px 22px rgba(38,120,233,.18); }
+.answer-result { display: grid; justify-items: center; }
+.answer-result:focus { outline: none; }
+.answer-number { display: block; color: var(--blue-dark); font-size: clamp(6rem,20vw,9rem); font-weight: 900; line-height: 1.15; }
+.answer-label { font-size: clamp(1.35rem,4vw,1.8rem); font-weight: 800; }
+.equation { margin-top: 18px; padding: 10px 20px; border-radius: 12px; background: white; font-size: clamp(1.25rem,4vw,1.65rem); font-weight: 750; letter-spacing: .06em; }
+.answer-panel.revealed { animation: answer-glow 1.4s ease-out both; }
+.revealed .answer-number { animation: answer-arrive 1s cubic-bezier(.2,.8,.25,1) both; }
+.revealed .answer-label, .revealed .equation { animation: answer-caption .6s .4s ease-out both; }
+@keyframes answer-arrive { from { opacity: 0; transform: translateY(18px) scale(.55); } 65% { opacity: 1; transform: translateY(0) scale(1.08); } to { opacity: 1; transform: scale(1); } }
+@keyframes answer-caption { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes answer-glow { from { box-shadow: 0 0 0 0 rgba(38,120,233,.28); } to { box-shadow: 0 0 0 16px rgba(38,120,233,0); } }
 .notebook { display: flex; gap: 14px; align-items: flex-start; background: #f5f8fc; border: 1px solid var(--border); border-radius: 18px; padding: 18px; margin: 14px 0 20px; }
 .pencil { font-size: 2rem; color: var(--blue-dark); line-height: 1; }
 h3 { font-size: .95rem; margin-bottom: 6px; }
@@ -44,3 +57,4 @@ button:disabled { opacity: .5; cursor: default; }
 @keyframes leave { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-65px); opacity: 0; } }
 @media (max-width: 480px) { .app-shell { width: calc(100% - 20px); padding-top: 18px; } .settings { gap: 10px; } .settings label { flex: 1; display: grid; gap: 6px; font-size: .85rem; } select { width: 100%; padding: 10px 6px; } .actions { grid-template-columns: 1fr; } .primary { grid-row: 1; } .story-text { min-height: 4.5em; } .notebook { padding: 14px; } .lesson-heading { align-items: flex-start; } }
 @media (prefers-reduced-motion: reduce) { .joining { animation: none; } .leaving { animation: none; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .answer-panel.revealed, .revealed .answer-number, .revealed .answer-label, .revealed .equation { animation: none; } }

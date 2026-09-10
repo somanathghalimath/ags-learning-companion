@@ -62,7 +62,15 @@ function render() {
     end === 0 ? "None left! We write 0 for none." : `${end} ${noun(end)} ${end === 1 ? "is" : "are"} ${theme.place} now.`
   ];
   $("storyText").textContent = stories[state.stage];
-  $("equation").textContent = state.stage === 0 ? `${start}` : `${start} ${sign} ${change} = ${state.stage === 3 ? end : "?"}`;
+  const revealed = state.stage === 3;
+  $("answerPanel").hidden = state.stage < 2;
+  $("answerPanel").classList.toggle("revealed", revealed);
+  $("answerPrompt").textContent = revealed ? "Let’s count together" : `How many ${theme.noun}?`;
+  $("revealAnswer").hidden = revealed;
+  $("answerResult").hidden = !revealed;
+  $("answerNumber").textContent = revealed ? end : "";
+  $("answerLabel").textContent = revealed ? `${noun(end)} ${adding() ? "altogether" : "left"}${end === 0 ? " — none!" : ""}` : "";
+  $("equation").textContent = revealed ? `${start} ${sign} ${change} = ${end}` : "";
   const notebook = [
     `Draw ${start} ${start === 1 ? "dot" : theme.mark}. Each dot stands for one ${noun(1)}.`,
     adding() ? `Add ${change} more ${theme.mark} beside your first group.` : `Cross out ${change} of your ${theme.mark}.`,
@@ -72,6 +80,7 @@ function render() {
   $("notebookText").textContent = notebook[state.stage];
   $("advance").textContent = ["Watch what happens →", "Watching…", "Show me the answer", state.index === list().length - 1 ? "Start these stories again ↻" : "Next story →"][state.stage];
   $("advance").disabled = state.busy;
+  $("advance").hidden = state.stage === 2;
   $("previous").disabled = state.index === 0;
   $("next").disabled = state.index === list().length - 1;
   renderScene(key, start, change);
@@ -86,7 +95,7 @@ function reset(index = state.index) {
   render();
 }
 
-$("advance").addEventListener("click", () => {
+function advanceLesson() {
   if (state.busy) return;
   if (state.stage === 3) return reset((state.index + 1) % list().length);
   state.stage++;
@@ -95,7 +104,13 @@ $("advance").addEventListener("click", () => {
     state.timer = setTimeout(() => { state.busy = false; state.stage = 2; render(); }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800);
   }
   render();
-});
+  if (state.stage === 3) {
+    $("answerResult").focus({ preventScroll: true });
+    $("answerPanel").scrollIntoView({ block: "nearest", behavior: "instant" });
+  }
+}
+$("advance").addEventListener("click", advanceLesson);
+$("revealAnswer").addEventListener("click", () => { if (state.stage === 2) advanceLesson(); });
 $("replay").addEventListener("click", () => reset());
 $("previous").addEventListener("click", () => { if (state.index > 0) reset(state.index - 1); });
 $("next").addEventListener("click", () => { if (state.index < list().length - 1) reset(state.index + 1); });
