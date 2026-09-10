@@ -66,7 +66,6 @@ function render() {
   $("answerPanel").hidden = state.stage < 2;
   $("answerPanel").classList.toggle("revealed", revealed);
   $("answerPrompt").textContent = revealed ? "Let’s count together" : `How many ${theme.noun}?`;
-  $("revealAnswer").hidden = revealed;
   $("answerResult").hidden = !revealed;
   $("answerNumber").textContent = revealed ? end : "";
   $("answerLabel").textContent = revealed ? `${noun(end)} ${adding() ? "altogether" : "left"}${end === 0 ? " — none!" : ""}` : "";
@@ -80,7 +79,6 @@ function render() {
   $("notebookText").textContent = notebook[state.stage];
   $("advance").textContent = ["Watch what happens →", "Watching…", "Show me the answer", state.index === list().length - 1 ? "Start these stories again ↻" : "Next story →"][state.stage];
   $("advance").disabled = state.busy;
-  $("advance").hidden = state.stage === 2;
   $("previous").disabled = state.index === 0;
   $("next").disabled = state.index === list().length - 1;
   renderScene(key, start, change);
@@ -110,7 +108,6 @@ function advanceLesson() {
   }
 }
 $("advance").addEventListener("click", advanceLesson);
-$("revealAnswer").addEventListener("click", () => { if (state.stage === 2) advanceLesson(); });
 $("replay").addEventListener("click", () => reset());
 $("previous").addEventListener("click", () => { if (state.index > 0) reset(state.index - 1); });
 $("next").addEventListener("click", () => { if (state.index < list().length - 1) reset(state.index + 1); });
