@@ -63,7 +63,7 @@ function render() {
   ];
   $("storyText").textContent = stories[state.stage];
   const revealed = state.stage === 3;
-  $("answerPanel").hidden = state.stage < 2;
+  $("answerPlaceholder").hidden = revealed;
   $("answerPanel").classList.toggle("revealed", revealed);
   $("answerPrompt").textContent = revealed ? "Let’s count together" : `How many ${theme.noun}?`;
   $("answerResult").hidden = !revealed;
@@ -104,7 +104,6 @@ function advanceLesson() {
   render();
   if (state.stage === 3) {
     $("answerResult").focus({ preventScroll: true });
-    $("answerPanel").scrollIntoView({ block: "nearest", behavior: "instant" });
   }
 }
 $("advance").addEventListener("click", advanceLesson);

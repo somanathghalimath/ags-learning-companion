@@ -19,13 +19,14 @@ select { border: 1px solid var(--border); border-radius: 12px; background: white
 .lesson-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
 .eyebrow { font-size: .8rem; color: var(--muted); font-weight: 750; }
 .concept { border-radius: 999px; padding: 7px 12px; color: var(--blue-dark); background: var(--blue-soft); font-size: .8rem; font-weight: 800; }
-h2 { font-size: clamp(1.5rem,4vw,2rem); }
-.story-text { margin-top: 8px; min-height: 3em; font-size: clamp(1.1rem,3vw,1.35rem); line-height: 1.5; }
+h2 { font-size: clamp(1.5rem,4vw,2rem); line-height: 1.2; min-height: 2.4em; }
+.story-text { margin-top: 8px; min-height: 4.5em; font-size: clamp(1.1rem,3vw,1.35rem); line-height: 1.5; }
 #scene { display: block; width: 100%; max-height: 300px; margin: 6px auto; overflow: hidden; }
 [hidden] { display: none !important; }
-.answer-panel { text-align: center; border: 2px solid #c4ddfb; border-radius: 24px; background: var(--blue-soft); padding: 24px 18px; margin: 12px 0 20px; scroll-margin: 20px; }
+.answer-panel { display: grid; grid-template-rows: 64px 1fr; min-height: 420px; text-align: center; border: 2px solid #c4ddfb; border-radius: 24px; background: var(--blue-soft); padding: 24px 18px; margin: 12px 0 20px; }
+.answer-placeholder { align-self: center; color: var(--muted); font-size: 1.1rem; }
 .answer-prompt { font-size: clamp(1.25rem,4vw,1.6rem); font-weight: 800; }
-.answer-result { display: grid; justify-items: center; }
+.answer-result { display: grid; justify-items: center; align-content: center; }
 .answer-result:focus { outline: none; }
 .answer-number { display: block; color: var(--blue-dark); font-size: clamp(6rem,20vw,9rem); font-weight: 900; line-height: 1.15; }
 .answer-label { font-size: clamp(1.35rem,4vw,1.8rem); font-weight: 800; }
@@ -36,11 +37,12 @@ h2 { font-size: clamp(1.5rem,4vw,2rem); }
 @keyframes answer-arrive { from { opacity: 0; transform: translateY(18px) scale(.55); } 65% { opacity: 1; transform: translateY(0) scale(1.08); } to { opacity: 1; transform: scale(1); } }
 @keyframes answer-caption { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes answer-glow { from { box-shadow: 0 0 0 0 rgba(38,120,233,.28); } to { box-shadow: 0 0 0 16px rgba(38,120,233,0); } }
-.notebook { display: flex; gap: 14px; align-items: flex-start; background: #f5f8fc; border: 1px solid var(--border); border-radius: 18px; padding: 18px; margin: 14px 0 20px; }
+.notebook { display: flex; min-height: 180px; gap: 14px; align-items: flex-start; background: #f5f8fc; border: 1px solid var(--border); border-radius: 18px; padding: 18px; margin: 14px 0 20px; }
 .pencil { font-size: 2rem; color: var(--blue-dark); line-height: 1; }
 h3 { font-size: .95rem; margin-bottom: 6px; }
 .notebook p { line-height: 1.6; font-size: 1.05rem; }
 .actions { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+.actions button { min-height: 80px; }
 button { border: 0; border-radius: 16px; min-height: 58px; padding: 12px 16px; font-weight: 800; color: var(--ink); background: #eff4f8; }
 button:hover:not(:disabled) { filter: brightness(.97); }
 button:disabled { opacity: .5; cursor: default; }
@@ -56,4 +58,6 @@ button:disabled { opacity: .5; cursor: default; }
 @keyframes leave { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-65px); opacity: 0; } }
 @media (max-width: 480px) { .app-shell { width: calc(100% - 20px); padding-top: 18px; } .settings { gap: 10px; } .settings label { flex: 1; display: grid; gap: 6px; font-size: .85rem; } select { width: 100%; padding: 10px 6px; } .actions { grid-template-columns: 1fr; } .primary { grid-row: 1; } .story-text { min-height: 4.5em; } .notebook { padding: 14px; } .lesson-heading { align-items: flex-start; } }
 @media (prefers-reduced-motion: reduce) { .joining { animation: none; } .leaving { animation: none; opacity: 0; } }
+/* Reserve enough space for the longest prompt so controls never move between steps. */
+@media (max-width: 600px) { .story-text { min-height: 7.5em; } .notebook { min-height: 240px; } }
 @media (prefers-reduced-motion: reduce) { .answer-panel.revealed, .revealed .answer-number, .revealed .answer-label, .revealed .equation { animation: none; } }

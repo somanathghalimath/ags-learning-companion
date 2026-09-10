@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f3f8fc" />
   <title>Numbers With Me</title>
-  <link rel="stylesheet" href="styles.css?v=4" />
-  <script src="lessons.js?v=4" defer></script>
-  <script src="app.js?v=4" defer></script>
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <script src="lessons.js?v=5" defer></script>
+  <script src="app.js?v=5" defer></script>
 </head>
 <body>
   <main class="app-shell">
@@ -26,8 +26,9 @@
       <h2 id="storyTitle"></h2>
       <p id="storyText" class="story-text" aria-live="polite"></p>
       <svg id="scene" viewBox="0 0 600 290" role="img" aria-labelledby="sceneTitle sceneDescription"><title id="sceneTitle"></title><desc id="sceneDescription"></desc><g id="sceneArt" aria-hidden="true"></g></svg>
-      <section id="answerPanel" class="answer-panel" aria-label="Discover the answer" hidden>
+      <section id="answerPanel" class="answer-panel" aria-label="Discover the answer">
         <p id="answerPrompt" class="answer-prompt"></p>
+        <p id="answerPlaceholder" class="answer-placeholder">Work it out in your notebook.</p>
         <div id="answerResult" class="answer-result" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
           <span id="answerNumber" class="answer-number"></span>
           <span id="answerLabel" class="answer-label"></span>
