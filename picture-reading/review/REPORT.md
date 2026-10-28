@@ -76,3 +76,9 @@ The application itself can be opened directly from `picture-reading/index.html` 
 ## Approval update validation
 
 After user acceptance, content validation passed with zero pending items. The browser checks were rerun to verify that all 251 picture cards are displayed and their images decode, including the 23 accepted items.
+
+## Individual picture views
+
+Picture cards now open a larger object view at `#category-id/item-id`. Previous and Next browse within the selected category, with unavailable steps disabled at the ends. Separate links return to the category grid and Picture Reading home. Direct links, reloads and browser Back are supported.
+
+Headless Chrome checks passed at 360, 768 and 1280 pixels for clickable cards, object captions, Previous/Next, sequence boundaries, both home links, direct object URLs and browser Back across all 28 picture categories. All 251 grid pictures still decode; the four complete-page viewers, existing navigation and seven existing module page-load checks also passed. No horizontal overflow or JavaScript errors were found. The mobile object view was also visually inspected.

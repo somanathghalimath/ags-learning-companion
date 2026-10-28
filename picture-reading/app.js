@@ -6,6 +6,23 @@
   const grid = document.querySelector('#category-grid');
   const pictures = document.querySelector('#pictures');
   const heading = document.querySelector('#reading-heading');
+  const objectView = document.querySelector('#object-view');
+  const objectHeading = document.querySelector('#object-heading');
+  function itemLink(category, item) {
+    return `#${category.id}/${item.id}`;
+  }
+  function setStep(id, category, item) {
+    const link = document.querySelector(id);
+    if (item) {
+      link.href = itemLink(category, item);
+      link.removeAttribute('aria-disabled');
+      link.removeAttribute('tabindex');
+    } else {
+      link.removeAttribute('href');
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('tabindex', '-1');
+    }
+  }
   const ready = item => item.reviewStatus !== 'needs-review';
   function image(src, alt) {
     const img = document.createElement('img');
@@ -27,13 +44,32 @@
     grid.append(link);
   }
   function render(focus = false) {
-    const category = pictureReading.find(c => c.id === location.hash.slice(1));
+    const [categoryId, itemId, extra] = location.hash.slice(1).split('/');
+    const category = pictureReading.find(c => c.id === categoryId);
+    const items = category?.type === 'image-grid' ? category.items.filter(ready) : [];
+    const itemIndex = extra === undefined ? items.findIndex(item => item.id === itemId) : -1;
+    const selectedItem = items[itemIndex];
     categories.hidden = Boolean(category);
-    reading.hidden = !category;
+    reading.hidden = !category || Boolean(selectedItem);
+    objectView.hidden = !selectedItem;
     pictures.replaceChildren();
     document.title = `${category ? category.title + ' · ' : ''}Picture Reading · AG's Learning Companion`;
     if (!category) {
       if (focus) document.querySelector('#category-heading').focus();
+      return;
+    }
+    if (selectedItem) {
+      document.title = `${selectedItem.name} · ${category.title} · Picture Reading`;
+      const sectionHome = document.querySelector('#section-home');
+      sectionHome.href = `#${category.id}`;
+      sectionHome.textContent = `⌂ ${category.title} home`;
+      objectHeading.textContent = selectedItem.name;
+      const objectImage = document.querySelector('#object-image');
+      objectImage.src = selectedItem.image;
+      document.querySelector('#object-position').textContent = `${itemIndex + 1} of ${items.length} · ${category.title}`;
+      setStep('#previous-object', category, items[itemIndex - 1]);
+      setStep('#next-object', category, items[itemIndex + 1]);
+      if (focus) { objectHeading.focus(); window.scrollTo(0, 0); }
       return;
     }
     heading.textContent = category.title;
@@ -58,7 +94,11 @@
         const caption = document.createElement('figcaption');
         caption.textContent = item.name;
         card.append(image(item.image, ''), caption);
-        cards.append(card);
+        const link = document.createElement('a');
+        link.className = 'picture-link';
+        link.href = itemLink(category, item);
+        link.append(card);
+        cards.append(link);
       }
       pictures.append(cards);
       if (category.items.some(item => !ready(item))) {

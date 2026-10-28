@@ -1,6 +1,6 @@
 # Picture Reading
 
-Open `index.html` or select Picture Reading from the Learning Companion home page.
+Open `index.html` or select Picture Reading from the Learning Companion home page. Select a picture card to open its larger object view. Previous and Next browse within the category; the two home links return to the category grid or Picture Reading home. Object URLs support direct links and browser Back.
 
 - `data/picture-reading.js`: category and item data, including source pages and review status.
 - `assets/`: local extracted object pictures and four intact full-page illustrations.

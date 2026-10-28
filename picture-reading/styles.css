@@ -26,4 +26,15 @@ figcaption { margin-top:14px; font-size:clamp(21px,3vw,26px); font-weight:800; l
 .full-page img { display:block; width:100%; height:auto; object-fit:contain; }
 .original-link { margin:16px 0; }
 .review-note { color:var(--muted); line-height:1.6; margin:24px 0; }
+.picture-link { display:block; color:var(--ink); text-decoration:none; border-radius:22px; }
+.picture-link .picture-card { height:100%; }
+.picture-link:hover .picture-card { border-color:var(--blue); }
+.object-homes,.object-navigation { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+.object-homes { margin-bottom:20px; }
+.object-card { margin:0 auto; padding:20px; max-width:850px; text-align:center; background:white; border:1px solid var(--border); border-radius:22px; box-shadow:0 12px 35px rgba(36,79,114,.1); }
+.object-card img { display:block; width:100%; height:clamp(220px,48vh,520px); object-fit:contain; }
+.object-card h2 { margin:0; font-size:clamp(28px,5vw,42px); }
+.object-position { color:var(--muted); text-align:center; margin:16px 0; }
+.object-navigation { max-width:850px; margin:auto; }
+.object-navigation [aria-disabled="true"] { opacity:.45; cursor:default; }
 @media(max-width:500px) { .app-shell { width:calc(100% - 24px); padding-top:16px; } .category-grid,.picture-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .category-card { padding:12px; font-size:17px; border-radius:16px; } .category-card img { height:110px; } .picture-card { padding:10px; border-radius:16px; } .picture-card img { height:155px; } figcaption { font-size:20px; } .full-page { padding:4px; border-radius:12px; } }
