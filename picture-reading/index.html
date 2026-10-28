@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f8fc">
+  <title>Picture Reading · AG's Learning Companion</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/picture-reading.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <a class="home-button" href="../" aria-label="Back to AG's Learning Companion" title="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg></a>
+      <div><h1>Picture Reading</h1><p>Look at the pictures. Discover their names.</p></div>
+    </header>
+    <section id="categories" aria-labelledby="category-heading">
+      <h2 id="category-heading" tabindex="-1">Choose a category</h2>
+      <div id="category-grid" class="category-grid"></div>
+    </section>
+    <section id="reading" aria-labelledby="reading-heading" hidden>
+      <a class="back-button" href="#">← All categories</a>
+      <h2 id="reading-heading" tabindex="-1"></h2>
+      <div id="pictures"></div>
+    </section>
+    <noscript>Please enable JavaScript to browse the picture categories.</noscript>
+  </main>
+</body>
+</html>

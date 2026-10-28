@@ -11,6 +11,8 @@ The root page is **AG's Learning Companion**, a visual launcher for the quiz pro
 - [`name-the-leader/`](name-the-leader/) — Same format, but for Indian national figures. Portraits fetched from Wikipedia and embedded.
 - [`name-the-flag/`](name-the-flag/) — Identify the country from its flag. Ten kid-friendly flags fetched from flagcdn.com as SVGs.
 
+- [`picture-reading/`](picture-reading/) — Picture vocabulary in 32 textbook categories, with local illustrations and four intact contextual pages. See its extraction report for source details and accepted review items.
+
 ## Hosting
 
 Hosted on GitHub Pages:
