@@ -13,8 +13,17 @@ const pictureSpeech = (() => {
     // Read the current list each time: some browsers load voices asynchronously.
     const voices = window.speechSynthesis.getVoices();
     const language = voice => voice.lang.replace(/_/g, '-').toLowerCase();
-    const voice = voices.find(v => language(v) === 'en-in')
-      || voices.find(v => language(v).startsWith('en-') && /india/i.test(v.name));
+    const indianEnglish = voices.filter(v => language(v) === 'en-in'
+      || (language(v).startsWith('en-') && /india/i.test(v.name)));
+    // The browser API has no standard gender field. Use explicit female labels
+    // and documented Microsoft female Indian English voice names only:
+    // https://support.microsoft.com/en-us/accessibility/windows/narrator/appendix-a-supported-languages-and-voices
+    // https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support
+    const female = v => /\bfemale\b|\b(?:heera|neerja|meera)(?:neural)?\b/i.test(v.name);
+    const voice = indianEnglish.find(v => language(v) === 'en-in' && female(v))
+      || indianEnglish.find(female)
+      || indianEnglish.find(v => language(v) === 'en-in')
+      || indianEnglish[0];
     currentUtterance = new SpeechSynthesisUtterance(text);
     currentUtterance.lang = 'en-IN';
     currentUtterance.rate = 0.85;

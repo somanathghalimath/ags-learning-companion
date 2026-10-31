@@ -43,6 +43,20 @@ const assert = require('node:assert/strict');
   await page.evaluate(() => {window.testVoices = [{name:'English India',lang:'en_IN'}];});
   await page.locator('#speak-object').click();
   assert.equal(await page.evaluate(() => window.speechCalls.at(-1).voice), 'English India');
+  const voiceCases = [
+   {voices:[{name:'Microsoft Ravi',lang:'en-IN'},{name:'Microsoft Heera',lang:'en-IN'}], expected:'Microsoft Heera'},
+   {voices:[{name:'Microsoft Ravi',lang:'en-IN'},{name:'Microsoft Neerja Online (Natural)',lang:'en-IN'}], expected:'Microsoft Neerja Online (Natural)'},
+   {voices:[{name:'Indian English male',lang:'en-IN'},{name:'Indian English female',lang:'en_IN'}], expected:'Indian English female'},
+   {voices:[{name:'Indian English',lang:'en-IN'},{name:'English India Female',lang:'en-GB'}], expected:'English India Female'},
+   {voices:[{name:'English US female',lang:'en-US'},{name:'Microsoft Ravi',lang:'en-IN'}], expected:'Microsoft Ravi'},
+   {voices:[{name:'Unidentified Indian voice',lang:'en-IN'}], expected:'Unidentified Indian voice'}
+  ];
+  for (const {voices,expected} of voiceCases) {
+   await page.evaluate(voices => {window.testVoices = voices;}, voices);
+   await page.locator('#speak-object').click();
+   assert.equal(await page.evaluate(() => window.speechCalls.at(-1).voice), expected);
+   assert.equal(await page.evaluate(() => window.speechCalls.at(-1).lang), 'en-IN');
+  }
   await page.locator('#object-view a[href="#"]').click();
   await page.locator('#categories').waitFor({state:'visible'});
   await page.locator('.category-card[href="#my-body"]').click();
@@ -61,6 +75,6 @@ const assert = require('node:assert/strict');
   await unsupported.goto(base+'#domestic-animals/cow');
   assert.equal(await unsupported.locator('#speak-object').isVisible(), false);
   assert.equal(await unsupported.locator('#object-heading').textContent(), 'Cow');
-  console.log('PASS: en-IN voice preference, late voice loading, fallback language, card/Previous/Next speech, replay, cancellation, browser Back, full-page title, silent direct load, unsupported browser and mobile layout. Speech requests mocked; audible accent not verified.');
+  console.log('PASS: female Indian English preference, Indian English fallback, en-IN voice preference, late voice loading, fallback language, card/Previous/Next speech, replay, cancellation, browser Back, full-page title, silent direct load, unsupported browser and mobile layout. Speech requests mocked; audible accent not verified.');
  } finally {await browser.close();}
 })().catch(e => {console.error(e);process.exit(1);});

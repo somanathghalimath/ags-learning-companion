@@ -90,3 +90,9 @@ Object cards and Previous/Next now speak the displayed name using browser speech
 The dedicated speech browser checks passed for Indian English voice preference, delayed voice availability, language fallback, pronunciation from cards and Previous/Next, replay, cancellation, browser Back, complete-page titles, quiet direct loads and unsupported browsers. Speech requests were mocked to inspect their text, voice and language; audible output and the actual accent were not verified in this environment. Accent availability depends on the user's browser/device voices.
 
 The existing browser suite also passed across 360, 768 and 1280 pixel widths, covering all 251 cards, full pages, object navigation and existing module smoke checks. JavaScript syntax and whitespace checks passed.
+
+## Female voice preference
+
+Indian English voice selection now prefers an identifiable female voice before falling back to another Indian English voice. The browser API has no standard gender property, so selection recognizes an explicit “female” voice-name label or the documented Microsoft names Heera, Neerja and Meera. A voice whose name does not identify its gender is treated as unspecified. A non-Indian English female voice does not replace an available Indian English voice.
+
+Speech browser checks passed for female preference over a listed male voice, documented names, underscore language tags, India-labelled English voices, male/unspecified Indian English fallback, delayed voice lists and the existing speech/navigation lifecycle. These checks inspect mocked speech requests; audible voice gender and accent remain dependent on device voices. JavaScript syntax and whitespace checks passed.
