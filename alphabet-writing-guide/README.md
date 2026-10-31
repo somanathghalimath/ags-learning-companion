@@ -17,3 +17,15 @@ NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/ch
 ```
 
 These are development tools only; the browser activity needs no framework or installed package. Adapted Kannada path data and derivative review illustrations are CC BY-SA 4.0, attributed to Gopala Krishna A; see the research notes.
+
+## Letter announcements
+
+All four sections use the shared browser voice helper from `../picture-reading/speech.js`. English capitals, small letters and numbers use Picture Reading's female Indian English (`en-IN`) preference, with the same reading rate and pitch. Kannada letters request a Kannada (`kn-IN`) voice, preferring an identifiable female voice (including Microsoft Sapna); the app does not force an English-only voice onto Kannada text.
+
+Changing letters or practice sets announces the new character. Replay and Play also announce it. The “Hear” button repeats the current name without resetting its strokes. Pause stops speech, and each new announcement cancels the previous one. Initial playback of handwriting remains automatic; initial speech waits for a user gesture because browsers may block autoplay audio. A tap on the lesson can introduce the first character. Unsupported browsers hide the Hear button and keep the visual guide.
+
+Voice availability, audible accent and Kannada pronunciation depend on the browser/device. If no matching voice is listed, the engine receives the requested language with no explicit voice. Speech tests inspect mocked requests; they do not certify actual audio.
+
+```sh
+NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/check-letter-speech.cjs
+```

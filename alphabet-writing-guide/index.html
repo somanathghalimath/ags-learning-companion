@@ -9,10 +9,11 @@
       content="A visual guide that teaches children the stroke order for letters, numbers, and Kannada swaras."
     />
     <title>Write With Me</title>
-    <link rel="stylesheet" href="styles.css?v=kannada-strokes-6" />
+    <link rel="stylesheet" href="styles.css?v=letter-voice-7" />
     <script src="kannada.js?v=stroke-research-6" defer></script>
     <script src="letters.js?v=kannada-strokes-6" defer></script>
-    <script src="app.js?v=kannada-strokes-6" defer></script>
+    <script src="../picture-reading/speech.js?v=letter-voice-7" defer></script>
+    <script src="app.js?v=letter-voice-7" defer></script>
   </head>
   <body>
     <main class="app-shell">
@@ -44,6 +45,10 @@
         </div>
 
         <div class="canvas-wrap">
+          <button id="hearButton" class="hear-button" type="button" aria-label="Hear the current letter" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></svg>
+            Hear
+          </button>
           <svg
             id="letterCanvas"
             class="letter-canvas"

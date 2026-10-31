@@ -26,7 +26,8 @@ const elements = {
   nextButton: document.querySelector("#nextButton"),
   setSelect: document.querySelector("#setSelect"),
   speedSelect: document.querySelector("#speedSelect"),
-  strokeInstruction: document.querySelector("#strokeInstruction")
+  strokeInstruction: document.querySelector("#strokeInstruction"),
+  hearButton: document.querySelector("#hearButton")
 };
 
 const state = {
@@ -56,6 +57,22 @@ function getActiveSet() {
 
 function getCharacters() {
   return getActiveSet().characters;
+}
+
+let hasAnnouncedLetter = false;
+
+function announceCurrentLetter() {
+  const letter = getCharacters()[state.letterIndex];
+  hasAnnouncedLetter = true;
+  if (state.activeSetKey === "kannadaSwaras") {
+    pictureSpeech.speak(letter.name, { lang: "kn-IN" });
+  } else {
+    const prefix = state.activeSetKey === "uppercase" ? "Capital "
+      : state.activeSetKey === "lowercase" ? "Small " : "";
+    const numbers = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+    const text = state.activeSetKey === "numbers" ? numbers[Number(letter.name) - 1] : prefix + letter.name.toUpperCase();
+    pictureSpeech.speak(text);
+  }
 }
 
 function populateSetSelect() {
@@ -186,6 +203,7 @@ function updateLetterLabels() {
   elements.letterHeading.textContent = `${headingLabel} ${letter.name}`;
   elements.letterCount.textContent = `${activeSet.itemLabel} ${state.letterIndex + 1} of ${characters.length}`;
   elements.svgTitle.textContent = `How to write ${headingLabel.toLowerCase()} ${letter.name}`;
+  elements.hearButton.setAttribute("aria-label", `Hear ${headingLabel.toLowerCase()} ${letter.name}`);
 }
 
 function updateControls() {
@@ -342,6 +360,7 @@ function stopAnimation() {
 
 function pause() {
   if (state.phase !== "drawing" && state.phase !== "preparing") return;
+  pictureSpeech.cancel();
 
   state.phaseElapsed += performance.now() - state.phaseStartedAt;
   state.phaseBeforePause = state.phase;
@@ -355,6 +374,7 @@ function pause() {
 }
 
 function play() {
+  announceCurrentLetter();
   if (state.phase === "paused") {
     state.phase = state.phaseBeforePause;
     state.phaseStartedAt = performance.now();
@@ -397,6 +417,7 @@ function replay() {
   state.phase = "ready";
   updateControls();
   beginLetter();
+  announceCurrentLetter();
 }
 
 function changeLetter(direction) {
@@ -405,6 +426,7 @@ function changeLetter(direction) {
   state.letterIndex = nextIndex;
   renderLetter();
   beginLetter();
+  announceCurrentLetter();
 }
 
 function changeSet(setKey) {
@@ -413,7 +435,17 @@ function changeSet(setKey) {
   state.letterIndex = 0;
   renderLetter();
   beginLetter();
+  announceCurrentLetter();
 }
+
+elements.hearButton.hidden = !pictureSpeech.supported;
+elements.hearButton.addEventListener("click", announceCurrentLetter);
+// Browsers generally require a gesture before speech. A tap on the lesson can
+// introduce the initial letter; navigation/replay handlers already announce it.
+document.addEventListener("click", event => {
+  if (!hasAnnouncedLetter && event.target.closest(".lesson-card")
+      && !event.target.closest("a, select, #pauseButton")) announceCurrentLetter();
+});
 
 elements.playButton.addEventListener("click", play);
 elements.pauseButton.addEventListener("click", pause);

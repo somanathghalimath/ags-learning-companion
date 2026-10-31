@@ -189,6 +189,27 @@ h1 {
   height: 100%;
 }
 
+.hear-button {
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:44px;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--blue-soft);
+  color:var(--blue-dark);
+  font-weight:800;
+  cursor:pointer;
+}
+
+.hear-button svg { width:18px; height:18px; }
+.hear-button:hover { border-color:var(--blue); }
+
 .guide-layer path,
 .stroke-layer path {
   fill: none;
