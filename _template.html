@@ -221,6 +221,9 @@
       flex: 1;
       min-width: 0;
     }
+    .hear-name { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+    .hear-name svg { width: 22px; height: 22px; }
+    button:disabled { opacity: 0.45; cursor: default; }
     .footer-actions {
       display: flex;
       gap: 8px;
@@ -417,6 +420,12 @@
     <div class="footer">
       <div class="hint">Use the arrows or press <strong>&larr;</strong> / <strong>&rarr;</strong></div>
       <div class="footer-actions">
+        <button id="hearBtn" type="button" class="primary hear-name" title="Hear the name" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/>
+          </svg>
+          Hear name
+        </button>
         <button id="shuffleBtn" type="button" class="icon" aria-label="Shuffle" title="Shuffle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M16 3h5v5"/>
@@ -430,6 +439,7 @@
     </div>
   </main>
 
+  <script src="../picture-reading/speech.js?v=quiz-voice-1"></script>
   <script>
     const items = {{ITEMS_JSON}};
     const features = {{FEATURES_JSON}};
@@ -439,6 +449,7 @@
     let answerVisible = false;
     let finished = false;
     let scratchMode = false;
+    let renderTimer;
 
     const stage      = document.getElementById('stage');
     const card       = document.getElementById('card');
@@ -451,6 +462,8 @@
     const shuffleBtn = document.getElementById('shuffleBtn');
     const prevBtn    = document.getElementById('prevBtn');
     const nextBtn    = document.getElementById('nextBtn');
+    const hearBtn    = document.getElementById('hearBtn');
+    if (!pictureSpeech.supported) hearBtn.remove();
 
     if (!features.showName) captionEl.remove();
 
@@ -620,12 +633,15 @@
     /* ---------- Render ---------- */
 
     function render() {
+      pictureSpeech.cancel();
+      clearTimeout(renderTimer);
+      hearBtn.disabled = true;
       const item = order[index];
       card.className = 'brand-card switching';
       stage.classList.remove('show-answer');
       answerVisible = false;
 
-      setTimeout(function () {
+      renderTimer = setTimeout(function () {
         brandEl.innerHTML = '';
 
         const frame = document.createElement('div');
@@ -652,14 +668,18 @@
         if (features.showName) captionEl.textContent = item.name;
         counterEl.textContent = index + 1;
         card.className = 'brand-card';
+        hearBtn.disabled = false;
       }, 180);
     }
 
     function showFinished() {
+      pictureSpeech.cancel();
+      clearTimeout(renderTimer);
+      hearBtn.disabled = true;
       finished = true;
       card.className = 'brand-card switching';
       stage.classList.remove('show-answer');
-      setTimeout(function () {
+      renderTimer = setTimeout(function () {
         brandEl.innerHTML =
           '<div class="done">' +
             '<div class="tick">&#10003;</div>' +
@@ -697,9 +717,21 @@
     }
 
     function toggleAnswer() {
-      if (finished) return;
+      if (finished || hearBtn.disabled) return;
       answerVisible = !answerVisible;
       stage.classList.toggle('show-answer', answerVisible);
+      if (answerVisible) pictureSpeech.speak(order[index].name);
+      else pictureSpeech.cancel();
+    }
+
+    function hearName() {
+      if (finished || hearBtn.disabled) return;
+      // Revealing the name is deliberate: navigation preserves the guessing game.
+      if (!features.showName) {
+        answerVisible = true;
+        stage.classList.add('show-answer');
+      }
+      pictureSpeech.speak(order[index].name);
     }
 
     function restart() {
@@ -719,6 +751,8 @@
     /* ---------- Input ---------- */
 
     document.addEventListener('keydown', function (e) {
+      // Let focused buttons receive their normal Space/Enter activation.
+      if (e.code === 'Space' && e.target.closest('button, a')) return;
       if (e.code === 'Space' || e.key === 'ArrowRight') { e.preventDefault(); nextItem(); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); prevItem(); }
       else if (e.key === 'a' || e.key === 'A') { toggleAnswer(); }
@@ -726,6 +760,10 @@
       else if (e.key === 'r' || e.key === 'R') { restart(); }
     });
 
+    hearBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      hearName();
+    });
     prevBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       prevItem();
