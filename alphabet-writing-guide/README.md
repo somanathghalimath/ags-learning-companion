@@ -2,9 +2,11 @@
 
 A static handwriting demonstration for English capitals, small letters, numbers and Kannada. Open `index.html` directly or serve the repository with `python3 -m http.server 8765`.
 
-Kannada uses the source-grounded centreline vectors in `kannada.js`. The green starting point is held before each pen-down stroke, the pencil moves at a constant path-distance pace, and separate strokes have a lift cue. The guide and final ink use identical geometry.
+Kannada uses the source-grounded centreline vectors in `kannada.js` (15 swaras/marks) and `kannada-vyanjana.js` (34 basic consonants). The green starting point is held before each pen-down stroke, the pencil moves at a constant path-distance pace, and separate strokes have a lift cue. The guide and final ink use identical geometry.
 
 - [Research and per-character construction](review/KANNADA-SOURCES.md)
+- [Consonant research and construction](review/KANNADA-VYANJANA-SOURCES.md)
+- [Consonant shape comparison and stroke playback](review/kannada-review.html?set=vyanjana)
 - [Visual stroke-order review and playback](review/kannada-review.html)
 - [Before / after comparison](review/before-after.png)
 
@@ -20,7 +22,7 @@ These are development tools only; the browser activity needs no framework or ins
 
 ## Letter announcements
 
-All four sections use the shared browser voice helper from `../picture-reading/speech.js`. English capitals, small letters and numbers use Picture Reading's female Indian English (`en-IN`) preference, with the same reading rate and pitch. Kannada letters request a Kannada (`kn-IN`) voice, preferring an identifiable female voice (including Microsoft Sapna); the app does not force an English-only voice onto Kannada text.
+All five sections use the shared browser voice helper from `../picture-reading/speech.js`. English capitals, small letters and numbers use Picture Reading's female Indian English (`en-IN`) preference, with the same reading rate and pitch. Kannada letters request a Kannada (`kn-IN`) voice, preferring an identifiable female voice (including Microsoft Sapna); the app does not force an English-only voice onto Kannada text.
 
 Changing letters or practice sets announces the new character. Replay and Play also announce it. The “Hear” button repeats the current name without resetting its strokes. Pause stops speech, and each new announcement cancels the previous one. Initial playback of handwriting remains automatic; initial speech waits for a user gesture because browsers may block autoplay audio. A tap on the lesson can introduce the first character. Unsupported browsers hide the Hear button and keep the visual guide.
 

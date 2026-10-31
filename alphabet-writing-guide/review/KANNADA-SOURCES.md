@@ -1,5 +1,7 @@
 # Kannada handwriting research and revision
 
+For the added 34 consonants, see [vyanjana research and construction](KANNADA-VYANJANA-SOURCES.md) and [consonant review](kannada-review.html?set=vyanjana).
+
 Research date: 31 October 2026. Scope: the 15 existing Kannada learning characters in Write With Me. This revision improves centreline letter construction and the demonstration of movement; it does not add a new teaching syllabus.
 
 ## What is established, and what is not

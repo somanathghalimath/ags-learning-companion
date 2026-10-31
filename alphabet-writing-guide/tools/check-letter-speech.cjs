@@ -17,7 +17,7 @@ const assert=require('node:assert/strict');
   await page.locator('#letterCanvas').click({position:{x:100,y:100}});
   assert.deepEqual(await page.evaluate(()=>speechCalls.at(-1)),{text:'Capital A',lang:'en-IN',voice:'Microsoft Heera'});
   let count=0;
-  for(const set of ['uppercase','lowercase','numbers','kannadaSwaras']){
+  for(const set of ['uppercase','lowercase','numbers','kannadaSwaras','kannadaVyanjanas']){
    await page.locator('#setSelect').selectOption(set);
    const names=await page.evaluate(()=>getCharacters().map(c=>c.name));
    for(let i=0;i<names.length;i++){
@@ -25,8 +25,8 @@ const assert=require('node:assert/strict');
     const expectedText=set==='uppercase'?'Capital '+names[i]:set==='lowercase'?'Small '+names[i].toUpperCase():set==='numbers'?['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'][i]:names[i];
     const last=await page.evaluate(()=>speechCalls.at(-1));
     assert.equal(last.text,expectedText);
-    assert.equal(last.lang,set==='kannadaSwaras'?'kn-IN':'en-IN');
-    assert.equal(last.voice,set==='kannadaSwaras'?'Microsoft Sapna':'Microsoft Heera');
+    assert.equal(last.lang,set.startsWith('kannada')?'kn-IN':'en-IN');
+    assert.equal(last.voice,set.startsWith('kannada')?'Microsoft Sapna':'Microsoft Heera');
     assert.equal(await page.evaluate(()=>speechCalls.at(-2).cancel),true);
     await page.locator('#hearButton').click();
     assert.deepEqual(await page.evaluate(()=>speechCalls.at(-1)),last);
@@ -40,9 +40,9 @@ const assert=require('node:assert/strict');
    await page.locator('#pauseButton').click();
    assert.equal(await page.evaluate(()=>speechCalls.at(-1).cancel),true);
    await page.locator('#playButton').click();
-   assert.equal(await page.evaluate(()=>speechCalls.at(-1).lang),set==='kannadaSwaras'?'kn-IN':'en-IN');
+   assert.equal(await page.evaluate(()=>speechCalls.at(-1).lang),set.startsWith('kannada')?'kn-IN':'en-IN');
   }
-  assert.equal(count,77);
+  assert.equal(count,111);
   // Without a listed Kannada voice, do not force the English voice onto Kannada.
   await page.evaluate(()=>{window.testVoices=[{name:'Microsoft Heera',lang:'en-IN'}];});
   await page.locator('#hearButton').click();
@@ -57,9 +57,13 @@ const assert=require('node:assert/strict');
   await unsupported.addInitScript(()=>{delete window.speechSynthesis;delete window.SpeechSynthesisUtterance;});
   await unsupported.goto('http://localhost:8765/alphabet-writing-guide/');
   assert.equal(await unsupported.locator('#hearButton').isVisible(),false);
-  await unsupported.locator('#setSelect').selectOption('kannadaSwaras');
-  assert.match(await unsupported.locator('#letter-heading').textContent(),/ಅ/);
+  for(const [set,first,second] of [['kannadaSwaras','ಅ','ಆ'],['kannadaVyanjanas','ಕ','ಖ']]){
+   await unsupported.locator('#setSelect').selectOption(set);
+   assert.ok((await unsupported.locator('#letter-heading').textContent()).includes(first));
+   await unsupported.locator('#nextButton').click();
+   assert.ok((await unsupported.locator('#letter-heading').textContent()).includes(second));
+  }
   assert.deepEqual(errors,[]);
-  console.log('PASS: all 77 characters in four sections; shared female en-IN preference; female kn-IN preference; Kannada fallback; Hear, first gesture, Next/Previous, replay, pause/resume, cancellation, mobile layout and unsupported browsers. Speech mocked; audible pronunciation not verified.');
+  console.log('PASS: all 111 characters in five sections; shared female en-IN preference; female kn-IN preference; Kannada fallback; Hear, first gesture, Next/Previous, replay, pause/resume, cancellation, mobile layout and unsupported browsers. Speech mocked; audible pronunciation not verified.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -190,10 +190,7 @@ h1 {
 }
 
 .hear-button {
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:2;
+  flex-shrink:0;
   display:inline-flex;
   align-items:center;
   gap:6px;
@@ -294,9 +291,18 @@ h1 {
   margin-top: 18px;
 }
 
-.stroke-instruction {
+.letter-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
   max-width: 540px;
   margin: 12px auto 0;
+}
+
+.stroke-instruction {
+  flex: 1;
+  margin: 0;
   color: var(--ink);
   font-size: 0.9rem;
   line-height: 1.45;

@@ -1,0 +1,1228 @@
+[
+  {
+    "name": "ಕ",
+    "id": "ka",
+    "file": "ka",
+    "strokes": [
+      {
+        "d": "M 104 85 C 84 100 83 122 102 133 C 124 146 145 122 135 103 C 130 87 118 80 110 82 C 108 82 106 83 104 85",
+        "prompt": "Go down around the round body and close it.",
+        "sourceFrames": [
+          0,
+          12
+        ]
+      },
+      {
+        "d": "M 73 82 L 145 82",
+        "prompt": "Lift. Draw the middle bar to the right.",
+        "sourceFrames": [
+          15,
+          18
+        ]
+      },
+      {
+        "d": "M 110 82 C 126 82 126 64 113 60 L 113 56",
+        "prompt": "Lift. Curve up from the middle bar.",
+        "sourceFrames": [
+          19,
+          20
+        ]
+      },
+      {
+        "d": "M 73 56 L 122 56 C 144 56 151 38 138 24",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          21,
+          26
+        ]
+      }
+    ],
+    "sourceBounds": [
+      72,
+      22,
+      145,
+      145
+    ],
+    "sourceSHA256": "b4cbac601ff4423b333b4c6f368df5025565158d6aa65514135025a06aab3c52",
+    "junctionNote": "The circle meets the middle bar at its upper tangent; the separate neck reaches the upper bar."
+  },
+  {
+    "name": "ಖ",
+    "id": "kha",
+    "file": "kha",
+    "strokes": [
+      {
+        "d": "M 70 80 C 57 79 55 65 66 60 C 89 48 111 66 109 96 C 107 122 87 141 61 140 C 32 139 34 119 55 113 C 80 105 94 122 111 132 C 139 151 168 132 165 99 C 162 68 142 33 112 35",
+        "prompt": "Curl out from the little left spiral, loop around below, cross through, then sweep around the right side.",
+        "sourceFrames": [
+          0,
+          23
+        ]
+      }
+    ],
+    "sourceBounds": [
+      34,
+      29,
+      169,
+      150
+    ],
+    "sourceSHA256": "dddcce4bed90a953e0920acdc0f02d1adfa212b720ec1cfb5973329dc857b4c3"
+  },
+  {
+    "name": "ಗ",
+    "id": "ga",
+    "file": "ga",
+    "strokes": [
+      {
+        "d": "M 71 143 L 71 110 C 71 42 140 42 140 110 L 140 143",
+        "prompt": "Start at the bottom left, arch over, then come down on the right.",
+        "sourceFrames": [
+          0,
+          11
+        ]
+      },
+      {
+        "d": "M 65 59 L 127 59 C 151 59 161 40 145 26",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          12,
+          21
+        ]
+      }
+    ],
+    "sourceBounds": [
+      64,
+      25,
+      154,
+      148
+    ],
+    "sourceSHA256": "a76e09ab8463dbd2ed51c6c8e2fecdc2e58aacdb45b56bd6a6b28cbd7d5118d9",
+    "junctionNote": "Arch apex meets the head stroke; source thick/thin contrast is simplified to a pencil centreline."
+  },
+  {
+    "name": "ಘ",
+    "id": "gha",
+    "file": "gha",
+    "strokes": [
+      {
+        "d": "M 65 97 C 80 91 72 79 61 84 C 42 92 52 113 71 112 C 85 112 95 104 97 98 C 102 117 136 122 139 99 C 142 83 133 73 132 66",
+        "prompt": "Curl around the left spiral, make both lower bowls, then curve up on the right.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 132 66 C 145 90 164 90 157 61",
+        "prompt": "Lift. From the right join, curve down and up to make the little side bowl.",
+        "sourceFrames": [
+          19,
+          24
+        ]
+      },
+      {
+        "d": "M 47 47 L 135 47 C 157 47 166 33 151 21",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          28,
+          39
+        ]
+      },
+      {
+        "d": "M 96 69 L 96 69.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          43,
+          44
+        ],
+        "sourceWidth": 12
+      },
+      {
+        "d": "M 97 120 L 97 144",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          47,
+          49
+        ]
+      }
+    ],
+    "sourceBounds": [
+      46,
+      20,
+      159,
+      150
+    ],
+    "sourceSHA256": "6cc06cf1986783f8b4fc17a6e8473c15fb00f10170a9d06325038add1425d511"
+  },
+  {
+    "name": "ಙ",
+    "id": "nga",
+    "file": "knha",
+    "strokes": [
+      {
+        "d": "M 56 64 C 38 54 51 31 68 39 C 90 45 80 65 68 77 C 43 98 49 121 72 121 C 91 121 102 110 106 100 C 111 124 145 128 156 111 C 168 95 155 82 142 82",
+        "prompt": "Curl over at the left, come down through both bowls, then finish the right hook.",
+        "sourceFrames": [
+          0,
+          20
+        ]
+      },
+      {
+        "d": "M 80 65 C 111 25 163 30 155 61",
+        "prompt": "Lift. From the left join, arch right over the top and turn down.",
+        "sourceFrames": [
+          23,
+          29
+        ]
+      },
+      {
+        "d": "M 111 66 L 111 66.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          32,
+          33
+        ],
+        "sourceWidth": 12
+      }
+    ],
+    "sourceBounds": [
+      44,
+      32,
+      160,
+      131
+    ],
+    "sourceSHA256": "da1e4aac967c7deda7559b625db467284822544f9b97b89ebba38e4cc1bb5f74"
+  },
+  {
+    "name": "ಚ",
+    "id": "cha",
+    "file": "cha",
+    "strokes": [
+      {
+        "d": "M 62 77 C 42 67 53 44 72 52 C 99 64 78 86 65 100 C 46 121 58 137 80 136 C 98 136 108 123 112 113 C 118 136 149 144 157 121 C 166 101 144 91 126 90 L 126 85",
+        "prompt": "Curl over on the left, sweep through both lower bowls, then finish left along the middle.",
+        "sourceFrames": [
+          0,
+          20
+        ]
+      },
+      {
+        "d": "M 114 85 L 158 85",
+        "prompt": "Lift. Draw the middle bar to the right.",
+        "sourceFrames": [
+          24,
+          29
+        ]
+      },
+      {
+        "d": "M 135 85 C 153 85 154 66 141 62 L 141 55",
+        "prompt": "Lift. Curve up from the middle bar.",
+        "sourceFrames": [
+          30,
+          31
+        ]
+      },
+      {
+        "d": "M 114 55 L 145 55 C 162 55 167 36 150 22",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          34,
+          39
+        ]
+      }
+    ],
+    "sourceBounds": [
+      46,
+      21,
+      161,
+      145
+    ],
+    "sourceSHA256": "ab8d4f77ffd8b853c39d954f4d3a7a9236469b2b47a42c00cf637a9de43593ae",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಛ",
+    "id": "chha",
+    "file": "chha",
+    "strokes": [
+      {
+        "d": "M 57 53 C 57 75 86 73 86 52 C 86 29 59 27 54 53 C 44 100 59 120 81 120 C 96 120 105 108 109 98 C 113 123 145 126 155 107 C 172 76 149 48 125 43 L 125 37",
+        "prompt": "Go around the small upper loop, sweep down through both bowls, then curve up to the head join.",
+        "sourceFrames": [
+          0,
+          20
+        ]
+      },
+      {
+        "d": "M 111 37 L 141 37 C 164 37 171 21 150 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          21,
+          29
+        ]
+      },
+      {
+        "d": "M 109 130 L 109 155",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          30,
+          31
+        ]
+      }
+    ],
+    "sourceBounds": [
+      48,
+      11,
+      162,
+      161
+    ],
+    "sourceSHA256": "3f860617de2d5dd2f08e24382772c48fa20ec05a7122a7f0aad4201f3bfe837b",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಜ",
+    "id": "ja",
+    "file": "ja",
+    "strokes": [
+      {
+        "d": "M 57 62 C 40 53 53 33 69 44 C 92 58 72 77 59 91 C 42 112 56 128 78 125 C 95 124 104 113 109 104 C 115 129 150 137 158 115 C 168 96 151 85 144 86",
+        "prompt": "Curl over on the left, sweep down through both bowls, then finish the right hook.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 77 52 C 105 75 158 81 160 44",
+        "prompt": "Lift. From the left join, curve down across the top and curl up on the right.",
+        "sourceFrames": [
+          19,
+          23
+        ]
+      }
+    ],
+    "sourceBounds": [
+      45,
+      37,
+      162,
+      135
+    ],
+    "sourceSHA256": "d432750387d6a5deb0005c63b5e8bc53a0e46e82ec25cc0a3a2fcbb842132a08"
+  },
+  {
+    "name": "ಝ",
+    "id": "jha",
+    "file": "jha",
+    "strokes": [
+      {
+        "d": "M 48 49 C 18 49 10 99 41 105 C 81 114 92 51 57 49 C 54 48 51 48 48 49",
+        "prompt": "Go down around the left round body and close it.",
+        "sourceFrames": [
+          0,
+          12
+        ]
+      },
+      {
+        "d": "M 17 46 L 67 46 C 85 46 91 35 78 24",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          13,
+          20
+        ]
+      },
+      {
+        "d": "M 94 97 C 99 124 126 112 126 90 C 126 70 111 53 99 53",
+        "prompt": "Lift. Make the middle bowl, coming up and back to its upper hook.",
+        "sourceFrames": [
+          24,
+          30
+        ]
+      },
+      {
+        "d": "M 136 97 C 141 124 169 112 169 90 C 169 70 154 53 142 53",
+        "prompt": "Lift. Make the right bowl in the same direction.",
+        "sourceFrames": [
+          33,
+          39
+        ]
+      },
+      {
+        "d": "M 134 119 L 134 138",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          42,
+          43
+        ]
+      }
+    ],
+    "sourceBounds": [
+      16,
+      23,
+      181,
+      144
+    ],
+    "sourceSHA256": "4fa377a3cc551fbf25f1e31232c9f7bb07c876be0f1ca644040ebe60ce7c5058",
+    "junctionNote": "Round body meets the underside of the head stroke, matching the original broad junction."
+  },
+  {
+    "name": "ಞ",
+    "id": "nya",
+    "file": "chna",
+    "strokes": [
+      {
+        "d": "M 42 96 C 13 95 20 52 47 55 C 64 55 73 63 75 72 C 80 51 109 48 119 64 C 133 85 123 104 108 104 C 82 104 81 87 99 91 C 119 94 128 112 122 127 C 116 143 131 144 134 132",
+        "prompt": "Curve over the first two humps, make the middle loop, then bring the tail down and curl up.",
+        "sourceFrames": [
+          0,
+          31
+        ]
+      },
+      {
+        "d": "M 125 73 C 129 48 167 48 178 65 C 190 82 174 97 163 95",
+        "prompt": "Lift. From the right join, arch over and finish the right hook.",
+        "sourceFrames": [
+          32,
+          38
+        ]
+      }
+    ],
+    "sourceBounds": [
+      23,
+      48,
+      186,
+      141
+    ],
+    "sourceSHA256": "ae5436b3b007c33d1cba30d7c4914d816ae94a8930cfcf9fe98744359b98768a"
+  },
+  {
+    "name": "ಟ",
+    "id": "tta",
+    "file": "ta",
+    "strokes": [
+      {
+        "d": "M 77 41 C 54 40 61 62 74 63 C 92 65 89 87 76 86 C 63 85 63 73 73 68 C 53 79 52 111 76 112 C 91 114 103 102 107 94 C 111 113 139 123 141 101 C 143 82 127 76 119 76 C 141 78 141 42 119 42",
+        "prompt": "Make the upper curl and little loop, sweep through both lower bowls, then finish the two right curves without lifting.",
+        "sourceFrames": [
+          0,
+          16
+        ]
+      }
+    ],
+    "sourceBounds": [
+      56,
+      38,
+      144,
+      121
+    ],
+    "sourceSHA256": "206757db1e57878b2c2df933bc88c2b6e342f035d81c0cd7a8300c116a186995"
+  },
+  {
+    "name": "ಠ",
+    "id": "ttha",
+    "file": "tta",
+    "strokes": [
+      {
+        "d": "M 77 54 C 47 67 47 111 77 125 C 110 142 144 111 133 80 C 128 61 112 49 95 49 C 89 49 82 51 77 54",
+        "prompt": "Go down around the round body and close it.",
+        "sourceFrames": [
+          0,
+          14
+        ]
+      },
+      {
+        "d": "M 53 49 L 112 49 C 138 49 150 33 129 17",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          15,
+          25
+        ]
+      },
+      {
+        "d": "M 95 85 L 95 85.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          26,
+          27
+        ],
+        "sourceWidth": 13
+      }
+    ],
+    "sourceBounds": [
+      52,
+      16,
+      142,
+      139
+    ],
+    "sourceSHA256": "6140b8bb322d9f8f4af8cc7073ce0e1ce647f8e8aabc59c74a7c69a7d1378246",
+    "junctionNote": "Round body meets the head stroke at its upper tangent."
+  },
+  {
+    "name": "ಡ",
+    "id": "dda",
+    "file": "dda",
+    "strokes": [
+      {
+        "d": "M 90 47 C 59 57 44 91 64 111 C 85 131 108 117 114 99 C 123 122 149 128 160 110 C 174 88 147 62 132 69 C 107 79 141 89 151 77 C 165 54 117 40 90 47 L 90 38",
+        "prompt": "Curve down through both bowls, loop left inside the right side, then curve across the top back to the start.",
+        "sourceFrames": [
+          0,
+          29
+        ]
+      },
+      {
+        "d": "M 54 38 L 141 38 C 164 38 175 22 154 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          30,
+          38
+        ]
+      },
+      {
+        "d": "M 116 133 L 116 153",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          39,
+          41
+        ]
+      }
+    ],
+    "sourceBounds": [
+      53,
+      11,
+      168,
+      160
+    ],
+    "sourceSHA256": "7e912862672c00f9e078f287b3d087d3f790b6be9395bb5a09eccb370abb9310",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಢ",
+    "id": "ddha",
+    "file": "dhha",
+    "strokes": [
+      {
+        "d": "M 69 37 C 38 47 25 86 48 105 C 68 121 85 109 93 96 C 103 117 128 119 138 100 C 157 66 116 26 69 37 L 69 28",
+        "prompt": "Go down around both bowls, then curve left across the top to close the body.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 35 28 L 122 28 C 146 28 155 21 140 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          19,
+          27
+        ]
+      },
+      {
+        "d": "M 93 123 L 93 145",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          28,
+          29
+        ]
+      }
+    ],
+    "sourceBounds": [
+      34,
+      11,
+      148,
+      152
+    ],
+    "sourceSHA256": "ed53bab281e8243aa72a1b40a9d780a497d018af6178ff98935e9ab35ad2e06c",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಣ",
+    "id": "nna",
+    "file": "nna",
+    "strokes": [
+      {
+        "d": "M 78 121 C 53 145 41 103 72 90 C 37 87 49 40 78 46 C 91 48 101 58 104 66 C 115 40 146 44 158 63 C 187 108 145 149 122 121 C 103 95 138 79 142 102 C 144 109 139 115 136 115",
+        "prompt": "Curve around the lower left hook, go up over both humps, then come down and curl inward on the right.",
+        "sourceFrames": [
+          0,
+          26
+        ]
+      }
+    ],
+    "sourceBounds": [
+      50,
+      41,
+      175,
+      135
+    ],
+    "sourceSHA256": "16dc8c88ffa3143ccdc39701222ef2a28123fb7fd2ae3392c5ac6c0dba2bd2a9"
+  },
+  {
+    "name": "ತ",
+    "id": "ta",
+    "file": "tha",
+    "strokes": [
+      {
+        "d": "M 48 101 C 41 132 104 142 125 117 C 146 95 122 69 96 76 C 60 84 82 101 103 91 C 127 79 119 61 106 57 L 106 47",
+        "prompt": "Sweep down around the wide bottom bowl, loop left inside, then curve up to the head join.",
+        "sourceFrames": [
+          0,
+          21
+        ]
+      },
+      {
+        "d": "M 46 47 L 113 47 C 139 47 147 32 126 15",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          22,
+          29
+        ]
+      }
+    ],
+    "sourceBounds": [
+      45,
+      14,
+      137,
+      137
+    ],
+    "sourceSHA256": "1212aa33044cbcb525f524012027244b3a1b654600afe4b1273520a0ab1a48c0",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಥ",
+    "id": "tha",
+    "file": "thha",
+    "strokes": [
+      {
+        "d": "M 66 39 C 34 49 23 88 45 106 C 64 123 84 111 91 97 C 102 118 126 120 136 101 C 157 65 113 27 66 39 L 66 29",
+        "prompt": "Go down around both bowls, then curve left across the top to close the body.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 33 29 L 120 29 C 145 29 155 22 140 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          19,
+          27
+        ]
+      },
+      {
+        "d": "M 92 124 L 92 146",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          28,
+          30
+        ]
+      },
+      {
+        "d": "M 92 63 L 92 63.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          31,
+          32
+        ],
+        "sourceWidth": 13
+      }
+    ],
+    "sourceBounds": [
+      32,
+      11,
+      146,
+      153
+    ],
+    "sourceSHA256": "532c67d85b3eabec013dc6cba71135a72d3aa92d94e7bd8ec4fa8aaefd036ed7",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ದ",
+    "id": "da",
+    "file": "da",
+    "strokes": [
+      {
+        "d": "M 90 48 C 59 58 44 92 64 112 C 85 131 109 117 115 99 C 123 123 150 128 160 111 C 174 89 148 64 132 71 C 106 82 142 89 152 78 C 165 55 118 40 90 48 L 90 38",
+        "prompt": "Curve down through both bowls, loop left inside the right side, then curve across the top back to the start.",
+        "sourceFrames": [
+          0,
+          29
+        ]
+      },
+      {
+        "d": "M 54 38 L 141 38 C 164 38 175 22 154 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          30,
+          38
+        ]
+      }
+    ],
+    "sourceBounds": [
+      53,
+      11,
+      168,
+      130
+    ],
+    "sourceSHA256": "c12760df02ea4fcc5fe3f5bcb11f4aaa56f2a368d566a3bfe3786bf57719a744",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಧ",
+    "id": "dha",
+    "file": "dha",
+    "strokes": [
+      {
+        "d": "M 65 40 C 34 50 21 86 44 106 C 62 121 82 110 89 97 C 100 119 125 121 135 102 C 156 67 111 28 65 40 L 65 29",
+        "prompt": "Go down around both bowls, then curve left across the top to close the body.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 31 29 L 119 29 C 143 29 153 22 138 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          19,
+          27
+        ]
+      }
+    ],
+    "sourceBounds": [
+      30,
+      11,
+      144,
+      120
+    ],
+    "sourceSHA256": "3cd2f72a1354bcaae35c5adb6506bd69b040abc03557714a9d9ddb136fd85fb1",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ನ",
+    "id": "na",
+    "file": "na",
+    "strokes": [
+      {
+        "d": "M 82 140 C 52 130 57 99 77 100 C 99 99 99 134 125 132 C 161 128 150 79 126 65 C 117 59 104 56 97 56 L 97 49",
+        "prompt": "Curl up from the lower left, sweep down and up through the right bowl, then curve left to the head join.",
+        "sourceFrames": [
+          0,
+          13
+        ]
+      },
+      {
+        "d": "M 62 49 L 130 49 C 153 49 162 34 143 22",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          20
+        ]
+      }
+    ],
+    "sourceBounds": [
+      61,
+      21,
+      155,
+      146
+    ],
+    "sourceSHA256": "7b17d28b5396f654c5a846790969ecb1ca0cb40a81413ff460eba97c627c0b1b",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಪ",
+    "id": "pa",
+    "file": "pa",
+    "strokes": [
+      {
+        "d": "M 90 96 C 109 91 98 77 86 82 C 62 90 66 115 88 118 C 111 122 119 110 122 100 C 132 124 165 130 172 112 C 182 93 165 72 166 64",
+        "prompt": "Curl around the left spiral, sweep through both lower bowls, then curve up on the right.",
+        "sourceFrames": [
+          0,
+          12
+        ]
+      },
+      {
+        "d": "M 124 64 L 124 64.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          13,
+          13
+        ],
+        "sourceWidth": 13
+      },
+      {
+        "d": "M 67 40 L 153 40 C 177 40 187 24 167 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          22
+        ]
+      }
+    ],
+    "sourceBounds": [
+      66,
+      11,
+      179,
+      129
+    ],
+    "sourceSHA256": "0e300a60ea440b967694c6a03de145b9dd91ec604d53a6677d269a54dcadf8f7"
+  },
+  {
+    "name": "ಫ",
+    "id": "pha",
+    "file": "pha",
+    "strokes": [
+      {
+        "d": "M 90 96 C 109 91 98 77 86 82 C 62 90 66 115 88 118 C 111 122 119 110 122 100 C 132 124 165 130 172 112 C 182 93 165 72 166 64",
+        "prompt": "Curl around the left spiral, sweep through both lower bowls, then curve up on the right.",
+        "sourceFrames": [
+          0,
+          12
+        ]
+      },
+      {
+        "d": "M 124 64 L 124 64.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          13,
+          13
+        ],
+        "sourceWidth": 13
+      },
+      {
+        "d": "M 67 40 L 153 40 C 177 40 187 24 167 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          22
+        ]
+      },
+      {
+        "d": "M 124 132 L 124 151",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          23,
+          24
+        ]
+      }
+    ],
+    "sourceBounds": [
+      66,
+      11,
+      179,
+      158
+    ],
+    "sourceSHA256": "70050e755e268b0a6d9c6b91a8da4c54958f48fd2517a262e374ec04c0426654"
+  },
+  {
+    "name": "ಬ",
+    "id": "ba",
+    "file": "ba",
+    "strokes": [
+      {
+        "d": "M 62 72 C 42 61 56 39 74 48 C 100 60 80 79 66 93 C 46 115 57 133 79 131 C 98 131 108 118 112 108 C 119 134 147 143 157 121 C 171 91 155 52 148 48",
+        "prompt": "Curl over on the left, sweep down through both bowls, then curve up the tall right side.",
+        "sourceFrames": [
+          0,
+          17
+        ]
+      }
+    ],
+    "sourceBounds": [
+      46,
+      42,
+      163,
+      140
+    ],
+    "sourceSHA256": "6e868615b7f6bdf69e512215961cd8895d637b04db256dc0a0bf2bc4e3f67ab1"
+  },
+  {
+    "name": "ಭ",
+    "id": "bha",
+    "file": "bha",
+    "strokes": [
+      {
+        "d": "M 63 63 C 43 53 57 30 75 40 C 101 53 82 74 67 88 C 48 108 58 124 80 121 C 99 121 108 109 113 99 C 120 123 150 132 160 108 C 172 78 148 51 130 47 L 130 37",
+        "prompt": "Curl over on the left, sweep through both bowls, then curve up to the head join.",
+        "sourceFrames": [
+          0,
+          13
+        ]
+      },
+      {
+        "d": "M 113 37 L 144 37 C 167 37 177 22 157 12",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          19
+        ]
+      },
+      {
+        "d": "M 115 133 L 115 153",
+        "prompt": "Lift. Draw the short lower mark downwards.",
+        "sourceFrames": [
+          20,
+          22
+        ]
+      }
+    ],
+    "sourceBounds": [
+      49,
+      11,
+      168,
+      161
+    ],
+    "sourceSHA256": "aa3259f64ae091a8d9b52263d155f329e2b00f99c57d06afbc88877faa93b434",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಮ",
+    "id": "ma",
+    "file": "ma",
+    "strokes": [
+      {
+        "d": "M 44 125 C 64 117 50 105 38 111 C 14 123 27 147 50 147 C 67 147 77 137 80 128 C 91 152 122 156 132 134 C 150 99 112 75 81 72 L 81 65",
+        "prompt": "Curl around the left spiral, sweep through both bowls, then curve left across the upper body.",
+        "sourceFrames": [
+          0,
+          14
+        ]
+      },
+      {
+        "d": "M 21 65 L 112 65 C 137 65 144 47 126 33",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          15,
+          21
+        ]
+      },
+      {
+        "d": "M 147 130 C 153 161 185 151 187 124 C 191 100 172 77 150 72",
+        "prompt": "Lift. Make the separate right bowl, coming up and back to its upper hook.",
+        "sourceFrames": [
+          22,
+          27
+        ]
+      }
+    ],
+    "sourceBounds": [
+      20,
+      32,
+      192,
+      156
+    ],
+    "sourceSHA256": "0ce745b9831035d5549046c56284e0d4676026e06a59c8d6d24ce3b442735ea8",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಯ",
+    "id": "ya",
+    "file": "ya",
+    "strokes": [
+      {
+        "d": "M 29 62 C 0 69 1 112 23 126 C 50 145 80 119 70 85 C 65 65 44 53 29 62",
+        "prompt": "Go down around the left loop and close it.",
+        "sourceFrames": [
+          0,
+          8
+        ]
+      },
+      {
+        "d": "M 74 102 C 77 130 106 139 120 118 C 143 90 119 61 98 58 L 98 49",
+        "prompt": "Lift. From the right join of the loop, go around the middle bowl and up to its head join.",
+        "sourceFrames": [
+          9,
+          14
+        ]
+      },
+      {
+        "d": "M 90 49 L 116 49 C 140 49 147 32 126 19",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          15,
+          18
+        ]
+      },
+      {
+        "d": "M 146 111 C 151 143 183 132 187 110 C 193 86 177 64 153 59",
+        "prompt": "Lift. Make the separate right bowl, coming up and back to its upper hook.",
+        "sourceFrames": [
+          19,
+          24
+        ]
+      }
+    ],
+    "sourceBounds": [
+      4,
+      18,
+      198,
+      142
+    ],
+    "sourceSHA256": "8285f23011987ecd9755148b50ed3f4fe58f4006668f9326b4f9c3e3aa78eda8",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ರ",
+    "id": "ra",
+    "file": "ra",
+    "strokes": [
+      {
+        "d": "M 77 54 C 47 67 47 111 77 125 C 110 142 144 111 133 80 C 128 61 112 49 95 49 C 89 49 82 51 77 54",
+        "prompt": "Go down around the round body and close it.",
+        "sourceFrames": [
+          0,
+          14
+        ]
+      },
+      {
+        "d": "M 53 49 L 112 49 C 138 49 150 33 129 17",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          15,
+          22
+        ]
+      }
+    ],
+    "sourceBounds": [
+      52,
+      15,
+      142,
+      138
+    ],
+    "sourceSHA256": "f575d23c6db8f759853d6af1b1e3498c9cca17e16b0a7534f24b6fa4dfbcfc50",
+    "junctionNote": "Round body meets the head stroke at its upper tangent."
+  },
+  {
+    "name": "ಲ",
+    "id": "la",
+    "file": "la",
+    "strokes": [
+      {
+        "d": "M 89 67 C 89 91 117 91 117 69 C 116 46 93 48 83 67 C 54 109 81 139 114 139 C 161 140 174 91 144 55",
+        "prompt": "Go around the small upper loop, sweep down around the wide bowl, then curve up on the right.",
+        "sourceFrames": [
+          0,
+          13
+        ]
+      }
+    ],
+    "sourceBounds": [
+      51,
+      48,
+      162,
+      145
+    ],
+    "sourceSHA256": "620a7d6fa1ab800111bb84200c852414645cf691391dddfd826af2009ececd69"
+  },
+  {
+    "name": "ವ",
+    "id": "va",
+    "file": "va",
+    "strokes": [
+      {
+        "d": "M 44 111 C 65 104 51 89 38 95 C 14 107 27 133 50 133 C 68 133 77 122 80 113 C 90 139 122 141 129 117 C 144 83 108 61 80 58 L 80 51",
+        "prompt": "Curl around the left spiral, sweep through both bowls, then curve left to the head join.",
+        "sourceFrames": [
+          0,
+          14
+        ]
+      },
+      {
+        "d": "M 21 51 L 112 51 C 137 51 145 35 126 20",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          15,
+          21
+        ]
+      }
+    ],
+    "sourceBounds": [
+      20,
+      19,
+      134,
+      142
+    ],
+    "sourceSHA256": "742d8a0afe3236294864b3f6b35890b571e1be29a4da9e61038342bdb1408d9c",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಶ",
+    "id": "sha",
+    "file": "sha",
+    "strokes": [
+      {
+        "d": "M 98 80 C 85 79 85 69 99 68 C 126 62 150 85 151 108 C 151 134 121 146 98 140 C 72 137 71 114 86 111 C 96 109 116 115 120 97 C 126 79 114 65 101 65 L 101 57",
+        "prompt": "Curl out from the small upper start, sweep around the outside bowl, then loop inward and up to the head join.",
+        "sourceFrames": [
+          0,
+          13
+        ]
+      },
+      {
+        "d": "M 74 57 L 137 57 C 160 57 170 42 148 28",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          19
+        ]
+      }
+    ],
+    "sourceBounds": [
+      73,
+      27,
+      163,
+      150
+    ],
+    "sourceSHA256": "f0b508338ae480b1aee6458256e688e080a191f8b44b5aec2827115a7597420b",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಷ",
+    "id": "ssa",
+    "file": "shha",
+    "strokes": [
+      {
+        "d": "M 91 121 C 112 114 98 99 85 105 C 61 117 73 143 97 143 C 114 143 123 132 126 123 C 137 148 167 152 175 128 C 187 105 170 88 169 83",
+        "prompt": "Curl around the left spiral, sweep through both lower bowls, then curve up on the right.",
+        "sourceFrames": [
+          0,
+          12
+        ]
+      },
+      {
+        "d": "M 128 84 L 128 84.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          13,
+          13
+        ],
+        "sourceWidth": 13
+      },
+      {
+        "d": "M 67 61 L 155 61 C 179 61 189 45 169 29",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          20
+        ]
+      },
+      {
+        "d": "M 142 104 L 178 147",
+        "prompt": "Lift. Draw the diagonal down to the right.",
+        "sourceFrames": [
+          21,
+          24
+        ]
+      }
+    ],
+    "sourceBounds": [
+      66,
+      28,
+      181,
+      155
+    ],
+    "sourceSHA256": "6555662f4f7753aba0cf35e1fab24f1143375f223d265e6fa40da22498308ea4"
+  },
+  {
+    "name": "ಸ",
+    "id": "sa",
+    "file": "sa",
+    "strokes": [
+      {
+        "d": "M 82 141 C 52 131 57 100 77 101 C 99 100 99 135 125 133 C 161 129 150 80 126 66 C 117 60 104 57 97 57 L 97 50",
+        "prompt": "Curl up from the lower left, sweep through the right bowl, then curve left to the head join.",
+        "sourceFrames": [
+          0,
+          13
+        ]
+      },
+      {
+        "d": "M 62 50 L 130 50 C 153 50 162 35 143 23",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          14,
+          22
+        ]
+      },
+      {
+        "d": "M 91 79 L 91 79.4",
+        "prompt": "Lift. Touch down to make the small dot.",
+        "sourceFrames": [
+          23,
+          24
+        ],
+        "sourceWidth": 13
+      }
+    ],
+    "sourceBounds": [
+      61,
+      22,
+      155,
+      147
+    ],
+    "sourceSHA256": "e22c9ddb902a13335a5b4ec8d6dd83b351b697685dff2c6480658b4d5a8c3905",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಹ",
+    "id": "ha",
+    "file": "ha",
+    "strokes": [
+      {
+        "d": "M 98 104 C 100 79 62 86 54 106 C 40 141 86 153 100 129 C 108 117 103 106 116 99 C 145 83 166 105 162 124 C 159 144 123 151 109 128 C 101 115 111 82 81 69 L 81 62",
+        "prompt": "Go around the left loop, continue around the right loop, then curve up to the head join.",
+        "sourceFrames": [
+          0,
+          20
+        ]
+      },
+      {
+        "d": "M 47 62 L 143 62 C 166 62 175 43 153 30",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          21,
+          29
+        ]
+      }
+    ],
+    "sourceBounds": [
+      46,
+      29,
+      168,
+      152
+    ],
+    "sourceSHA256": "60f72976e5db843b65ad069507e519ecadc4d3d364ef88e64c922e3bc16b3dc3",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  },
+  {
+    "name": "ಳ",
+    "id": "lla",
+    "file": "lla",
+    "strokes": [
+      {
+        "d": "M 84 61 C 80 84 108 86 108 65 C 109 41 84 43 77 63 C 63 101 85 108 108 108 C 133 108 145 142 124 143 C 96 147 100 117 114 112 C 144 120 171 97 153 74 C 148 67 140 64 133 64 L 133 56",
+        "prompt": "Go around the small upper loop, sweep down, loop around below, then curve up to the right head join.",
+        "sourceFrames": [
+          0,
+          18
+        ]
+      },
+      {
+        "d": "M 125 56 L 143 56 C 166 56 174 39 152 25",
+        "prompt": "Lift. Go right across the head stroke, then curl up.",
+        "sourceFrames": [
+          19,
+          23
+        ]
+      }
+    ],
+    "sourceBounds": [
+      69,
+      24,
+      163,
+      148
+    ],
+    "sourceSHA256": "4600e00129783f0ea5306b87ae9bfccc3ab2e6d502dfcd9e6dfbc8dec83c1bec",
+    "junctionNote": "Extended the body centreline into the head/middle stroke within the broad source junction; no extra pen lift."
+  }
+]

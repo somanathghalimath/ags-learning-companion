@@ -64,8 +64,8 @@ let hasAnnouncedLetter = false;
 function announceCurrentLetter() {
   const letter = getCharacters()[state.letterIndex];
   hasAnnouncedLetter = true;
-  if (state.activeSetKey === "kannadaSwaras") {
-    pictureSpeech.speak(letter.name, { lang: "kn-IN" });
+  if (getActiveSet().speechLang) {
+    pictureSpeech.speak(letter.name, { lang: getActiveSet().speechLang });
   } else {
     const prefix = state.activeSetKey === "uppercase" ? "Capital "
       : state.activeSetKey === "lowercase" ? "Small " : "";
@@ -169,11 +169,12 @@ function renderLetter() {
 
     letter.strokes.forEach((stroke) => {
       const guidePath = createPath(stroke.d);
-      if (strokeWidth) guidePath.style.strokeWidth = `${strokeWidth}`;
+      const width = stroke.strokeWidth || strokeWidth;
+      if (width) guidePath.style.strokeWidth = `${width}`;
       elements.guideLayer.append(guidePath);
 
       const animatedPath = createPath(stroke.d);
-      if (strokeWidth) animatedPath.style.strokeWidth = `${strokeWidth}`;
+      if (width) animatedPath.style.strokeWidth = `${width}`;
       elements.strokeLayer.append(animatedPath);
       const length = animatedPath.getTotalLength();
       animatedPath.style.strokeDasharray = `${length} ${length}`;

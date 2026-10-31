@@ -4,7 +4,7 @@
  * ADDING CHARACTERS
  * -----------------
  * 1. Choose a set: `uppercase`, `lowercase`, `numbers`, or
- *    `kannadaSwaras`.
+ *    `kannadaSwaras` or `kannadaVyanjanas`.
  * 2. Add a character object to that set's `characters` array.
  * 3. Add each pen stroke in writing order. Every stroke needs an SVG path `d`
  *    value and a short child-friendly `prompt`.
@@ -311,10 +311,22 @@ window.LETTER_LIBRARY = {
     label: "ಕನ್ನಡ ಸ್ವರಗಳು",
     headingLabel: "Kannada swara",
     itemLabel: "Swara",
+    speechLang: "kn-IN",
     strokeWidth: 12,
     startHold: 800,
     linearMotion: true,
     durationByLength: true,
     characters: window.KANNADA_SWARAS
+  },
+  kannadaVyanjanas: {
+    label: "ಕನ್ನಡ ವ್ಯಂಜನಗಳು",
+    headingLabel: "Kannada vyanjana",
+    itemLabel: "Vyanjana",
+    speechLang: "kn-IN",
+    strokeWidth: 12,
+    startHold: 800,
+    linearMotion: true,
+    durationByLength: true,
+    characters: window.KANNADA_VYANJANAS
   }
 };
