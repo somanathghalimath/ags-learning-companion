@@ -7,6 +7,7 @@
   <title>Picture Reading · AG's Learning Companion</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data/picture-reading.js" defer></script>
+  <script src="speech.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -32,6 +33,7 @@
       <figure class="object-card">
         <img id="object-image" alt="">
         <figcaption><h2 id="object-heading" tabindex="-1"></h2></figcaption>
+        <button id="speak-object" class="speak-button" type="button" hidden>Say it again</button>
       </figure>
       <p id="object-position" class="object-position"></p>
       <nav class="object-navigation" aria-label="Browse pictures">

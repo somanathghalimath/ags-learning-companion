@@ -10,3 +10,7 @@ Open `index.html` or select Picture Reading from the Learning Companion home pag
 - `tools/`: offline extraction, cleanup and validation only; never required in the browser.
 
 32 categories are available. All 251 individual pictures and four complete-page illustrations are displayed. The 23 previously flagged items were accepted as-is by the user on 2026-10-28; their approval is recorded in the data and inventory.
+
+Picture names are pronounced when opening a card or using Previous/Next. “Say it again” repeats the current name. Full-page illustrations pronounce their category title and have a “Say the title” button. Speech prefers a browser-provided Indian English (`en-IN`) voice, uses a slower reading pace, and cancels the previous utterance before starting another. Direct links start quietly until a speech or navigation control is used. Devices without speech synthesis keep the visual activity and hide speech buttons.
+
+The accent depends on installed/device voices. When no Indian English voice is listed, the browser receives an `en-IN` language request and chooses its available voice. Browser voices may require a device voice download or network access; the application adds no speech service or audio dependency.

@@ -8,6 +8,33 @@
   const heading = document.querySelector('#reading-heading');
   const objectView = document.querySelector('#object-view');
   const objectHeading = document.querySelector('#object-heading');
+  const speakObject = document.querySelector('#speak-object');
+  let speechActivated = false;
+  let spokenHash = null;
+  function speechText(hash) {
+    const [categoryId, itemId, extra] = hash.replace(/^#/, '').split('/');
+    const category = pictureReading.find(c => c.id === categoryId);
+    if (!category || extra !== undefined) return '';
+    if (category.type === 'full-page' && !itemId) return category.title;
+    return category.items?.find(item => item.id === itemId && ready(item))?.name || '';
+  }
+  function speechButton(text, label) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'speak-button';
+    button.textContent = label;
+    button.hidden = !pictureSpeech.supported;
+    button.addEventListener('click', () => {
+      speechActivated = true;
+      pictureSpeech.speak(text);
+    });
+    return button;
+  }
+  speakObject.hidden = !pictureSpeech.supported;
+  speakObject.addEventListener('click', () => {
+    speechActivated = true;
+    pictureSpeech.speak(objectHeading.textContent);
+  });
   function itemLink(category, item) {
     return `#${category.id}/${item.id}`;
   }
@@ -84,7 +111,7 @@
       original.rel = 'noopener';
       original.textContent = 'Open larger picture ↗';
       original.setAttribute('aria-label', 'Open larger picture in a new tab');
-      pictures.append(viewer, original);
+      pictures.append(viewer, speechButton(category.title, 'Say the title'), original);
     } else {
       const cards = document.createElement('div');
       cards.className = 'picture-grid';
@@ -110,6 +137,25 @@
     }
     if (focus) { heading.focus(); window.scrollTo(0, 0); }
   }
-  window.addEventListener('hashchange', () => render(true));
+  // Speak within the click gesture for browsers that require user activation.
+  document.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href]');
+    if (!link || link.target === '_blank' || link.origin !== location.origin || link.pathname !== location.pathname) return;
+    speechActivated = true;
+    spokenHash = link.hash;
+    const text = speechText(link.hash);
+    if (text) pictureSpeech.speak(text);
+    else pictureSpeech.cancel();
+  });
+  window.addEventListener('hashchange', () => {
+    render(true);
+    if (location.hash !== spokenHash) {
+      const text = speechText(location.hash);
+      if (text && speechActivated) pictureSpeech.speak(text);
+      else pictureSpeech.cancel();
+    }
+    spokenHash = null;
+  });
   render();
 })();

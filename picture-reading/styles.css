@@ -37,4 +37,7 @@ figcaption { margin-top:14px; font-size:clamp(21px,3vw,26px); font-weight:800; l
 .object-position { color:var(--muted); text-align:center; margin:16px 0; }
 .object-navigation { max-width:850px; margin:auto; }
 .object-navigation [aria-disabled="true"] { opacity:.45; cursor:default; }
+.speak-button { min-height:44px; margin:16px 12px 0 0; padding:10px 16px; font:inherit; font-weight:750; color:var(--blue-dark); background:var(--blue-soft); border:1px solid var(--border); border-radius:12px; cursor:pointer; }
+.speak-button:hover { border-color:var(--blue); }
+.speak-button:focus-visible { outline:4px solid #90c3ff; outline-offset:3px; }
 @media(max-width:500px) { .app-shell { width:calc(100% - 24px); padding-top:16px; } .category-grid,.picture-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .category-card { padding:12px; font-size:17px; border-radius:16px; } .category-card img { height:110px; } .picture-card { padding:10px; border-radius:16px; } .picture-card img { height:155px; } figcaption { font-size:20px; } .full-page { padding:4px; border-radius:12px; } }

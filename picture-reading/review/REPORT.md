@@ -2,7 +2,7 @@
 
 ## Delivered
 
-Picture Reading is integrated into the existing launcher and uses the light blue styling of the newer learning modules. It has 32 categories, declarative data, local WebP assets, category/back/home navigation, responsive picture cards, and complete-page viewers. No runtime dependencies, OCR, PDF renderer, network image sources, quizzes, speech or scoring were added.
+Picture Reading is integrated into the existing launcher and uses the light blue styling of the newer learning modules. It has 32 categories, declarative data, local WebP assets, category/back/home navigation, responsive picture cards, and complete-page viewers. No runtime dependencies, OCR, PDF renderer, network image sources, quizzes or scoring were added.
 
 251 object pictures were extracted and **all 251 are displayed**, together with the four full-page illustrations. On 2026-10-28, the user accepted all 23 previously flagged items as-is. Their status is `approved` in the data and inventory, and this approval is preserved by the extraction tool.
 
@@ -82,3 +82,11 @@ After user acceptance, content validation passed with zero pending items. The br
 Picture cards now open a larger object view at `#category-id/item-id`. Previous and Next browse within the selected category, with unavailable steps disabled at the ends. Separate links return to the category grid and Picture Reading home. Direct links, reloads and browser Back are supported.
 
 Headless Chrome checks passed at 360, 768 and 1280 pixels for clickable cards, object captions, Previous/Next, sequence boundaries, both home links, direct object URLs and browser Back across all 28 picture categories. All 251 grid pictures still decode; the four complete-page viewers, existing navigation and seven existing module page-load checks also passed. No horizontal overflow or JavaScript errors were found. The mobile object view was also visually inspected.
+
+## Indian English pronunciation
+
+Object cards and Previous/Next now speak the displayed name using browser speech synthesis. “Say it again” repeats it. The four preserved complete-page illustrations speak their category title, with a “Say the title” control. Speech requests prefer an available `en-IN` voice, request `en-IN` when none is listed, and use a reading rate of 0.85. The current voice list is queried for each request to accommodate delayed loading. New speech cancels earlier speech; returning home, hiding the page or leaving it cancels speech. Direct page loads remain quiet until interaction. Unsupported browsers retain the visual activity and hide speech controls.
+
+The dedicated speech browser checks passed for Indian English voice preference, delayed voice availability, language fallback, pronunciation from cards and Previous/Next, replay, cancellation, browser Back, complete-page titles, quiet direct loads and unsupported browsers. Speech requests were mocked to inspect their text, voice and language; audible output and the actual accent were not verified in this environment. Accent availability depends on the user's browser/device voices.
+
+The existing browser suite also passed across 360, 768 and 1280 pixel widths, covering all 251 cards, full pages, object navigation and existing module smoke checks. JavaScript syntax and whitespace checks passed.
