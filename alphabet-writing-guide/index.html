@@ -9,9 +9,10 @@
       content="A visual guide that teaches children the stroke order for letters, numbers, and Kannada swaras."
     />
     <title>Write With Me</title>
-    <link rel="stylesheet" href="styles.css?v=home-nav-5" />
-    <script src="letters.js?v=kannada-polished-4" defer></script>
-    <script src="app.js?v=kannada-polished-4" defer></script>
+    <link rel="stylesheet" href="styles.css?v=kannada-strokes-6" />
+    <script src="kannada.js?v=stroke-research-6" defer></script>
+    <script src="letters.js?v=kannada-strokes-6" defer></script>
+    <script src="app.js?v=kannada-strokes-6" defer></script>
   </head>
   <body>
     <main class="app-shell">
@@ -65,6 +66,8 @@
             </g>
           </svg>
         </div>
+
+        <p id="strokeInstruction" class="stroke-instruction" aria-live="polite" aria-atomic="true" hidden></p>
 
         <div class="playback-controls" aria-label="Playback controls">
           <button class="control-button primary" id="playButton" type="button">

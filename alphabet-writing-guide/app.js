@@ -25,7 +25,8 @@ const elements = {
   previousButton: document.querySelector("#previousButton"),
   nextButton: document.querySelector("#nextButton"),
   setSelect: document.querySelector("#setSelect"),
-  speedSelect: document.querySelector("#speedSelect")
+  speedSelect: document.querySelector("#speedSelect"),
+  strokeInstruction: document.querySelector("#strokeInstruction")
 };
 
 const state = {
@@ -172,6 +173,7 @@ function renderLetter() {
   state.phaseElapsed = 0;
   hideStartDot();
   hidePencil();
+  updateStrokeInstruction();
   updateLetterLabels();
   updateControls();
 }
@@ -206,6 +208,26 @@ function hideStartDot() {
   elements.startDot.classList.remove("visible");
 }
 
+function updateStrokeInstruction() {
+  const set = getActiveSet();
+  elements.strokeInstruction.hidden = !set.startHold;
+  if (!set.startHold) return;
+  const letter = getCharacters()[state.letterIndex];
+  const step = `Stroke ${state.strokeIndex + 1} of ${letter.strokes.length}`;
+  if (state.phase === "preparing") {
+    elements.strokeInstruction.textContent = `${step} · ${state.strokeIndex ? "Lift your pencil. " : ""}Start at the green dot.`;
+  } else if (state.phase === "complete") {
+    elements.strokeInstruction.textContent = letter.movementNote;
+  } else {
+    elements.strokeInstruction.textContent = `${step} · ${letter.strokes[state.strokeIndex].prompt}`;
+  }
+}
+
+function beginLetter() {
+  if (getActiveSet().startHold) prepareNextStroke();
+  else startCurrentStroke();
+}
+
 function positionPencil(path, distance) {
   const pathLength = path.getTotalLength();
   const clampedDistance = Math.max(0, Math.min(distance, pathLength));
@@ -232,6 +254,7 @@ function startCurrentStroke() {
   state.phaseStartedAt = performance.now();
   showStartDot(path);
   positionPencil(path, 0);
+  updateStrokeInstruction();
   updateControls();
   requestTick();
 }
@@ -255,14 +278,14 @@ function updateDrawing(now) {
   const elapsed = state.phaseElapsed + (now - state.phaseStartedAt);
   const length = state.strokeLengths[state.strokeIndex];
   const durationScale = getActiveSet().durationByLength
-    ? Math.max(0.7, Math.min(length / 220, 3.5))
+    ? (getActiveSet().linearMotion ? Math.max(0.35, length / 220) : Math.max(0.7, Math.min(length / 220, 3.5)))
     : 1;
   const progress = Math.min(elapsed / (settings.drawDuration * durationScale), 1);
-  const easedProgress = 1 - Math.pow(1 - progress, 2);
+  const easedProgress = getActiveSet().linearMotion ? progress : 1 - Math.pow(1 - progress, 2);
   const path = state.strokeElements[state.strokeIndex];
   state.strokeElements[state.strokeIndex].style.strokeDashoffset = `${length * (1 - easedProgress)}`;
   positionPencil(path, length * easedProgress);
-  if (progress > 0.04) hideStartDot();
+  if (getActiveSet().startHold ? elapsed >= 300 : progress > 0.04) hideStartDot();
 
   if (progress >= 1) {
     const completedPath = state.strokeElements[state.strokeIndex];
@@ -277,6 +300,7 @@ function updateDrawing(now) {
         state.revealElement.removeAttribute("mask");
       }
       state.phase = "complete";
+      updateStrokeInstruction();
       updateControls();
     } else {
       state.strokeIndex += 1;
@@ -289,13 +313,18 @@ function prepareNextStroke() {
   state.phase = "preparing";
   state.phaseStartedAt = performance.now();
   state.phaseElapsed = 0;
+  if (getActiveSet().startHold) {
+    showStartDot(state.strokeElements[state.strokeIndex]);
+    hidePencil();
+    updateStrokeInstruction();
+  }
   updateControls();
   requestTick();
 }
 
 function updatePreparing(now) {
   const elapsed = state.phaseElapsed + (now - state.phaseStartedAt);
-  if (elapsed >= NEXT_STROKE_DELAY) startCurrentStroke();
+  if (elapsed >= (getActiveSet().startHold || NEXT_STROKE_DELAY)) startCurrentStroke();
 }
 
 function requestTick() {
@@ -318,8 +347,10 @@ function pause() {
   state.phaseBeforePause = state.phase;
   state.phase = "paused";
   stopAnimation();
-  hideStartDot();
-  hidePencil();
+  if (!getActiveSet().startHold) {
+    hideStartDot();
+    hidePencil();
+  }
   updateControls();
 }
 
@@ -332,6 +363,8 @@ function play() {
       const length = state.strokeLengths[state.strokeIndex];
       const offset = Number.parseFloat(state.strokeElements[state.strokeIndex].style.strokeDashoffset);
       positionPencil(state.strokeElements[state.strokeIndex], length - offset);
+    } else if (getActiveSet().startHold) {
+      showStartDot(state.strokeElements[state.strokeIndex]);
     }
     updateControls();
     requestTick();
@@ -339,7 +372,7 @@ function play() {
   }
 
   if (state.phase === "complete") resetStrokes();
-  startCurrentStroke();
+  beginLetter();
 }
 
 function resetStrokes() {
@@ -363,7 +396,7 @@ function replay() {
   resetStrokes();
   state.phase = "ready";
   updateControls();
-  startCurrentStroke();
+  beginLetter();
 }
 
 function changeLetter(direction) {
@@ -371,7 +404,7 @@ function changeLetter(direction) {
   if (nextIndex < 0 || nextIndex >= getCharacters().length) return;
   state.letterIndex = nextIndex;
   renderLetter();
-  startCurrentStroke();
+  beginLetter();
 }
 
 function changeSet(setKey) {
@@ -379,7 +412,7 @@ function changeSet(setKey) {
   state.activeSetKey = setKey;
   state.letterIndex = 0;
   renderLetter();
-  startCurrentStroke();
+  beginLetter();
 }
 
 elements.playButton.addEventListener("click", play);
@@ -399,4 +432,4 @@ elements.speedSelect.addEventListener("change", () => {
 
 populateSetSelect();
 renderLetter();
-startCurrentStroke();
+beginLetter();

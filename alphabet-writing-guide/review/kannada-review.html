@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kannada handwriting · Shape and stroke review</title>
+<script src="../kannada.js" defer></script>
+<style>
+body{font:17px/1.5 system-ui,sans-serif;background:#f3f8fc;color:#17324d;margin:24px auto;padding:0 16px;max-width:1200px}h1{font-size:30px}a{color:#155dbb}section{background:white;border:1px solid #dbe7f0;border-radius:16px;margin:24px 0;padding:18px}.steps{display:flex;flex-wrap:wrap;gap:12px}figure{margin:0;width:230px;max-width:100%}svg{width:100%;height:auto;border:1px solid #dbe7f0;border-radius:12px}figcaption{font-size:14px}h2{font-family:'Noto Sans Kannada',system-ui;font-size:30px;margin:4px 0}button{font:inherit;min-height:44px;border:1px solid #dbe7f0;border-radius:12px;background:#eaf3ff;color:#155dbb;padding:8px 14px;margin:12px 0;cursor:pointer}.overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.overview a{text-align:center;text-decoration:none}.overview svg{background:white;display:block}p{max-width:90ch}button:focus-visible,a:focus-visible{outline:3px solid #2678e9;outline-offset:3px}
+</style>
+<h1>Kannada handwriting: shape and stroke review</h1>
+<p>15 characters. Each numbered panel represents one uninterrupted pen-down movement. Green dots mark starts; orange arrows show travel direction. Blue lines are earlier strokes, green is the current stroke, grey is still to come. <strong>This is a source-grounded revision, not a Kannada teacher certification.</strong></p>
+<p><a href="../">Open Write With Me</a> · <a href="KANNADA-SOURCES.md">Research, provenance and differences</a> · <a href="before-after.png">Before / after comparison</a></p>
+<div class="overview" id="overview"></div><main id="review"></main>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+const ns='http://www.w3.org/2000/svg';let running=null;
+function el(name,attrs={}){const n=document.createElementNS(ns,name);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;}
+function svgFor(c,step){const svg=el('svg',{viewBox:'35 50 330 300',role:'img','aria-label':c.name+(step===undefined?' completed form':` stroke ${step+1}`)});for(let i=0;i<c.strokes.length;i++)svg.append(el('path',{d:c.strokes[i].d,fill:'none',stroke:step===undefined?'#2678e9':i<step?'#2678e9':i===step?'#21846e':'#dbe7f0','stroke-width':12,'stroke-linecap':'round','stroke-linejoin':'round'}));return svg;}
+for(const c of KANNADA_SWARAS){
+ const tile=document.createElement('a');tile.href='#'+c.id;tile.append(svgFor(c),document.createTextNode(c.name));document.querySelector('#overview').append(tile);
+ const section=document.createElement('section');section.id=c.id;const title=document.createElement('h2');title.textContent=c.name;section.append(title);
+ const note=document.createElement('p');note.textContent=`${c.strokes.length} pen-down ${c.strokes.length===1?'stroke':'strokes'}. ${c.movementNote}`;section.append(note);
+ const motion=svgFor(c);motion.style.maxWidth='330px';section.append(motion);
+ const replay=document.createElement('button');replay.textContent='Watch stroke order';replay.type='button';section.append(document.createElement('br'),replay);
+ replay.addEventListener('click',async()=>{
+  if(running){running.abort();}const controller=new AbortController();running=controller;
+  const paths=[...motion.querySelectorAll('path')];paths.forEach(p=>{const l=p.getTotalLength();p.style.strokeDasharray=l;p.style.strokeDashoffset=l;});
+  for(const p of paths){if(controller.signal.aborted)break;const l=p.getTotalLength();const animation=p.animate([{strokeDashoffset:l},{strokeDashoffset:0}],{duration:Math.max(400,l/220*1250),fill:'forwards',easing:'linear'});controller.signal.addEventListener('abort',()=>animation.cancel(),{once:true});try{await animation.finished;}catch{break;}await new Promise(r=>setTimeout(r,800));}
+ });
+ const steps=document.createElement('div');steps.className='steps';section.append(steps);
+ c.strokes.forEach((stroke,index)=>{
+  const figure=document.createElement('figure');const svg=svgFor(c,index);figure.append(svg);steps.append(figure);
+  const path=svg.querySelectorAll('path')[index],len=path.getTotalLength(),start=path.getPointAtLength(0);
+  svg.append(el('circle',{cx:start.x,cy:start.y,r:10,fill:'#21846e',stroke:'white','stroke-width':2}));
+  const number=el('text',{x:start.x,y:start.y+4,'text-anchor':'middle','font-size':11,fill:'white'});number.textContent=index+1;svg.append(number);
+  for(const fraction of [.18,.48,.78]){const distance=len*fraction,p=path.getPointAtLength(distance),before=path.getPointAtLength(Math.max(0,distance-3)),after=path.getPointAtLength(Math.min(len,distance+3)),angle=Math.atan2(after.y-before.y,after.x-before.x)*180/Math.PI;svg.append(el('path',{d:'M -6 -5 L 0 0 L -6 5',fill:'none',stroke:'#b14d12','stroke-width':3,transform:`translate(${p.x} ${p.y}) rotate(${angle})`}));}
+  const caption=document.createElement('figcaption');caption.textContent=`${index+1}. ${stroke.prompt}`;figure.append(caption);
+ });
+ const source=document.createElement('a');source.href=c.source;source.textContent='Movement reference: original handwriting animation';section.append(source);document.querySelector('#review').append(section);
+}
+});
+</script>
+</html>
