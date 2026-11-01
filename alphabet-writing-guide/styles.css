@@ -215,6 +215,14 @@ h1 {
   stroke-linejoin: round;
 }
 
+.notebook-lines line {
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+.notebook-lines .outer-line { stroke: #d97987; }
+.notebook-lines .inner-line { stroke: #82aed8; }
+
 .guide-layer path {
   stroke: var(--guide);
   stroke-width: 7;

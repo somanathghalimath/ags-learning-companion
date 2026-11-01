@@ -12,6 +12,7 @@ const SPEEDS = {
 
 const elements = {
   svgDefs: document.querySelector("#svgDefs"),
+  notebookLayer: document.querySelector("#notebookLayer"),
   guideLayer: document.querySelector("#guideLayer"),
   strokeLayer: document.querySelector("#strokeLayer"),
   startDot: document.querySelector("#startDot"),
@@ -145,6 +146,22 @@ function renderLetter() {
   const characters = getCharacters();
   state.letterIndex = Math.min(state.letterIndex, characters.length - 1);
   const letter = characters[state.letterIndex];
+  elements.notebookLayer.replaceChildren();
+  if (activeSet.notebookGuides) {
+    // Top, middle, baseline, descender line: three equal notebook spaces.
+    [70, 160, 250, 340].forEach((y, index) => {
+      const line = document.createElementNS(SVG_NS, "line");
+      line.setAttribute("x1", "16");
+      line.setAttribute("x2", "384");
+      line.setAttribute("y1", y);
+      line.setAttribute("y2", y);
+      line.setAttribute("class", index === 0 || index === 3 ? "outer-line" : "inner-line");
+      elements.notebookLayer.append(line);
+    });
+  }
+  document.querySelector("#svgDescription").textContent = activeSet.notebookGuides
+    ? "Four notebook lines: red at the top and bottom, blue in the middle. The letter forms one stroke at a time."
+    : "The strokes appear one at a time in writing order.";
   elements.svgDefs.replaceChildren();
   elements.guideLayer.replaceChildren();
   elements.strokeLayer.replaceChildren();

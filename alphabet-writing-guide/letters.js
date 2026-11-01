@@ -35,214 +35,214 @@ function character(name, strokes) {
 
 const UPPERCASE = [
   character("A", [
-    stroke("M 200 70 L 105 320", "Start at the top and slide down left."),
-    stroke("M 200 70 L 295 320", "Start at the top and slide down right."),
-    stroke("M 145 220 L 255 220", "Draw a line across the middle.")
+    stroke("M 200.00 70.00 L 133.50 250.00", "Start at the top and slide down left."),
+    stroke("M 200.00 70.00 L 266.50 250.00", "Start at the top and slide down right."),
+    stroke("M 161.50 178.00 L 238.50 178.00", "Draw a line across the middle.")
   ]),
   character("B", [
-    stroke("M 125 70 L 125 330", "Start at the top and draw straight down."),
-    stroke("M 125 70 L 210 70 C 285 70 285 195 210 195 L 125 195", "Go right and around to the middle."),
-    stroke("M 125 195 L 215 195 C 300 195 300 330 215 330 L 125 330", "Go right and around to the bottom.")
+    stroke("M 147.50 70.00 L 147.50 250.00", "Start at the top and draw straight down."),
+    stroke("M 147.50 70.00 L 207.00 70.00 C 259.50 70.00 259.50 156.54 207.00 156.54 L 147.50 156.54", "Go right and around to the middle."),
+    stroke("M 147.50 156.54 L 210.50 156.54 C 270.00 156.54 270.00 250.00 210.50 250.00 L 147.50 250.00", "Go right and around to the bottom.")
   ]),
   character("C", [
-    stroke("M 290 105 C 255 65 185 62 135 100 C 65 154 72 270 143 314 C 194 346 258 334 292 296", "Start at the top right and curve all the way around.")
+    stroke("M 263.00 92.10 C 238.50 64.33 189.50 62.24 154.50 88.63 C 105.50 126.12 110.40 206.65 160.10 237.20 C 195.80 259.42 240.60 251.09 264.40 224.70", "Start at the top right and curve all the way around.")
   ]),
   character("D", [
-    stroke("M 125 70 L 125 330", "Draw a straight line down."),
-    stroke("M 125 70 L 190 70 C 305 70 305 330 190 330 L 125 330", "Go right and curve around to the bottom.")
+    stroke("M 147.50 70.00 L 147.50 250.00", "Draw a straight line down."),
+    stroke("M 147.50 70.00 L 193.00 70.00 C 273.50 70.00 273.50 250.00 193.00 250.00 L 147.50 250.00", "Go right and curve around to the bottom.")
   ]),
   character("E", [
-    stroke("M 125 70 L 125 330", "Draw a straight line down."),
-    stroke("M 125 70 L 295 70", "Draw the top line across."),
-    stroke("M 125 200 L 260 200", "Draw the middle line across."),
-    stroke("M 125 330 L 295 330", "Draw the bottom line across.")
+    stroke("M 147.50 70.00 L 147.50 250.00", "Draw a straight line down."),
+    stroke("M 147.50 70.00 L 266.50 70.00", "Draw the top line across."),
+    stroke("M 147.50 160.00 L 242.00 160.00", "Draw the middle line across."),
+    stroke("M 147.50 250.00 L 266.50 250.00", "Draw the bottom line across.")
   ]),
   character("F", [
-    stroke("M 125 70 L 125 330", "Draw a straight line down."),
-    stroke("M 125 70 L 295 70", "Draw the top line across."),
-    stroke("M 125 200 L 260 200", "Draw the middle line across.")
+    stroke("M 147.50 70.00 L 147.50 250.00", "Draw a straight line down."),
+    stroke("M 147.50 70.00 L 266.50 70.00", "Draw the top line across."),
+    stroke("M 147.50 160.00 L 242.00 160.00", "Draw the middle line across.")
   ]),
   character("G", [
-    stroke("M 295 108 C 255 65 180 60 130 105 C 68 160 78 275 145 315 C 205 350 290 320 295 250", "Curve from the top right around to the lower right."),
-    stroke("M 295 220 L 225 220", "Draw a short line inward.")
+    stroke("M 266.50 94.28 C 238.50 64.08 186.00 60.56 151.00 92.18 C 107.60 130.81 114.60 211.60 161.50 239.70 C 203.50 264.29 263.00 243.21 266.50 194.04", "Curve from the top right around to the lower right."),
+    stroke("M 266.50 194.04 L 266.50 160.00 L 217.50 160.00", "Go up a little, then draw a short line inward.")
   ]),
   character("H", [
-    stroke("M 115 70 L 115 330", "Draw the left line down."),
-    stroke("M 285 70 L 285 330", "Draw the right line down."),
-    stroke("M 115 200 L 285 200", "Join the lines across the middle.")
+    stroke("M 140.50 70.00 L 140.50 250.00", "Draw the left line down."),
+    stroke("M 259.50 70.00 L 259.50 250.00", "Draw the right line down."),
+    stroke("M 140.50 160.00 L 259.50 160.00", "Join the lines across the middle.")
   ]),
   character("I", [
-    stroke("M 115 70 L 285 70", "Draw the top line across."),
-    stroke("M 200 70 L 200 330", "Draw a straight line down the middle."),
-    stroke("M 115 330 L 285 330", "Draw the bottom line across.")
+    stroke("M 140.50 70.00 L 259.50 70.00", "Draw the top line across."),
+    stroke("M 200.00 70.00 L 200.00 250.00", "Draw a straight line down the middle."),
+    stroke("M 140.50 250.00 L 259.50 250.00", "Draw the bottom line across.")
   ]),
   character("J", [
-    stroke("M 105 70 L 295 70", "Draw the top line across."),
-    stroke("M 255 70 L 255 255 C 255 330 150 355 105 290", "Draw down and curve to the left.")
+    stroke("M 133.50 70.00 L 266.50 70.00", "Draw the top line across."),
+    stroke("M 238.50 70.00 L 238.50 199.39 C 238.50 251.84 165.00 269.33 133.50 223.87", "Draw down and curve to the left.")
   ]),
   character("K", [
-    stroke("M 120 70 L 120 330", "Draw a straight line down."),
-    stroke("M 290 70 L 120 215", "Slant down to the middle."),
-    stroke("M 180 165 L 300 330", "Slant down to the bottom right.")
+    stroke("M 144.00 70.00 L 144.00 250.00", "Draw a straight line down."),
+    stroke("M 263.00 70.00 L 144.00 170.38", "Slant down to the middle."),
+    stroke("M 186.00 135.77 L 270.00 250.00", "Slant down to the bottom right.")
   ]),
   character("L", [
-    stroke("M 125 70 L 125 330 L 295 330", "Draw down, then across the bottom.")
+    stroke("M 147.50 70.00 L 147.50 250.00 L 266.50 250.00", "Draw down, then across the bottom.")
   ]),
   character("M", [
-    stroke("M 90 330 L 90 70", "Draw the left line up."),
-    stroke("M 90 70 L 200 225", "Slant down to the middle."),
-    stroke("M 200 225 L 310 70", "Slant up to the right."),
-    stroke("M 310 70 L 310 330", "Draw the right line down.")
+    stroke("M 123.00 250.00 L 123.00 70.00", "Draw the left line up."),
+    stroke("M 123.00 70.00 L 200.00 177.31", "Slant down to the middle."),
+    stroke("M 200.00 177.31 L 277.00 70.00", "Slant up to the right."),
+    stroke("M 277.00 70.00 L 277.00 250.00", "Draw the right line down.")
   ]),
   character("N", [
-    stroke("M 105 330 L 105 70", "Draw the left line up."),
-    stroke("M 105 70 L 295 330", "Slant down to the bottom right."),
-    stroke("M 295 330 L 295 70", "Draw the right line up.")
+    stroke("M 133.50 250.00 L 133.50 70.00", "Draw the left line up."),
+    stroke("M 133.50 70.00 L 266.50 250.00", "Slant down to the bottom right."),
+    stroke("M 266.50 250.00 L 266.50 70.00", "Draw the right line up.")
   ]),
   character("O", [
-    stroke("M 200 70 C 120 70 80 120 80 200 C 80 285 125 330 200 330 C 275 330 320 285 320 200 C 320 115 275 70 200 70", "Start at the top and go all the way around.")
+    stroke("M 200.00 70.00 C 144.00 70.00 116.00 104.62 116.00 160.00 C 116.00 218.85 147.50 250.00 200.00 250.00 C 252.50 250.00 284.00 218.85 284.00 160.00 C 284.00 101.15 252.50 70.00 200.00 70.00", "Start at the top and go all the way around.")
   ]),
   character("P", [
-    stroke("M 120 70 L 120 330", "Draw a straight line down."),
-    stroke("M 120 70 L 210 70 C 300 70 300 205 210 205 L 120 205", "Go right and curve back to the middle.")
+    stroke("M 144.00 70.00 L 144.00 250.00", "Draw a straight line down."),
+    stroke("M 144.00 70.00 L 207.00 70.00 C 270.00 70.00 270.00 163.46 207.00 163.46 L 144.00 163.46", "Go right and curve back to the middle.")
   ]),
   character("Q", [
-    stroke("M 195 70 C 115 70 78 120 78 200 C 78 285 120 330 195 330 C 270 330 315 285 315 200 C 315 115 270 70 195 70", "Start at the top and go all the way around."),
-    stroke("M 225 265 L 315 345", "Add a short slanting tail.")
+    stroke("M 196.50 70.00 C 140.50 70.00 114.60 104.62 114.60 160.00 C 114.60 218.85 144.00 250.00 196.50 250.00 C 249.00 250.00 280.50 218.85 280.50 160.00 C 280.50 101.15 249.00 70.00 196.50 70.00", "Start at the top and go all the way around."),
+    stroke("M 217.50 205.00 L 280.50 260.38", "Add a short slanting tail.")
   ]),
   character("R", [
-    stroke("M 120 70 L 120 330", "Draw a straight line down."),
-    stroke("M 120 70 L 210 70 C 300 70 300 205 210 205 L 120 205", "Go right and curve back to the middle."),
-    stroke("M 205 205 L 305 330", "Slant down to the bottom right.")
+    stroke("M 144.00 70.00 L 144.00 250.00", "Draw a straight line down."),
+    stroke("M 144.00 70.00 L 207.00 70.00 C 270.00 70.00 270.00 163.46 207.00 163.46 L 144.00 163.46", "Go right and curve back to the middle."),
+    stroke("M 203.50 163.46 L 273.50 250.00", "Slant down to the bottom right.")
   ]),
   character("S", [
-    stroke("M 290 105 C 250 60 145 65 110 120 C 75 175 125 200 200 205 C 280 210 315 250 280 300 C 245 350 135 340 100 295", "Curve left, then right, then left again.")
+    stroke("M 263.00 91.13 C 235.00 59.82 161.50 63.30 137.00 101.57 C 112.50 139.83 147.50 157.23 200.00 160.71 C 256.00 164.18 280.50 192.01 256.00 226.80 C 231.50 261.59 154.50 254.63 130.00 223.32", "Curve left, then right, then left again.")
   ]),
   character("T", [
-    stroke("M 90 70 L 310 70", "Draw the top line across."),
-    stroke("M 200 70 L 200 330", "Draw a straight line down the middle.")
+    stroke("M 123.00 70.00 L 277.00 70.00", "Draw the top line across."),
+    stroke("M 200.00 70.00 L 200.00 250.00", "Draw a straight line down the middle.")
   ]),
   character("U", [
-    stroke("M 95 70 L 95 235 C 95 365 305 365 305 235 L 305 70", "Draw down, curve around, and go back up.")
+    stroke("M 126.50 70.00 L 126.50 183.14 C 126.50 272.29 273.50 272.29 273.50 183.14 L 273.50 70.00", "Draw down, curve around, and go back up.")
   ]),
   character("V", [
-    stroke("M 90 70 L 200 330 L 310 70", "Slant down, then slant back up.")
+    stroke("M 123.00 70.00 L 200.00 250.00 L 277.00 70.00", "Slant down, then slant back up.")
   ]),
   character("W", [
-    stroke("M 65 70 L 125 330 L 200 160 L 275 330 L 335 70", "Go down, up, down, and up again.")
+    stroke("M 105.50 70.00 L 147.50 250.00 L 200.00 132.31 L 252.50 250.00 L 294.50 70.00", "Go down, up, down, and up again.")
   ]),
   character("X", [
-    stroke("M 95 70 L 305 330", "Slant down to the bottom right."),
-    stroke("M 305 70 L 95 330", "Slant down to the bottom left.")
+    stroke("M 126.50 70.00 L 273.50 250.00", "Slant down to the bottom right."),
+    stroke("M 273.50 70.00 L 126.50 250.00", "Slant down to the bottom left.")
   ]),
   character("Y", [
-    stroke("M 90 70 L 200 205", "Slant down to the middle."),
-    stroke("M 310 70 L 200 205", "Slant down to the middle from the right."),
-    stroke("M 200 205 L 200 330", "Draw straight down.")
+    stroke("M 123.00 70.00 L 200.00 163.46", "Slant down to the middle."),
+    stroke("M 277.00 70.00 L 200.00 163.46", "Slant down to the middle from the right."),
+    stroke("M 200.00 163.46 L 200.00 250.00", "Draw straight down.")
   ]),
   character("Z", [
-    stroke("M 90 70 L 310 70 L 90 330 L 310 330", "Go across, slant down, and go across again.")
+    stroke("M 123.00 70.00 L 277.00 70.00 L 123.00 250.00 L 277.00 250.00", "Go across, slant down, and go across again.")
   ])
 ];
 
 const LOWERCASE = [
   character("a", [
-    stroke("M 200 170 C 150 170 120 198 120 235 C 120 275 152 300 198 300 C 238 300 260 272 260 235 C 260 198 235 170 200 170", "Make a small round body."),
-    stroke("M 260 175 L 260 300", "Draw the short line down.")
+    stroke("M 200.00 160.00 C 165.00 160.00 144.00 179.38 144.00 205.00 C 144.00 232.69 166.40 250.00 198.60 250.00 C 226.60 250.00 242.00 230.62 242.00 205.00 C 242.00 179.38 224.50 160.00 200.00 160.00", "Make a small round body."),
+    stroke("M 242.00 160.00 L 242.00 250.00", "Draw the short line down.")
   ]),
   character("b", [
-    stroke("M 145 80 L 145 300", "Draw a tall line down."),
-    stroke("M 145 190 C 165 165 225 160 255 200 C 290 247 255 300 200 300 C 170 300 148 278 145 248", "Curve around to make the belly.")
+    stroke("M 161.50 70.00 L 161.50 250.00", "Draw a tall line down."),
+    stroke("M 161.50 173.50 C 175.50 156.11 217.50 152.64 238.50 180.45 C 263.00 213.14 238.50 250.00 200.00 250.00 C 179.00 250.00 163.60 234.70 161.50 213.84", "Curve around to make the belly.")
   ]),
   character("c", [
-    stroke("M 270 195 C 240 160 175 158 140 198 C 102 244 132 300 195 300 C 230 300 255 285 272 263", "Start at the top and curve around.")
+    stroke("M 249.00 178.21 C 228.00 154.27 182.50 152.91 158.00 180.26 C 131.40 211.71 152.40 250.00 196.50 250.00 C 221.00 250.00 238.50 239.74 250.40 224.70", "Start at the top and curve around.")
   ]),
   character("d", [
-    stroke("M 235 80 L 235 300", "Draw a tall line down."),
-    stroke("M 235 190 C 212 165 158 160 130 200 C 98 247 132 300 185 300 C 215 300 235 278 235 248", "Curve around to make the body.")
+    stroke("M 224.50 70.00 L 224.50 250.00", "Draw a tall line down."),
+    stroke("M 224.50 173.50 C 208.40 156.11 170.60 152.64 151.00 180.45 C 128.60 213.14 152.40 250.00 189.50 250.00 C 210.50 250.00 224.50 234.70 224.50 213.84", "Curve around to make the body.")
   ]),
   character("e", [
-    stroke("M 145 225 L 265 225 C 265 185 232 160 195 160 C 150 160 120 193 120 235 C 120 278 154 303 202 300 C 230 298 252 286 270 268", "Go across, then curve around.")
+    stroke("M 161.50 201.71 L 245.50 201.71 C 245.50 176.04 222.40 160.00 196.50 160.00 C 165.00 160.00 144.00 181.18 144.00 208.13 C 144.00 235.73 167.80 251.77 201.40 249.84 C 221.00 248.56 236.40 240.86 249.00 229.31", "Go across, then curve around.")
   ]),
   character("f", [
-    stroke("M 245 95 C 215 75 175 88 175 132 L 175 300", "Curve at the top and draw down."),
-    stroke("M 130 185 L 235 185", "Cross the middle.")
+    stroke("M 231.50 77.69 C 210.50 60.88 182.50 71.80 182.50 108.79 L 182.50 250.00", "Curve at the top and draw down."),
+    stroke("M 151.00 160.00 L 224.50 160.00", "Cross the middle.")
   ]),
   character("g", [
-    stroke("M 200 170 C 150 170 120 198 120 235 C 120 275 152 300 198 300 C 238 300 260 272 260 235 C 260 198 235 170 200 170", "Make a small round body."),
-    stroke("M 260 175 L 260 318 C 260 350 220 365 175 355 C 158 350 145 342 135 330", "Draw the tail down and curve left.")
+    stroke("M 200.00 160.00 C 165.00 160.00 144.00 179.38 144.00 205.00 C 144.00 232.69 166.40 250.00 198.60 250.00 C 226.60 250.00 242.00 230.62 242.00 205.00 C 242.00 179.38 224.50 160.00 200.00 160.00", "Make a small round body."),
+    stroke("M 242.00 160.00 L 242.00 295.00 C 242.00 325.00 228.00 340.00 210.50 340.00 C 189.50 340.00 168.50 325.00 161.50 310.00", "Draw the tail down and curve left.")
   ]),
   character("h", [
-    stroke("M 140 80 L 140 300", "Draw a tall line down."),
-    stroke("M 140 205 C 160 175 215 158 245 192 C 260 210 260 235 260 300", "Go up and around for the hump.")
+    stroke("M 158.00 70.00 L 158.00 250.00", "Draw a tall line down."),
+    stroke("M 158.00 182.55 C 172.00 161.25 210.50 149.18 231.50 173.32 C 242.00 186.10 242.00 203.85 242.00 250.00", "Go up and around for the hump.")
   ]),
   character("i", [
-    stroke("M 200 170 L 200 300", "Draw a short line down."),
-    stroke("M 200 110 L 200 112", "Add the dot.")
+    stroke("M 200.00 160.00 L 200.00 250.00", "Draw a short line down."),
+    stroke("M 200.00 115.00 L 200.00 117.00", "Add the dot.")
   ]),
   character("j", [
-    stroke("M 220 170 L 220 310 C 220 350 175 365 145 335", "Draw down and hook left."),
-    stroke("M 220 110 L 220 112", "Add the dot.")
+    stroke("M 214.00 160.00 L 214.00 295.00 C 214.00 325.00 203.50 340.00 186.00 340.00 C 175.50 340.00 165.00 330.00 161.50 320.00", "Draw down and hook left."),
+    stroke("M 214.00 115.00 L 214.00 117.00", "Add the dot.")
   ]),
   character("k", [
-    stroke("M 145 80 L 145 300", "Draw a tall line down."),
-    stroke("M 255 170 L 145 245", "Slant down to the middle."),
-    stroke("M 180 220 L 265 300", "Slant down to the bottom.")
+    stroke("M 161.50 70.00 L 161.50 250.00", "Draw a tall line down."),
+    stroke("M 238.50 160.00 L 161.50 211.92", "Slant down to the middle."),
+    stroke("M 186.00 194.62 L 245.50 250.00", "Slant down to the bottom.")
   ]),
   character("l", [
-    stroke("M 200 80 L 200 300", "Draw a tall line down.")
+    stroke("M 200.00 70.00 L 200.00 250.00", "Draw a tall line down.")
   ]),
   character("m", [
-    stroke("M 95 170 L 95 300", "Draw a short line down."),
-    stroke("M 95 210 C 115 175 165 160 185 198 C 195 215 195 240 195 300", "Make the first hump."),
-    stroke("M 195 210 C 215 175 265 160 285 198 C 295 215 295 240 295 300", "Make the second hump.")
+    stroke("M 126.50 160.00 L 126.50 250.00", "Draw a short line down."),
+    stroke("M 126.50 184.83 C 140.50 159.48 175.50 148.62 189.50 176.14 C 196.50 188.45 196.50 206.55 196.50 250.00", "Make the first hump."),
+    stroke("M 196.50 184.83 C 210.50 159.48 245.50 148.62 259.50 176.14 C 266.50 188.45 266.50 206.55 266.50 250.00", "Make the second hump.")
   ]),
   character("n", [
-    stroke("M 130 170 L 130 300", "Draw a short line down."),
-    stroke("M 130 210 C 155 175 215 160 245 198 C 260 218 260 242 260 300", "Make one hump.")
+    stroke("M 151.00 160.00 L 151.00 250.00", "Draw a short line down."),
+    stroke("M 151.00 184.83 C 168.50 159.48 210.50 148.62 231.50 176.14 C 242.00 190.62 242.00 208.00 242.00 250.00", "Make one hump.")
   ]),
   character("o", [
-    stroke("M 200 160 C 150 160 120 190 120 230 C 120 275 152 300 200 300 C 248 300 280 275 280 230 C 280 188 250 160 200 160", "Go all the way around.")
+    stroke("M 200.00 160.00 C 165.00 160.00 144.00 179.29 144.00 205.00 C 144.00 233.93 166.40 250.00 200.00 250.00 C 233.60 250.00 256.00 233.93 256.00 205.00 C 256.00 178.00 235.00 160.00 200.00 160.00", "Go all the way around.")
   ]),
   character("p", [
-    stroke("M 145 170 L 145 360", "Draw down below the line."),
-    stroke("M 145 190 C 165 165 225 160 255 200 C 290 247 255 300 200 300 C 170 300 148 278 145 248", "Curve around to make the belly.")
+    stroke("M 161.50 160.00 L 161.50 340.00", "Draw down below the line."),
+    stroke("M 161.50 173.50 C 175.50 156.11 217.50 152.64 238.50 180.45 C 263.00 213.14 238.50 250.00 200.00 250.00 C 179.00 250.00 163.60 234.70 161.50 213.84", "Curve around to make the belly.")
   ]),
   character("q", [
-    stroke("M 200 170 C 150 170 120 198 120 235 C 120 275 152 300 198 300 C 238 300 260 272 260 235 C 260 198 235 170 200 170", "Make a small round body."),
-    stroke("M 260 175 L 260 360", "Draw the tail down.")
+    stroke("M 200.00 160.00 C 165.00 160.00 144.00 179.38 144.00 205.00 C 144.00 232.69 166.40 250.00 198.60 250.00 C 226.60 250.00 242.00 230.62 242.00 205.00 C 242.00 179.38 224.50 160.00 200.00 160.00", "Make a small round body."),
+    stroke("M 242.00 160.00 L 242.00 340.00", "Draw the tail down.")
   ]),
   character("r", [
-    stroke("M 150 170 L 150 300", "Draw a short line down."),
-    stroke("M 150 210 C 172 175 215 162 248 180", "Make a small shoulder.")
+    stroke("M 165.00 160.00 L 165.00 250.00", "Draw a short line down."),
+    stroke("M 165.00 250.00 C 180.40 167.27 210.50 136.54 233.60 179.09", "Make a small shoulder.")
   ]),
   character("s", [
-    stroke("M 260 190 C 232 160 165 160 145 198 C 125 236 260 224 255 270 C 250 312 165 310 135 278", "Curve one way, then the other.")
+    stroke("M 242.00 174.57 C 222.40 154.32 175.50 154.32 161.50 179.96 C 147.50 205.60 242.00 197.51 238.50 228.55 C 235.00 256.89 175.50 255.54 154.50 233.94", "Curve one way, then the other.")
   ]),
   character("t", [
-    stroke("M 200 115 L 200 270 C 200 300 230 310 255 292", "Draw down."),
-    stroke("M 150 180 L 250 180", "Cross the middle.")
+    stroke("M 200.00 110.00 L 200.00 226.69 C 200.00 249.27 221.00 256.80 238.50 243.25", "Draw down."),
+    stroke("M 165.00 160.00 L 235.00 160.00", "Cross the middle.")
   ]),
   character("u", [
-    stroke("M 135 170 L 135 250 C 135 285 160 300 195 300 C 230 300 255 275 255 240 L 255 170", "Go down, curve, and go up."),
-    stroke("M 255 170 L 255 300", "Finish the short line.")
+    stroke("M 154.50 160.00 L 154.50 215.38 C 154.50 239.62 172.00 250.00 196.50 250.00 C 221.00 250.00 238.50 232.69 238.50 208.46 L 238.50 160.00", "Go down, curve, and go up."),
+    stroke("M 238.50 160.00 L 238.50 250.00", "Finish the short line.")
   ]),
   character("v", [
-    stroke("M 125 170 L 200 300 L 275 170", "Slant down, then slant up.")
+    stroke("M 147.50 160.00 L 200.00 250.00 L 252.50 160.00", "Slant down, then slant up.")
   ]),
   character("w", [
-    stroke("M 90 170 L 140 300 L 200 205 L 260 300 L 310 170", "Go down, up, down, and up.")
+    stroke("M 123.00 160.00 L 158.00 250.00 L 200.00 184.23 L 242.00 250.00 L 277.00 160.00", "Go down, up, down, and up.")
   ]),
   character("x", [
-    stroke("M 130 170 L 270 300", "Slant down to the right."),
-    stroke("M 270 170 L 130 300", "Slant down to the left.")
+    stroke("M 151.00 160.00 L 249.00 250.00", "Slant down to the right."),
+    stroke("M 249.00 160.00 L 151.00 250.00", "Slant down to the left.")
   ]),
   character("y", [
-    stroke("M 125 170 L 200 300", "Slant down to the middle."),
-    stroke("M 275 170 L 195 320 C 180 350 155 360 130 345", "Slant down and curve left.")
+    stroke("M 147.50 160.00 L 200.00 250.00", "Slant down to the middle."),
+    stroke("M 252.50 160.00 L 200.00 250.00 L 182.50 310.00 C 175.50 330.00 165.00 340.00 151.00 340.00", "Slant down and curve left.")
   ]),
   character("z", [
-    stroke("M 130 170 L 270 170 L 130 300 L 270 300", "Go across, slant down, and go across.")
+    stroke("M 151.00 160.00 L 249.00 160.00 L 151.00 250.00 L 249.00 250.00", "Go across, slant down, and go across.")
   ])
 ];
 
@@ -293,12 +293,14 @@ window.LETTER_LIBRARY = {
     label: "Uppercase",
     headingLabel: "Uppercase",
     itemLabel: "Letter",
+    notebookGuides: true,
     characters: UPPERCASE
   },
   lowercase: {
     label: "Lowercase",
     headingLabel: "Lowercase",
     itemLabel: "Letter",
+    notebookGuides: true,
     characters: LOWERCASE
   },
   numbers: {

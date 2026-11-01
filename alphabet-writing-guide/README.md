@@ -31,3 +31,18 @@ Voice availability, audible accent and Kannada pronunciation depend on the brows
 ```sh
 NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/check-letter-speech.cjs
 ```
+
+
+## English four-line notebook
+
+Uppercase and lowercase lessons show four equally spaced horizontal rules: **red, blue, blue, red**. In the 400 × 400 canvas they sit at y = 70, 160, 250 and 340. This is the notebook convention requested by the parent; the same red/blue arrangement and roles are described in [Walbottle Village Primary’s handwriting policy, Books section](https://www.walbottlevillage.newcastle.sch.uk/attachments/download.asp?file=42&type=pdf).
+
+The English centreline paths are sized and placed against those rules. Capitals reach the upper red line and sit on the lower blue baseline; Q retains its short tail below the baseline. Ordinary small letter bodies fit between the two blue lines. The b/d/f/h/k/l stems reach the upper red line; t keeps the shorter stem of the existing manuscript style. The g/j/p/q/y descenders reach the bottom red line, and i/j dots sit above the upper blue line. Rounded bodies use their actual curve extrema, rather than SVG control-point bounds, to meet the rules. Widths are adjusted consistently with the smaller writing height.
+
+The animation, grey guide, green starting point and pencil all use the same newly aligned geometry. Stroke ordering and pen lifts are retained. G’s formerly detached inward bar now starts at the end of its first curve and rises into the bar, preserving its two movements. The g/j/y tail curves were refitted so the child sees the correct baseline crossing and bottom-red-line finish. Numbers and both Kannada sets have no notebook ruling and retain their existing path data.
+
+```sh
+NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/check-notebook.cjs
+```
+
+The notebook check exercises all 52 English letters, actual cap/body/descender bounds, rule colours and layering, guide/ink correspondence, animated pencil placement, completion, phone/tablet/desktop layouts and switching to the other sets. Existing speech and Kannada checks remain available above.
