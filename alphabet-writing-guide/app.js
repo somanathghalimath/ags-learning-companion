@@ -147,19 +147,23 @@ function renderLetter() {
   state.letterIndex = Math.min(state.letterIndex, characters.length - 1);
   const letter = characters[state.letterIndex];
   elements.notebookLayer.replaceChildren();
+  const kannadaRuling = activeSet.notebookGuides === "kannada";
   if (activeSet.notebookGuides) {
-    // Top, middle, baseline, descender line: three equal notebook spaces.
-    [70, 160, 250, 340].forEach((y, index) => {
+    const lines = kannadaRuling ? window.KANNADA_NOTEBOOK.lines : [70, 160, 250, 340];
+    lines.forEach((y, index) => {
       const line = document.createElementNS(SVG_NS, "line");
       line.setAttribute("x1", "16");
       line.setAttribute("x2", "384");
       line.setAttribute("y1", y);
       line.setAttribute("y2", y);
-      line.setAttribute("class", index === 0 || index === 3 ? "outer-line" : "inner-line");
+      line.setAttribute("class", kannadaRuling ? "kannada-line"
+        : index === 0 || index === 3 ? "outer-line" : "inner-line");
       elements.notebookLayer.append(line);
     });
   }
-  document.querySelector("#svgDescription").textContent = activeSet.notebookGuides
+  document.querySelector("#svgDescription").textContent = kannadaRuling
+    ? "Two notebook lines guide the main Kannada letter body. Upper curls and lower marks can extend beyond them."
+    : activeSet.notebookGuides
     ? "Four notebook lines: red at the top and bottom, blue in the middle. The letter forms one stroke at a time."
     : "The strokes appear one at a time in writing order.";
   elements.svgDefs.replaceChildren();

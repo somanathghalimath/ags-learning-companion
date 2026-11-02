@@ -1,5 +1,7 @@
 # Kannada vyanjanas: handwriting evidence and construction
 
+For the paired notebook guides and per-letter placement, see [two-line placement research](KANNADA-RULING-SOURCES.md). The original movement paths remain the source of the positioned copies.
+
 Research and implementation: 31 October 2026. Scope: **34 basic modern consonants, ಕ–ಳ**, including ಙ and ಞ. Together with the existing 15 learning swaras/marks, the app now has 49 Kannada learning characters. ಕ್ಷ and ಜ್ಞ are conjunct constructions and are not silently added to this basic-consonant set.
 
 ## What the lesson teaches

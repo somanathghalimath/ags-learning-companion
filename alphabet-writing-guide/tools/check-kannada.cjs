@@ -37,7 +37,7 @@ await p.evaluate(()=>{
   for(let j=0;j<ink.length;j++){
    if(ink[j].getAttribute('d')!==guide[j].getAttribute('d')||ink[j].style.strokeWidth!==guide[j].style.strokeWidth)throw Error('Guide/ink mismatch');
    const b=ink[j].getBBox(),margin=Number(ink[j].style.strokeWidth)/2;
-   if(b.x-margin<35||b.y-margin<40||b.x+b.width+margin>365||b.y+b.height+margin>360)throw Error('Clipped consonant '+KANNADA_VYANJANAS[i].name);
+   if(b.x-margin<16||b.y-margin<24||b.x+b.width+margin>384||b.y+b.height+margin>376)throw Error('Clipped consonant '+KANNADA_VYANJANAS[i].name);
   }
   // These bodies must meet their head strokes even with thin pencil ink.
   const headPairs={ka:[[0,1],[1,2],[2,3]],ga:[[0,1]],cha:[[0,1],[1,2],[2,3]],chha:[[0,1]],jha:[[0,1]],ttha:[[0,1]],dda:[[0,1]],ddha:[[0,1]],ta:[[0,1]],tha:[[0,1]],da:[[0,1]],dha:[[0,1]],na:[[0,1]],bha:[[0,1]],ma:[[0,1]],ya:[[0,1],[1,2]],ra:[[0,1]],va:[[0,1]],sha:[[0,1]],sa:[[0,1]],ha:[[0,1]],lla:[[0,1]]};

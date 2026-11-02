@@ -7,6 +7,7 @@ Kannada uses the source-grounded centreline vectors in `kannada.js` (15 swaras/m
 - [Research and per-character construction](review/KANNADA-SOURCES.md)
 - [Consonant research and construction](review/KANNADA-VYANJANA-SOURCES.md)
 - [Consonant shape comparison and stroke playback](review/kannada-review.html?set=vyanjana)
+- [Kannada two-line placement evidence](review/KANNADA-RULING-SOURCES.md)
 - [Visual stroke-order review and playback](review/kannada-review.html)
 - [Before / after comparison](review/before-after.png)
 
@@ -39,10 +40,21 @@ Uppercase and lowercase lessons show four equally spaced horizontal rules: **red
 
 The English centreline paths are sized and placed against those rules. Capitals reach the upper red line and sit on the lower blue baseline; Q retains its short tail below the baseline. Ordinary small letter bodies fit between the two blue lines. The b/d/f/h/k/l stems reach the upper red line; t keeps the shorter stem of the existing manuscript style. The g/j/p/q/y descenders reach the bottom red line, and i/j dots sit above the upper blue line. Rounded bodies use their actual curve extrema, rather than SVG control-point bounds, to meet the rules. Widths are adjusted consistently with the smaller writing height.
 
-The animation, grey guide, green starting point and pencil all use the same newly aligned geometry. Stroke ordering and pen lifts are retained. G’s formerly detached inward bar now starts at the end of its first curve and rises into the bar, preserving its two movements. The g/j/y tail curves were refitted so the child sees the correct baseline crossing and bottom-red-line finish. Numbers and both Kannada sets have no notebook ruling and retain their existing path data.
+The animation, grey guide, green starting point and pencil all use the same newly aligned geometry. Stroke ordering and pen lifts are retained. G’s formerly detached inward bar now starts at the end of its first curve and rises into the bar, preserving its two movements. The g/j/y tail curves were refitted so the child sees the correct baseline crossing and bottom-red-line finish. Numbers retain an unruled canvas. Kannada has its own two-line body guides, described below.
 
 ```sh
 NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/check-notebook.cjs
 ```
 
 The notebook check exercises all 52 English letters, actual cap/body/descender bounds, rule colours and layering, guide/ink correspondence, animated pencil placement, completion, phone/tablet/desktop layouts and switching to the other sets. Existing speech and Kannada checks remain available above.
+
+
+## Kannada paired-line notebook
+
+Both Kannada sets show **two neutral grey horizontal body guides** matching the pair in the parent’s notebook photo. Each of the 49 characters has individual body anchors derived from ruled copybook models. Main bodies sit against the pair, while upper crests and lower marks retain their extensions. Uniform scale and translation preserve the researched paths and pen lifts; the original vector arrays remain unchanged. English retains its four coloured lines.
+
+The lesson and review use the same placements from `kannada-notebook.js`. [Placement sources, per-letter model pages and reconstruction choices](review/KANNADA-RULING-SOURCES.md) are available for inspection.
+
+```sh
+NODE_PATH=/path/to/development/node_modules node alphabet-writing-guide/tools/check-kannada-notebook.cjs
+```

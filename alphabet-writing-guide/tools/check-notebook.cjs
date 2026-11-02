@@ -66,7 +66,7 @@ const base=(process.env.SITE_URL||'http://localhost:8765').replace(/\/$/,'');
   }
   for(const set of ['numbers','kannadaSwaras','kannadaVyanjanas']){
    await page.locator('#setSelect').selectOption(set);
-   assert.equal(await page.locator('#notebookLayer line').count(),0);
+   assert.equal(await page.locator('#notebookLayer line').count(),set==='numbers'?0:2);
   }
   await page.locator('#setSelect').selectOption('uppercase');
   assert.equal(await page.locator('#notebookLayer line').count(),4);

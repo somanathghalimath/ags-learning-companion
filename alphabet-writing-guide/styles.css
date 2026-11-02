@@ -222,6 +222,7 @@ h1 {
 
 .notebook-lines .outer-line { stroke: #d97987; }
 .notebook-lines .inner-line { stroke: #82aed8; }
+.notebook-lines .kannada-line { stroke: #8a9199; }
 
 .guide-layer path {
   stroke: var(--guide);

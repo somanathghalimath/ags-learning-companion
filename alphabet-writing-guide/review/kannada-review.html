@@ -4,30 +4,32 @@
 <title>Kannada handwriting · Shape and stroke review</title>
 <script src="../kannada.js" defer></script>
 <script src="../kannada-vyanjana.js?v=vyanjana-8" defer></script>
+<script src="../kannada-notebook.js?v=kannada-lines-10" defer></script>
 <style>
 body{font:17px/1.5 system-ui,sans-serif;background:#f3f8fc;color:#17324d;margin:24px auto;padding:0 16px;max-width:1200px}h1{font-size:30px}a{color:#155dbb}section{background:white;border:1px solid #dbe7f0;border-radius:16px;margin:24px 0;padding:18px}.steps{display:flex;flex-wrap:wrap;gap:12px}figure{margin:0;width:230px;max-width:100%}select{font:inherit;min-height:44px;max-width:100%;padding:6px}.reference{width:auto;max-width:230px;max-height:220px;display:block}.comparison{display:flex;align-items:center;flex-wrap:wrap;gap:16px}svg{width:100%;height:auto;border:1px solid #dbe7f0;border-radius:12px}figcaption{font-size:14px}h2{font-family:'Noto Sans Kannada',system-ui;font-size:30px;margin:4px 0}button{font:inherit;min-height:44px;border:1px solid #dbe7f0;border-radius:12px;background:#eaf3ff;color:#155dbb;padding:8px 14px;margin:12px 0;cursor:pointer}.overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.overview a{text-align:center;text-decoration:none}.overview svg{background:white;display:block}p{max-width:90ch}button:focus-visible,a:focus-visible{outline:3px solid #2678e9;outline-offset:3px}
 </style>
 <h1>Kannada handwriting: shape and stroke review</h1>
 <p>15 swaras and 34 vyanjanas. Each numbered panel represents one uninterrupted pen-down movement. Green dots mark starts; orange arrows show travel direction. Blue lines are earlier strokes, green is the current stroke, grey is still to come. <strong>This is a source-grounded revision, not a Kannada teacher certification.</strong></p>
-<p><a href="../">Open Write With Me</a> · <a href="KANNADA-SOURCES.md">Research, provenance and differences</a> · <a href="before-after.png">Swara comparison</a> · <a href="KANNADA-VYANJANA-SOURCES.md">Vyanjana research and construction notes</a></p>
+<p><a href="../">Open Write With Me</a> · <a href="KANNADA-SOURCES.md">Research, provenance and differences</a> · <a href="before-after.png">Swara comparison</a> · <a href="KANNADA-VYANJANA-SOURCES.md">Vyanjana research and construction notes</a> · <a href="KANNADA-RULING-SOURCES.md">Two-line placement evidence</a></p>
 <label for="reviewSet">Review set </label><select id="reviewSet"><option value="swaras">ಸ್ವರಗಳು · Swaras (15)</option><option value="vyanjana">ವ್ಯಂಜನಗಳು · Vyanjanas (34)</option></select>
 <div class="overview" id="overview"></div><main id="review"></main>
 <script>
 window.addEventListener('DOMContentLoaded',()=>{
 const ns='http://www.w3.org/2000/svg';let running=null;
 function el(name,attrs={}){const n=document.createElementNS(ns,name);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);return n;}
-function svgFor(c,step){const svg=el('svg',{viewBox:'35 50 330 300',role:'img','aria-label':c.name+(step===undefined?' completed form':` stroke ${step+1}`)});for(let i=0;i<c.strokes.length;i++)svg.append(el('path',{d:c.strokes[i].d,fill:'none',stroke:step===undefined?'#2678e9':i<step?'#2678e9':i===step?'#21846e':'#dbe7f0','stroke-width':c.strokes[i].strokeWidth||12,'stroke-linecap':'round','stroke-linejoin':'round'}));return svg;}
+function svgFor(c,step){const svg=el('svg',{viewBox:'0 0 400 400',role:'img','aria-label':c.name+(step===undefined?' completed form':` stroke ${step+1}`)});for(const y of KANNADA_NOTEBOOK.lines)svg.append(el('line',{x1:16,x2:384,y1:y,y2:y,stroke:'#8a9199','stroke-width':1.5}));for(let i=0;i<c.strokes.length;i++)svg.append(el('path',{d:c.strokes[i].d,fill:'none',stroke:step===undefined?'#2678e9':i<step?'#2678e9':i===step?'#21846e':'#dbe7f0','stroke-width':c.strokes[i].strokeWidth||12,'stroke-linecap':'round','stroke-linejoin':'round'}));return svg;}
 const select=document.querySelector('#reviewSet');
 select.value=new URLSearchParams(location.search).get('set')==='vyanjana'?'vyanjana':'swaras';
 function renderReview(){
  if(running)running.abort();
  document.querySelector('#overview').replaceChildren();document.querySelector('#review').replaceChildren();
- const characters=select.value==='vyanjana'?KANNADA_VYANJANAS:KANNADA_SWARAS;
+ const characters=(select.value==='vyanjana'?KANNADA_VYANJANAS:KANNADA_SWARAS).map(KANNADA_NOTEBOOK.place);
 for(const c of characters){
  const tile=document.createElement('a');tile.href='#'+c.id;tile.append(svgFor(c),document.createTextNode(c.name));document.querySelector('#overview').append(tile);
  const section=document.createElement('section');section.id=c.id;const title=document.createElement('h2');title.textContent=c.name;section.append(title);
  const note=document.createElement('p');note.textContent=`${c.strokes.length} pen-down ${c.strokes.length===1?'stroke':'strokes'}. ${c.movementNote}`;section.append(note);
  if(c.reconstructionNote){const explanation=document.createElement('p');explanation.textContent=c.reconstructionNote;section.append(explanation);}
+ const placement=document.createElement('p');const anchor=c.notebookPlacement;placement.textContent=`Two-line placement · Copybook PDF page ${anchor.page}, ${anchor.row} model. ${anchor.note} `;const ruledSource=document.createElement('a');ruledSource.href=anchor.source;ruledSource.textContent='Ruled placement reference';placement.append(ruledSource);section.append(placement);
  const comparison=document.createElement('div');comparison.className='comparison';section.append(comparison);
  const motion=svgFor(c);motion.style.maxWidth='330px';comparison.append(motion);
  if(c.referenceImage){const figure=document.createElement('figure');const img=document.createElement('img');img.src=c.referenceImage;img.alt=`Original completed reference for ${c.name}`;img.className='reference';img.loading='lazy';const caption=document.createElement('figcaption');caption.textContent='Original final frame · Gopala Krishna A · CC BY-SA 4.0';figure.append(img,caption);comparison.append(figure);}

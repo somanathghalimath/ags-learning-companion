@@ -314,21 +314,23 @@ window.LETTER_LIBRARY = {
     headingLabel: "Kannada swara",
     itemLabel: "Swara",
     speechLang: "kn-IN",
+    notebookGuides: "kannada",
     strokeWidth: 12,
     startHold: 800,
     linearMotion: true,
     durationByLength: true,
-    characters: window.KANNADA_SWARAS
+    characters: window.KANNADA_SWARAS.map(window.KANNADA_NOTEBOOK.place)
   },
   kannadaVyanjanas: {
     label: "ಕನ್ನಡ ವ್ಯಂಜನಗಳು",
     headingLabel: "Kannada vyanjana",
     itemLabel: "Vyanjana",
     speechLang: "kn-IN",
+    notebookGuides: "kannada",
     strokeWidth: 12,
     startHold: 800,
     linearMotion: true,
     durationByLength: true,
-    characters: window.KANNADA_VYANJANAS
+    characters: window.KANNADA_VYANJANAS.map(window.KANNADA_NOTEBOOK.place)
   }
 };
