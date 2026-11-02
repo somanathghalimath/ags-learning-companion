@@ -3,45 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f3f8fc" />
+  <meta name="theme-color" content="#f8f7ef" />
+  <meta name="description" content="Four little number adventures: a number train, snack plates, Teddy's picnic and a shape workshop." />
   <title>Numbers With Me</title>
-  <link rel="stylesheet" href="styles.css?v=7" />
-  <script src="lessons.js?v=7" defer></script>
-  <script src="app.js?v=7" defer></script>
+  <link rel="stylesheet" href="games.css?v=games-8" />
+  <script src="games-lessons.js?v=games-8" defer></script>
+  <script src="games-art.js?v=games-8" defer></script>
+  <script src="games-app.js?v=games-8" defer></script>
 </head>
 <body>
-  <main class="app-shell">
+  <main class="games-shell">
     <header class="app-header">
-      <a class="home-button" href="../" aria-label="Back to home" title="Home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
-      </a>
-      <div><h1>Numbers With Me</h1><p>Little stories. Big pencil thinking.</p></div>
-      <button id="helpButton" class="help-button" type="button" aria-label="A note for your grown-up">?</button>
+      <a class="home-link" href="../" aria-label="Learning Companion home" title="Learning Companion home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 11 9-8 9 8M5 9v12h14V9M9 21v-7h6v7"/></svg></a>
+      <h1>Numbers With Me</h1>
+      <button class="grownup-button" type="button" data-action="settings" aria-haspopup="dialog">Grown-ups</button>
     </header>
-    <section class="settings" aria-label="Choose your practice">
-      <label>Let’s try <select id="operation"><option value="add">+ Adding</option><option value="subtract">− Taking away</option></select></label>
-      <label>Numbers <select id="range"><option value="5">Up to 5</option><option value="10">Up to 10</option></select></label>
+
+    <section id="gameHome" aria-labelledby="homeTitle">
+      <div class="welcome"><span class="eyebrow">A LITTLE PLAY. A LITTLE DISCOVERY.</span><h2 id="homeTitle">What shall we play?</h2><p>Pick a picture. Let’s help someone today.</p></div>
+      <div id="gameCards" class="game-cards"></div>
+      <details class="story-card"><summary><span class="story-symbol" aria-hidden="true">+ −</span><span><strong>Adding &amp; taking away</strong><small>Our picture stories and notebook time</small></span><span class="chevron" aria-hidden="true">⌄</span></summary><div class="story-links"><a id="addingLink" href="stories.html?operation=add&amp;range=5">+ Adding stories</a><a id="subtractingLink" href="stories.html?operation=subtract&amp;range=5">− Taking-away stories</a></div></details>
+      <p class="home-note">Take your time. You can try again whenever you like.</p>
     </section>
-    <section class="lesson-card" aria-labelledby="storyTitle">
-      <div class="lesson-heading"><span id="position" class="eyebrow"></span><span id="concept" class="concept"></span></div>
-      <h2 id="storyTitle"></h2>
-      <p id="storyText" class="story-text" aria-live="polite"></p>
-      <div class="guide-area">
-      <svg id="scene" viewBox="0 0 600 290" role="img" aria-labelledby="sceneTitle sceneDescription"><title id="sceneTitle"></title><desc id="sceneDescription"></desc><g id="sceneArt" aria-hidden="true"></g></svg>
-      <section id="answerPanel" class="answer-panel" aria-label="Discover the answer" hidden>
-        <div id="answerResult" class="answer-result" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
-          <span id="answerNumber" class="answer-number"></span>
-          <span id="answerLabel" class="answer-label"></span>
-          <div id="equation" class="equation" aria-label="Number sentence"></div>
-        </div>
-      </section>
-      </div>
-      <div class="notebook"><span class="pencil" aria-hidden="true">✎</span><div><h3>In your notebook</h3><p id="notebookText"></p></div></div>
-      <div class="actions"><button id="replay" class="secondary" type="button">↻ Again</button><button id="advance" class="primary" type="button">Watch what happens →</button></div>
-      <nav class="navigation" aria-label="Stories"><button id="previous" type="button">← Previous</button><button id="next" type="button">Next story →</button></nav>
+
+    <section id="gameView" hidden aria-labelledby="missionTitle">
+      <nav class="game-nav" aria-label="Game navigation"><button type="button" class="quiet-button" data-action="home">← Games</button><span id="gameName"></span><span id="missionProgress" class="mission-progress"></span></nav>
+      <article class="mission-card">
+        <div class="mission-heading"><span id="missionEyebrow" class="eyebrow"></span><button id="helpMission" type="button" class="help-button" data-action="hint">A little help</button></div>
+        <h2 id="missionTitle" tabindex="-1"></h2>
+        <p id="tapInstruction" class="tap-instruction"></p>
+        <div id="playArea" class="play-area"></div>
+        <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></div>
+        <div id="missionActions" class="mission-actions"></div>
+      </article>
     </section>
-    <dialog id="helpDialog" class="grownup" aria-labelledby="helpTitle"><h2 id="helpTitle">For your grown-up</h2><p>One notebook dot stands for one picture. Count together, then let your child draw and write before showing the answer.</p><p>Adding means joining more. Taking away means crossing some out and counting what remains. Start with numbers up to 5.</p><form method="dialog"><button class="primary">Got it</button></form></dialog>
-    <noscript>Please enable JavaScript to play the number stories.</noscript>
+
+    <dialog id="grownupDialog" aria-labelledby="grownupTitle">
+      <form id="settingsForm" method="dialog">
+        <div class="dialog-title"><h2 id="grownupTitle">A note for your grown-up</h2><button type="button" data-action="close-settings" class="close-button" aria-label="Close grown-up settings">×</button></div>
+        <p>Read the little mission together. Your child can tap a piece and then its place, or drag it. In Snack Plates, tap the plate with more or fewer snacks, or choose “The same”.</p>
+        <label for="trainRange">Number Train<select id="trainRange" name="trainRange"><option value="10">Numbers 1–10</option><option value="20">Numbers 1–20</option><option value="50">Numbers 1–50</option><option value="100">Numbers 1–100</option></select></label>
+        <label for="snackRange">Snack Plates &amp; number stories<select id="snackRange" name="snackRange"><option value="5">Quantities up to 5</option><option value="10">Quantities up to 10</option></select></label>
+        <p class="setting-note">Changing a range starts a fresh set of missions in the current game. These choices last until this page is reloaded.</p>
+        <button class="primary-button" type="submit">Ready to play</button>
+      </form>
+    </dialog>
+    <noscript>Please enable JavaScript to play these number adventures.</noscript>
   </main>
 </body>
 </html>

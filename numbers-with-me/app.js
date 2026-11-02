@@ -111,4 +111,10 @@ $("previous").addEventListener("click", () => { if (state.index > 0) reset(state
 $("next").addEventListener("click", () => { if (state.index < list().length - 1) reset(state.index + 1); });
 for (const id of ["operation", "range"]) $(id).addEventListener("change", () => reset(0));
 $("helpButton").addEventListener("click", () => $("helpDialog").showModal());
+// Card links carry the chosen story and grown-up quantity range.
+const storyParameters = new URLSearchParams(location.search);
+if (["add", "subtract"].includes(storyParameters.get("operation"))) $("operation").value = storyParameters.get("operation");
+if (["5", "10"].includes(storyParameters.get("range"))) $("range").value = storyParameters.get("range");
+window.addEventListener("pagehide", () => { clearTimeout(state.timer); state.timer = null; });
+window.addEventListener("pageshow", event => { if (event.persisted && state.busy) reset(); });
 reset(0);
